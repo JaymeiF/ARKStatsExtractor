@@ -9,9 +9,8 @@ namespace ARKBreedingStats.uiControls
 {
     public partial class MyColorPicker : Form
     {
-        private int regionId;
-        private int[] creatureColors;
-        private List<int> naturalColorIDs;
+        public int SelectedColorId;
+        private List<int> _naturalColorIDs;
         public bool isShown;
         private readonly ToolTip tt;
 
@@ -19,7 +18,17 @@ namespace ARKBreedingStats.uiControls
         {
             InitializeComponent();
             tt = new ToolTip { AutomaticDelay = 200 };
+
+            BtNoColor.Tag = 0; // id of no color
+            BtNoColor.Text = Loc.S("noColor");
+
+            buttonCancel.Text = Loc.S("Cancel");
+
             Disposed += MyColorPicker_Disposed;
+
+            checkBoxOnlyNatural.Text = Loc.S("showOnlyNaturalOccuring");
+
+            TopMost = true;
         }
 
         private void MyColorPicker_Disposed(object sender, EventArgs e)
@@ -27,49 +36,54 @@ namespace ARKBreedingStats.uiControls
             tt.RemoveAll();
         }
 
-        public void SetColors(int[] creatureColors, int regionId, string name, List<ARKColor> naturalColors = null)
+        public void SetColors(int selectedColorId, string regionName, List<ArkColor> naturalColors = null)
         {
-            label1.Text = name;
-            this.regionId = regionId;
+            label1.Text = regionName;
             var colors = values.Values.V.Colors.colorsList;
 
-            this.creatureColors = creatureColors;
-            this.naturalColorIDs = naturalColors?.Select(ac => ac.id).ToList();
+            SelectedColorId = selectedColorId;
+            _naturalColorIDs = naturalColors?.Select(ac => ac.Id).ToList();
+            checkBoxOnlyNatural.Visible = _naturalColorIDs != null;
+            if (_naturalColorIDs == null)
+                checkBoxOnlyNatural.Checked = true;
 
             flowLayoutPanel1.SuspendLayout();
 
-            for (int c = 0; c < colors.Count; c++)
+            for (int colorIndex = 1; colorIndex < colors.Count; colorIndex++)
             {
-                if (flowLayoutPanel1.Controls.Count <= c)
+                int controlIndex = colorIndex - 1;
+                if (flowLayoutPanel1.Controls.Count <= controlIndex)
                 {
                     Panel np = new Panel
                     {
                         Width = 40,
                         Height = 20
                     };
-                    np.Click += ColorChoosen;
+                    np.Click += ColorChosen;
                     flowLayoutPanel1.Controls.Add(np);
                 }
-                Panel p = flowLayoutPanel1.Controls[c] as Panel;
-                p.BackColor = colors[c].color;
-                p.Tag = colors[c].id;
-                p.BorderStyle = creatureColors[regionId] == colors[c].id ? BorderStyle.Fixed3D : BorderStyle.None;
-                p.Visible = ColorVisible(colors[c].id);
-                tt.SetToolTip(p, colors[c].id + ": " + colors[c].name);
+                Panel p = flowLayoutPanel1.Controls[controlIndex] as Panel;
+                p.BackColor = colors[colorIndex].Color;
+                p.Tag = colors[colorIndex].Id;
+                p.BorderStyle = SelectedColorId == colors[colorIndex].Id ? BorderStyle.Fixed3D : BorderStyle.None;
+                p.Visible = ColorVisible(colors[colorIndex].Id);
+                tt.SetToolTip(p, colors[colorIndex].Id + ": " + colors[colorIndex].Name);
             }
 
             flowLayoutPanel1.ResumeLayout();
             isShown = true;
         }
 
-        private bool ColorVisible(int id) => !checkBoxOnlyNatural.Checked || naturalColorIDs == null || naturalColorIDs.Count == 0 || naturalColorIDs.Contains(id);
+        private bool ColorVisible(int id) => !checkBoxOnlyNatural.Checked || (_naturalColorIDs?.Contains(id) ?? true);
 
-        private void ColorChoosen(object sender, EventArgs e)
+        /// <summary>
+        /// Color was chosen and saved in the property SelectedColorId. Window then will be hidden.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ColorChosen(object sender, EventArgs e)
         {
-            // store selected color-id in creature-array and close this window
-            int i = (int)((Panel)sender).Tag;
-            if (i >= 0)
-                creatureColors[regionId] = i;
+            SelectedColorId = (int)((Control)sender).Tag;
             HideWindow(true);
         }
 

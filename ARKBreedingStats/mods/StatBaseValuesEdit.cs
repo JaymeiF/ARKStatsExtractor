@@ -43,9 +43,11 @@ namespace ARKBreedingStats.mods
             nudImprintingOverride.Enabled = enabled;
         }
 
+        public void SetStatNameByIndex(int statIndex, Dictionary<string, string> customStatNames = null) => StatName = $"[{statIndex}] {Utils.StatName(statIndex, false, customStatNames)}";
+
         public string StatName
         {
-            set => cbOverride.Text = "Override " + value;
+            set => cbOverride.Text = value;
         }
 
         internal void SetStatOverrides(double[] defaultValues, double?[] statOverrides = null)

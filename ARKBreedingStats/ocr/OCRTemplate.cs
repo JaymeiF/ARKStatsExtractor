@@ -78,14 +78,14 @@ namespace ARKBreedingStats.ocr
             return fontSizes.IndexOf(fontSize);
         }
 
-        public OCRTemplate loadFile(string filename)
+        public OCRTemplate LoadFile(string filename)
         {
             OCRTemplate ocrConfig = null;
 
             // check if file exists
             if (!File.Exists(filename))
             {
-                MessageBox.Show($"OCR-File '{filename}' not found. OCR is not possible without the config-file.", "Error",
+                MessageBox.Show($"OCR-File '{filename}' not found. OCR is not possible without the config-file.", $"{Loc.S("error")} - {Utils.ApplicationNameVersion}",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return null;
             }
@@ -100,14 +100,14 @@ namespace ARKBreedingStats.ocr
                 }
                 catch (Exception e)
                 {
-                    MessageBox.Show("File Couldn't be opened or read.\nErrormessage:\n\n" + e.Message, "Error",
+                    MessageBox.Show("File Couldn't be opened or read.\nErrormessage:\n\n" + e.Message, $"{Loc.S("error")} - {Utils.ApplicationNameVersion}",
                             MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             return ocrConfig;
         }
 
-        public bool saveFile(string filename)
+        public bool SaveFile(string filename)
         {
             try
             {
@@ -120,7 +120,7 @@ namespace ARKBreedingStats.ocr
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error during serialization.\nErrormessage:\n\n" + ex.Message, "Serialization-Error",
+                MessageBox.Show("Error during serialization.\nErrormessage:\n\n" + ex.Message, $"Serialization-Error - {Utils.ApplicationNameVersion}",
                         MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return false;

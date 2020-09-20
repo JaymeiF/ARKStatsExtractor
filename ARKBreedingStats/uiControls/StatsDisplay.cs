@@ -9,8 +9,8 @@ namespace ARKBreedingStats.uiControls
     {
         private readonly StatDisplay[] stats;
         private readonly ToolTip tt = new ToolTip();
-        private static int[] displayedStats;
-        private static int displayedStatsCount;
+        private readonly int[] displayedStats;
+        private readonly int displayedStatsCount;
 
         public StatsDisplay()
         {
@@ -31,11 +31,7 @@ namespace ARKBreedingStats.uiControls
             for (int s = 0; s < displayedStatsCount; s++)
             {
                 int si = displayedStats[s];
-                StatDisplay sd = new StatDisplay
-                {
-                    statIndex = si,
-                    Percent = Utils.precision(si) == 3
-                };
+                StatDisplay sd = new StatDisplay(si, Utils.Precision(si) == 3);
                 stats[s] = sd;
 
                 sd.Location = new System.Drawing.Point(3, 19 + s * 23);
@@ -53,15 +49,14 @@ namespace ARKBreedingStats.uiControls
         {
             SuspendLayout();
 
-            bool glowSpecies = creature.Species.IsGlowSpecies;
-            for (int s = 0; s < displayedStats.Length; s++)
+            for (int s = 0; s < displayedStatsCount; s++)
             {
                 int si = displayedStats[s];
-                stats[s].GlowSpecies = glowSpecies;
-                stats[s].setNumbers(creature.levelsWild[si], creature.levelsDom[si], creature.valuesBreeding[si], creature.valuesDom[si]);
+                stats[s].SetCustomStatNames(creature.Species.statNames);
+                stats[s].SetNumbers(creature.levelsWild[si], creature.levelsDom[si], creature.valuesBreeding[si], creature.valuesDom[si]);
             }
 
-            labelSex.Text = Utils.sexSymbol(creature.sex);
+            labelSex.Text = Utils.SexSymbol(creature.sex);
 
             ResumeLayout();
         }
@@ -70,7 +65,7 @@ namespace ARKBreedingStats.uiControls
         {
             set
             {
-                for (int s = 0; s < 8; s++)
+                for (int s = 0; s < displayedStatsCount; s++)
                 {
                     stats[s].barMaxLevel = value;
                 }
@@ -79,9 +74,9 @@ namespace ARKBreedingStats.uiControls
 
         public void Clear()
         {
-            for (int s = 0; s < 8; s++)
+            for (int s = 0; s < displayedStatsCount; s++)
             {
-                stats[s].setNumbers(0, 0, 0, 0);
+                stats[s].SetNumbers(0, 0, 0, 0);
             }
             labelSex.Text = "";
         }

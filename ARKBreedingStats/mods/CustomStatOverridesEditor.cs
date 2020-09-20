@@ -28,7 +28,8 @@ namespace ARKBreedingStats.mods
             overrideEdits = new StatBaseValuesEdit[Values.STATS_COUNT];
             for (int s = 0; s < Values.STATS_COUNT; s++)
             {
-                var se = new StatBaseValuesEdit() { StatName = Utils.statName(s, true) };
+                var se = new StatBaseValuesEdit();
+                se.SetStatNameByIndex(s);
                 overrideEdits[s] = se;
                 flowLayoutPanelOverrideEdits.Controls.Add(se);
                 flowLayoutPanelOverrideEdits.SetFlowBreak(se, true);
@@ -76,6 +77,7 @@ namespace ARKBreedingStats.mods
             // set control values to overridden values or to default values.
             for (int s = 0; s < Values.STATS_COUNT; s++)
             {
+                overrideEdits[s].SetStatNameByIndex(s, species.statNames);
                 overrideEdits[s].SetStatOverrides(selectedSpecies.fullStatsRaw[s], overrides?[s]);
                 overrideEdits[s].SetImprintingMultiplierOverride(selectedSpecies.StatImprintingMultipliersDefault[s], overrides != null && overrides.Length > Values.STATS_COUNT ? overrides[Values.STATS_COUNT]?[s] : null);
             }
@@ -147,9 +149,9 @@ namespace ARKBreedingStats.mods
             })
             {
                 if (dlg.ShowDialog() != DialogResult.OK) return;
-                if (!FileService.LoadJSONFile(dlg.FileName, out Dictionary<string, double?[][]> dict, out string error))
+                if (!FileService.LoadJsonFile(dlg.FileName, out Dictionary<string, double?[][]> dict, out string error))
                 {
-                    MessageBox.Show(error, "Error loading file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(error, $"Error loading file - {Utils.ApplicationNameVersion}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -202,9 +204,9 @@ namespace ARKBreedingStats.mods
             })
             {
                 if (dlg.ShowDialog() != DialogResult.OK) return;
-                if (!FileService.SaveJSONFile(dlg.FileName, cc.CustomSpeciesStats, out string error))
+                if (!FileService.SaveJsonFile(dlg.FileName, cc.CustomSpeciesStats, out string error))
                 {
-                    MessageBox.Show(error, "Error saving file", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show(error, $"Error saving file - {Utils.ApplicationNameVersion}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

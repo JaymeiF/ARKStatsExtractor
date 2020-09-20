@@ -89,7 +89,7 @@ Source: "{#ReleaseDir}\es\*"; DestDir: "{app}\es\"; Flags: ignoreversion; Exclud
 Source: "{#ReleaseDir}\fr\*"; DestDir: "{app}\fr\"; Flags: ignoreversion; Excludes: "*.pdb,*.xml"
 Source: "{#ReleaseDir}\it\*"; DestDir: "{app}\it\"; Flags: ignoreversion; Excludes: "*.pdb,*.xml"
 Source: "{#ReleaseDir}\zh\*"; DestDir: "{app}\zh\"; Flags: ignoreversion; Excludes: "*.pdb,*.xml"
-Source: "{#ReleaseDir}\json\*"; DestDir: "{localappdata}\{#AppName}\json\"; Flags: ignoreversion
+Source: "{#ReleaseDir}\json\*.json"; DestDir: "{localappdata}\{#AppName}\json\"; Flags: ignoreversion
 Source: "{#ReleaseDir}\json\values\values.json"; DestDir: "{localappdata}\{#AppName}\json\values\"; Flags: ignoreversion
 Source: "{#ReleaseDir}\json\values\_manifest.json"; DestDir: "{localappdata}\{#AppName}\json\values\"; Flags: ignoreversion
 Source: "{#ReleaseDirUpdater}\asb-updater.exe"; DestDir: "{app}"; Flags: ignoreversion
@@ -101,7 +101,7 @@ Name: "{group}\{cm:UninstallProgram,{#AppName}}"; Filename: "{uninstallexe}"
 Name: "{commondesktop}\{#AppName}"; Filename: "{app}\{#AppExeName}"; Tasks: desktopicon
 
 [Run]
-Filename: "powershell.exe"; Parameters: "-nologo -noprofile -command ""& {{ Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('{tmp}\images.zip', '{localappdata}\{#AppName}\'); }"""; Flags: runminimized; StatusMsg: "{cm:InstallImages}"; Tasks: images
+Filename: "powershell.exe"; Parameters: "-nologo -noprofile -command ""& {{ Add-Type -A 'System.IO.Compression.FileSystem'; [IO.Compression.ZipFile]::ExtractToDirectory('{tmp}\img.zip', '{localappdata}\{#AppName}\img\'); }"""; Flags: runminimized; StatusMsg: "{cm:InstallImages}"; Tasks: images
 Filename: "{app}\{#AppExeName}"; Flags: nowait postinstall skipifsilent unchecked; Description: "{cm:LaunchProgram,{#StringChange(AppName, '&', '&&')}}"
 
 [UninstallRun]
@@ -159,7 +159,7 @@ begin
   end;
   if (CurPageID = wpSelectTasks) then begin
     if IsTaskSelected('images') then
-      idpAddFile('https://github.com/cadon/ARKStatsExtractor/raw/master/images.zip', ExpandConstant('{tmp}\images.zip'));
+      idpAddFile('https://github.com/cadon/ARKStatsExtractor/raw/master/img.zip', ExpandConstant('{tmp}\img.zip'));
       idpDownloadAfter(wpReady);
   end;
   Result := True;

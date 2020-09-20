@@ -10,35 +10,46 @@ namespace ARKBreedingStats
 {
     public partial class PedigreeCreature : UserControl
     {
-        private Creature creature;
-        private bool isVirtual; // set to true for not existing creatures (e.g. possible offspring)
-
         public delegate void CreatureChangedEventHandler(Creature creature, int comboId, MouseEventArgs e);
 
         public event CreatureChangedEventHandler CreatureClicked;
 
-        public delegate void CreatureEditEventHandler(Creature creature, bool isVirtual);
+        /// <summary>
+        /// Edit the creature. Boolean parameter determines if the creature is virtual.
+        /// </summary>
+        public event Action<Creature, bool> CreatureEdit;
 
-        public event CreatureEditEventHandler CreatureEdit;
+        /// <summary>
+        /// Display the best breeding partners for the given creature.
+        /// </summary>
+        public event Action<Creature> BestBreedingPartners;
 
-        public delegate void CreaturePartnerEventHandler(Creature creature);
+        /// <summary>
+        /// Display the creature in the pedigree.
+        /// </summary>
+        public event Action<Creature> DisplayInPedigree;
 
-        public event CreaturePartnerEventHandler BestBreedingPartners;
+        /// <summary>
+        /// Recalculate the breeding plan, e.g. if the cooldown was reset.
+        /// </summary>
+        public event Action RecalculateBreedingPlan;
 
-        public delegate void BPRecalcEventHandler();
+        public delegate void ExportToClipboardEventHandler(Creature c, bool breedingValues, bool ArkMl);
 
-        public event BPRecalcEventHandler BPRecalc;
-
-        public delegate void ExportToClipboardEventHandler(Creature c, bool breedingValues, bool ARKml);
-
-        public event ExportToClipboardEventHandler exportToClipboard;
-        private List<Label> labels;
-        ToolTip tt = new ToolTip();
+        public event ExportToClipboardEventHandler ExportToClipboard;
+        private readonly List<Label> _labels;
+        private readonly ToolTip _tt;
         public int comboId;
-        public bool onlyLevels; // no sex, status, colors
+        /// <summary>
+        /// If set to true, the control will not display sex, status or creature colors.
+        /// </summary>
+        public bool OnlyLevels { get; set; }
         public bool[] enabledColorRegions;
-        private bool contextMenuAvailable;
-        public bool totalLevelUnknown = false; // if set to true, the levelHatched in parenthesis is appended with an '+'
+        private bool _contextMenuAvailable;
+        /// <summary>
+        /// If set to true, the levelHatched in parenthesis is appended with an '+'.
+        /// </summary>
+        public bool TotalLevelUnknown { get; set; } = false;
 
         public static int[] displayedStats = new int[] {
                                                         (int)StatNames.Health,
@@ -50,165 +61,176 @@ namespace ARKBreedingStats
                                                         (int)StatNames.SpeedMultiplier,
                                                         (int)StatNames.CraftingSpeedMultiplier
                                                         };
+        public static int displayedStatsCount = displayedStats.Length;
 
         public PedigreeCreature()
         {
-            InitC();
+            InitializeComponent();
+            _tt = new ToolTip
+            {
+                InitialDelay = 100
+            };
+            _tt.SetToolTip(labelSex, "Sex");
+            _tt.SetToolTip(labelMutations, "Mutation-Counter");
+            _labels = new List<Label> { labelHP, labelSt, labelOx, labelFo, labelWe, labelDm, labelSp, labelCr };
+            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
+            Disposed += PedigreeCreature_Disposed;
             comboId = -1;
         }
 
-        private void InitC()
+        public PedigreeCreature(Creature creature, bool[] enabledColorRegions, int comboId = -1, bool displayPedigreeLink = false) : this()
         {
-            InitializeComponent();
-            tt.InitialDelay = 100;
-            tt.SetToolTip(labelSex, "Sex");
-            tt.SetToolTip(labelMutations, "Mutation-Counter");
-            labels = new List<Label> { labelHP, labelSt, labelOx, labelFo, labelWe, labelDm, labelSp, labelCr };
-            SetStyle(ControlStyles.UserPaint | ControlStyles.AllPaintingInWmPaint | ControlStyles.OptimizedDoubleBuffer, true);
-            Disposed += PedigreeCreature_Disposed;
+            Cursor = Cursors.Hand;
+            this.enabledColorRegions = enabledColorRegions;
+            this.comboId = comboId;
+            Creature = creature;
+            TsMiViewInPedigree.Visible = displayPedigreeLink;
         }
 
         /// <summary>
         /// Set text of labels for stats. Only used for header control.
         /// </summary>
-        public bool IsGlowSpecies
+        public void SetCustomStatNames(Dictionary<string, string> customStatNames = null)
         {
-            set
+            for (int s = 0; s < displayedStatsCount; s++)
             {
-                for (int s = 0; s < 8; s++) // only 8 stats are displayed
-                {
-                    labels[s].Text = Utils.statName(displayedStats[s], true, value);
-                }
-                tt.SetToolTip(labelHP, Utils.statName(StatNames.Health, glow: value));
-                tt.SetToolTip(labelSt, Utils.statName(StatNames.Stamina, glow: value));
-                tt.SetToolTip(labelOx, Utils.statName(StatNames.Oxygen, glow: value));
-                tt.SetToolTip(labelFo, Utils.statName(StatNames.Food, glow: value));
-                tt.SetToolTip(labelWe, Utils.statName(StatNames.Weight, glow: value));
-                tt.SetToolTip(labelDm, Utils.statName(StatNames.MeleeDamageMultiplier, glow: value));
-                tt.SetToolTip(labelSp, Utils.statName(StatNames.SpeedMultiplier, glow: value));
-                tt.SetToolTip(labelCr, Utils.statName(StatNames.CraftingSpeedMultiplier, glow: value));
+                _labels[s].Text = Utils.StatName(displayedStats[s], true, customStatNames);
+                _tt.SetToolTip(_labels[s], Utils.StatName(displayedStats[s], customStatNames: customStatNames));
             }
+
+            labelMutations.Visible = true;
         }
 
         private void PedigreeCreature_Disposed(object sender, EventArgs e)
         {
-            tt.RemoveAll();
+            _tt.RemoveAll();
         }
 
-        public PedigreeCreature(Creature creature, bool[] enabledColorRegions, int comboId = -1)
-        {
-            InitC();
-            Cursor = Cursors.Hand;
-            this.enabledColorRegions = enabledColorRegions;
-            this.comboId = comboId;
-            Creature = creature;
-        }
-
+        private Creature _creature;
+        /// <summary>
+        /// The creature that is displayed in this control.
+        /// </summary>
         public Creature Creature
         {
-            get => creature;
+            get => _creature;
             set
             {
-                if (value != null)
+                _creature = value;
+                if (_creature == null)
                 {
-                    creature = value;
-                    setTitle();
+                    Clear();
+                    return;
+                }
+                SetTitle();
 
-                    if (!onlyLevels)
+                if (!OnlyLevels)
+                {
+                    if (_creature.Status == CreatureStatus.Dead)
                     {
-                        if (creature.status == CreatureStatus.Dead)
-                        {
-                            groupBox1.ForeColor = SystemColors.GrayText;
-                            tt.SetToolTip(groupBox1, "Creature has passed away");
-                        }
-                        else if (creature.status == CreatureStatus.Unavailable)
-                        {
-                            groupBox1.ForeColor = SystemColors.GrayText;
-                            tt.SetToolTip(groupBox1, "Creature is currently not available");
-                        }
-                        else if (creature.status == CreatureStatus.Obelisk)
-                        {
-                            groupBox1.ForeColor = SystemColors.GrayText;
-                            tt.SetToolTip(groupBox1, "Creature is currently uploaded in an obelisk");
-                        }
+                        groupBox1.ForeColor = SystemColors.GrayText;
+                        _tt.SetToolTip(groupBox1, "Creature has passed away");
                     }
+                    else if (_creature.Status == CreatureStatus.Unavailable)
+                    {
+                        groupBox1.ForeColor = SystemColors.GrayText;
+                        _tt.SetToolTip(groupBox1, "Creature is currently not available");
+                    }
+                    else if (_creature.Status == CreatureStatus.Obelisk)
+                    {
+                        groupBox1.ForeColor = SystemColors.GrayText;
+                        _tt.SetToolTip(groupBox1, "Creature is currently uploaded in an obelisk");
+                    }
+                }
 
-                    tt.SetToolTip(labelSex, "Sex: " + Loc.s(creature.sex.ToString()));
-                    bool isGlowSpecies = creature.Species?.IsGlowSpecies ?? false;
-                    for (int s = 0; s < 8; s++)
+                _tt.SetToolTip(labelSex, "Sex: " + Loc.S(_creature.sex.ToString()));
+                for (int s = 0; s < displayedStatsCount; s++)
+                {
+                    int si = displayedStats[s];
+                    if (_creature.valuesBreeding[si] == 0)
                     {
-                        int si = displayedStats[s];
-                        if (creature.valuesBreeding[si] == 0)
-                        {
-                            // stat not used // TODO hide label?
-                            labels[s].Text = "-";
-                            labels[s].BackColor = Color.WhiteSmoke;
-                            labels[s].ForeColor = Color.LightGray;
-                        }
-                        else if (creature.levelsWild[si] < 0)
-                        {
-                            labels[s].Text = "?";
-                            labels[s].BackColor = Color.WhiteSmoke;
-                            labels[s].ForeColor = Color.LightGray;
-                        }
-                        else
-                        {
-                            labels[s].Text = creature.levelsWild[si].ToString();
-                            labels[s].BackColor = Utils.getColorFromPercent((int)(creature.levelsWild[si] * 2.5), creature.topBreedingStats[si] ? 0.2 : 0.7);
-                            labels[s].ForeColor = SystemColors.ControlText;
-                            tt.SetToolTip(labels[s], Utils.statName(si, false, isGlowSpecies) + ": " + creature.valuesBreeding[si] * (Utils.precision(si) == 3 ? 100 : 1) + (Utils.precision(si) == 3 ? "%" : ""));
-                        }
-                        labels[s].Font = new Font("Microsoft Sans Serif", 8.25F, creature.topBreedingStats[si] ? FontStyle.Bold : FontStyle.Regular, GraphicsUnit.Point, 0);
+                        // stat not used // TODO hide label?
+                        _labels[s].Text = "-";
+                        _labels[s].BackColor = Color.WhiteSmoke;
+                        _labels[s].ForeColor = Color.LightGray;
                     }
-                    if (onlyLevels)
+                    else if (_creature.levelsWild[si] < 0)
                     {
-                        labelSex.Visible = false;
-                        pictureBox1.Visible = false;
-                        plainTextcurrentValuesToolStripMenuItem.Visible = false;
+                        _labels[s].Text = "?";
+                        _labels[s].BackColor = Color.WhiteSmoke;
+                        _labels[s].ForeColor = Color.LightGray;
+                    }
+                    else if (_creature.levelsWild[si] == 0 && (_creature.Species?.stats[si].IncPerTamedLevel ?? -1) == 0)
+                    {
+                        // stat cannot be leveled, e.g. speed for flyers, and thus it's assumed there are no wild levels applied, i.e. irrelevant for breeding.
+                        _labels[s].Text = "0";
+                        _labels[s].BackColor = Color.WhiteSmoke;
+                        _labels[s].ForeColor = Color.LightGray;
+                        _tt.SetToolTip(_labels[s], Utils.StatName(si, false, _creature.Species?.statNames) + ": " + _creature.valuesBreeding[si] * (Utils.Precision(si) == 3 ? 100 : 1) + (Utils.Precision(si) == 3 ? "%" : string.Empty));
                     }
                     else
                     {
-                        labelSex.Visible = true;
-                        labelSex.Text = Utils.sexSymbol(creature.sex);
-                        labelSex.BackColor = creature.flags.HasFlag(CreatureFlags.Neutered) ? SystemColors.GrayText : Utils.sexColor(creature.sex);
-                        // creature Colors
-                        pictureBox1.Image = CreatureColored.getColoredCreature(creature.colors, null, enabledColorRegions, 24, 22, true);
-                        tt.SetToolTip(pictureBox1, CreatureColored.RegionColorInfo(creature.Species, creature.colors));
-                        labelSex.Visible = true;
-                        pictureBox1.Visible = true;
-                        plainTextcurrentValuesToolStripMenuItem.Visible = true;
+                        _labels[s].Text = _creature.levelsWild[si].ToString();
+                        _labels[s].BackColor = Utils.GetColorFromPercent((int)(_creature.levelsWild[si] * 2.5), _creature.topBreedingStats[si] ? 0.2 : 0.7);
+                        _labels[s].ForeColor = Parent.ForeColor; // needed so text is not transparent on overlay
+                        _tt.SetToolTip(_labels[s], Utils.StatName(si, false, _creature.Species?.statNames) + ": " + _creature.valuesBreeding[si] * (Utils.Precision(si) == 3 ? 100 : 1) + (Utils.Precision(si) == 3 ? "%" : string.Empty));
                     }
-                    int totalMutations = creature.Mutations;
-                    if (totalMutations > 0)
-                    {
-                        labelMutations.Text = totalMutations.ToString();
-                        if (totalMutations > 9999)
-                            labelMutations.Text = totalMutations.ToString().Substring(0, 4) + "…";
-                        if (totalMutations > 19)
-                            labelMutations.BackColor = Utils.MutationColorOverLimit;
-                        else
-                            labelMutations.BackColor = Utils.MutationColor;
-                        tt.SetToolTip(labelMutations, "Mutation-Counter: " + totalMutations.ToString("N0") + "\nMaternal: " + creature.mutationsMaternal.ToString("N0") + "\nPaternal: " + creature.mutationsPaternal.ToString("N0"));
-                    }
-                    labelMutations.Visible = totalMutations > 0;
-                    contextMenuAvailable = true;
+                    _labels[s].Font = new Font("Microsoft Sans Serif", 8.25F, _creature.topBreedingStats[si] ? FontStyle.Bold : FontStyle.Regular, GraphicsUnit.Point, 0);
                 }
+                if (OnlyLevels)
+                {
+                    labelSex.Visible = false;
+                    pictureBox1.Visible = false;
+                    plainTextcurrentValuesToolStripMenuItem.Visible = false;
+                }
+                else
+                {
+                    labelSex.Visible = true;
+                    labelSex.Text = Utils.SexSymbol(_creature.sex);
+                    labelSex.BackColor = _creature.flags.HasFlag(CreatureFlags.Neutered) ? SystemColors.GrayText : Utils.SexColor(_creature.sex);
+                    UpdateColors(_creature.colors);
+                    _tt.SetToolTip(pictureBox1, CreatureColored.RegionColorInfo(_creature.Species, _creature.colors));
+                    labelSex.Visible = true;
+                    pictureBox1.Visible = true;
+                    plainTextcurrentValuesToolStripMenuItem.Visible = true;
+                }
+                int totalMutations = _creature.Mutations;
+                if (totalMutations > 0)
+                {
+                    labelMutations.Text = totalMutations > 9999 ? totalMutations.ToString().Substring(0, 4) + "…" : totalMutations.ToString();
+                    if (totalMutations > 19)
+                        labelMutations.BackColor = Utils.MutationColorOverLimit;
+                    else
+                        labelMutations.BackColor = Utils.MutationColor;
+                    _tt.SetToolTip(labelMutations, "Mutation-Counter: " + totalMutations.ToString("N0") + "\nMaternal: " + _creature.mutationsMaternal.ToString("N0") + "\nPaternal: " + _creature.mutationsPaternal.ToString("N0"));
+                }
+                labelMutations.Visible = totalMutations > 0;
+                _contextMenuAvailable = true;
             }
         }
 
-        private void setTitle()
-        {
-            string totalLevel = creature.LevelHatched > 0 ? creature.LevelHatched.ToString() : "?";
-            groupBox1.Text = (!onlyLevels && creature.status != CreatureStatus.Available ? "(" + Utils.statusSymbol(creature.status) + ") " : "")
-                    + creature.name + " (" + totalLevel + (totalLevelUnknown ? "+" : "") + ")";
+        /// <summary>
+        /// Update the colors displayed in the wheel.
+        /// </summary>
+        /// <param name="colorIds"></param>
+        internal void UpdateColors(int[] colorIds)
+            => pictureBox1.Image = CreatureColored.GetColoredCreature(colorIds, null, enabledColorRegions, 24, 22, true);
 
-            if (creature.growingUntil > DateTime.Now)
-                groupBox1.Text += " (grown at " + Utils.shortTimeDate(creature.growingUntil) + ")";
-            else if (creature.cooldownUntil > DateTime.Now)
-                groupBox1.Text += " (cooldown until " + Utils.shortTimeDate(creature.cooldownUntil) + ")";
+        /// <summary>
+        /// Sets the displayed title of the control.
+        /// </summary>
+        private void SetTitle()
+        {
+            string totalLevel = _creature.LevelHatched > 0 ? _creature.LevelHatched.ToString() : "?";
+            groupBox1.Text =
+                $"{(!OnlyLevels && _creature.Status != CreatureStatus.Available ? "(" + Utils.StatusSymbol(_creature.Status) + ") " : string.Empty)}{_creature.name} ({totalLevel}{(TotalLevelUnknown ? "+" : string.Empty)})";
+
+            if (_creature.growingUntil > DateTime.Now)
+                groupBox1.Text += $" (grown at {Utils.ShortTimeDate(_creature.growingUntil)})";
+            else if (_creature.cooldownUntil > DateTime.Now)
+                groupBox1.Text += $" (cooldown until {Utils.ShortTimeDate(_creature.cooldownUntil)})";
         }
 
-        public bool highlight
+        public bool Highlight
         {
             set
             {
@@ -225,7 +247,7 @@ namespace ARKBreedingStats
         private void PedigreeCreature_MouseClick(object sender, MouseEventArgs e)
         {
             if (CreatureClicked != null && e.Button == MouseButtons.Left)
-                CreatureClicked(creature, comboId, e);
+                CreatureClicked(_creature, comboId, e);
         }
 
         private void element_MouseClick(object sender, MouseEventArgs e)
@@ -235,58 +257,59 @@ namespace ARKBreedingStats
 
         public void Clear()
         {
-            for (int s = 0; s < 7; s++)
+            for (int s = 0; s < displayedStatsCount; s++)
             {
-                labels[s].Text = "";
-                labels[s].BackColor = SystemColors.Control;
+                _labels[s].Text = string.Empty;
+                _labels[s].BackColor = SystemColors.Control;
             }
             labelSex.Visible = false;
-            groupBox1.Text = "";
+            labelMutations.Visible = false;
+            groupBox1.Text = string.Empty;
             pictureBox1.Visible = false;
         }
 
-        public bool IsVirtual
+        private bool _isVirtual;
+        /// <summary>
+        /// If a creature is virtual, it is not a creature in the library.
+        /// </summary>
+        public void SetIsVirtual(bool isVirtual)
         {
-            get => isVirtual;
-            set
-            {
-                isVirtual = value;
-                setCooldownToolStripMenuItem.Visible = !value;
-                removeCooldownGrowingToolStripMenuItem.Visible = !value;
-                bestBreedingPartnersToolStripMenuItem.Visible = !value;
-                editToolStripMenuItem.Text = value ? "Copy values to Tester" : "Edit";
-            }
+            _isVirtual = isVirtual;
+            setCooldownToolStripMenuItem.Visible = !isVirtual;
+            removeCooldownGrowingToolStripMenuItem.Visible = !isVirtual;
+            bestBreedingPartnersToolStripMenuItem.Visible = !isVirtual;
+            editToolStripMenuItem.Text = isVirtual ? "Copy values to Tester" : "Edit";
         }
 
         private void editToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            CreatureEdit?.Invoke(creature, isVirtual);
+            CreatureEdit?.Invoke(_creature, _isVirtual);
         }
 
         private void setCooldownToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            creature.cooldownUntil = DateTime.Now.AddHours(2);
-            BPRecalc?.Invoke();
-            setTitle();
+            _creature.cooldownUntil = DateTime.Now.AddHours(2);
+            RecalculateBreedingPlan?.Invoke();
+            SetTitle();
         }
 
         private void removeCooldownGrowingToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (creature.cooldownUntil > DateTime.Now)
-                creature.cooldownUntil = DateTime.Now;
-            if (creature.growingUntil > DateTime.Now)
-                creature.growingUntil = DateTime.Now;
-            setTitle();
+            if (_creature.cooldownUntil > DateTime.Now)
+                _creature.cooldownUntil = DateTime.Now;
+            if (_creature.growingUntil > DateTime.Now)
+                _creature.growingUntil = DateTime.Now;
+            SetTitle();
         }
 
         private void bestBreedingPartnersToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            BestBreedingPartners?.Invoke(creature);
+            BestBreedingPartners?.Invoke(_creature);
         }
 
         private void contextMenuStrip1_Opening(object sender, CancelEventArgs e)
         {
-            if (!contextMenuAvailable)
+            if (!_contextMenuAvailable)
             {
                 e.Cancel = true;
             }
@@ -294,18 +317,29 @@ namespace ARKBreedingStats
 
         private void plainTextbreedingValuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            exportToClipboard?.Invoke(creature, true, false);
+            ExportToClipboard?.Invoke(_creature, true, false);
         }
 
         private void plainTextcurrentValuesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            exportToClipboard?.Invoke(creature, false, false);
+            ExportToClipboard?.Invoke(_creature, false, false);
         }
 
         private void OpenWikipageInBrowserToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (creature?.Species != null)
-                System.Diagnostics.Process.Start("https://ark.gamepedia.com/" + creature.Species.name);
+            if (_creature?.Species != null)
+                System.Diagnostics.Process.Start("https://ark.gamepedia.com/" + _creature.Species.name);
+        }
+
+        private void TsMiViewInPedigree_Click(object sender, EventArgs e)
+        {
+            DisplayInPedigree?.Invoke(_creature);
+        }
+
+        private void copyNameToClipboardToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(_creature?.name))
+                Clipboard.SetText(_creature.name);
         }
     }
 }

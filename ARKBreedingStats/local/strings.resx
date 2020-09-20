@@ -130,7 +130,7 @@
     <value>Body</value>
   </data>
   <data name="BonusLevel" xml:space="preserve">
-    <value>Bonus-Level</value>
+    <value>Bonus Level</value>
   </data>
   <data name="Bow" xml:space="preserve">
     <value>Bow</value>
@@ -225,22 +225,22 @@ The levels are then shown without the extraction-process (and without validation
   <data name="cbToggleOverlay" xml:space="preserve">
     <value>Overlay</value>
   </data>
-  <data name="ChargeCapacity_Abb" xml:space="preserve">
+  <data name="Charge Capacity_Abb" xml:space="preserve">
     <value>CC</value>
   </data>
   <data name="Chart" xml:space="preserve">
     <value>Chart</value>
   </data>
-  <data name="ChargeCapacity" xml:space="preserve">
+  <data name="Charge Capacity" xml:space="preserve">
     <value>Ch Capacity</value>
   </data>
   <data name="checkForUpdatedStatsToolStripMenuItem" xml:space="preserve">
     <value>Check for Updates</value>
   </data>
-  <data name="ChargeEmissionRange" xml:space="preserve">
+  <data name="Charge Emission Range" xml:space="preserve">
     <value>Ch Emission Range</value>
   </data>
-  <data name="ChargeRegeneration" xml:space="preserve">
+  <data name="Charge Regen" xml:space="preserve">
     <value>Ch Regen</value>
   </data>
   <data name="Club" xml:space="preserve">
@@ -264,10 +264,10 @@ The levels are then shown without the extraction-process (and without validation
   <data name="copyToMultiplierTesterToolStripButtonTT" xml:space="preserve">
     <value>All the levels, TE and IB from the Tester, and the stat-values from the Extractor will be copied to the Stat-Multiplier-Tester</value>
   </data>
-  <data name="ChargeEmissionRange_Abb" xml:space="preserve">
+  <data name="Charge Emission Range_Abb" xml:space="preserve">
     <value>CRa</value>
   </data>
-  <data name="ChargeRegeneration_Abb" xml:space="preserve">
+  <data name="Charge Regen_Abb" xml:space="preserve">
     <value>CRe</value>
   </data>
   <data name="Creature" xml:space="preserve">
@@ -284,9 +284,6 @@ The levels are then shown without the extraction-process (and without validation
   </data>
   <data name="Damage" xml:space="preserve">
     <value>Damage</value>
-  </data>
-  <data name="de" xml:space="preserve">
-    <value>German</value>
   </data>
   <data name="deadCreaturesToolStripMenuItem" xml:space="preserve">
     <value>Dead Creatures</value>
@@ -324,10 +321,7 @@ The levels are then shown without the extraction-process (and without validation
   <data name="ElectricProdHits" xml:space="preserve">
     <value>Electric Prod Hits</value>
   </data>
-  <data name="en" xml:space="preserve">
-    <value>English</value>
-  </data>
-  <data name="Event_" xml:space="preserve">
+  <data name="Event" xml:space="preserve">
     <value>Event</value>
   </data>
   <data name="exportValuesToClipboardToolStripMenuItem" xml:space="preserve">
@@ -890,7 +884,7 @@ Set to -1 for any number of mutation.</value>
     <value>Raising</value>
   </data>
   <data name="rbBPHighStats" xml:space="preserve">
-    <value>High Stats</value>
+    <value>Best next generation</value>
   </data>
   <data name="rbBPHighStatsTT" xml:space="preserve">
     <value>Check for best next-generation-results.
@@ -898,19 +892,19 @@ The chance for an overall good creature is better.
 Check if it's not important to have a Top-Stats-Offspring.</value>
   </data>
   <data name="rbBPTopStats" xml:space="preserve">
-    <value>Top Stats Lc</value>
+    <value>Combine top stats lucky</value>
   </data>
   <data name="rbBPTopStatsCn" xml:space="preserve">
-    <value>Top Stats Cn</value>
+    <value>Combine top stats steady</value>
   </data>
   <data name="rbBPTopStatsCnTT" xml:space="preserve">
-    <value>Top Stats, Conservative.
+    <value>Combine top stats steady
 Check for best long-term-results and if you want to go safe.
 This mode will get to the best possible offspring steady and surely.
 Some offsprings might be worse than in High-Stats-Mode, but that's the mode you go if you want to have that perfect creature in some generations.</value>
   </data>
   <data name="rbBPTopStatsTT" xml:space="preserve">
-    <value>Top Stats, Feeling Lucky.
+    <value>Combine top stats lucky
 Check for best long-term-results and if you're feeling lucky. It can be faster to get the perfect creature than in the Top-Stat-Conservative-Mode if you're lucky.
 Some offsprings might be worse than in High-Stats-Mode, but you also have a chance to the best possible offspring.</value>
   </data>
@@ -932,9 +926,6 @@ Some offsprings might be worse than in High-Stats-Mode, but you also have a chan
   <data name="Available" xml:space="preserve">
     <value>Available</value>
   </data>
-  <data name="fr" xml:space="preserve">
-    <value>French</value>
-  </data>
   <data name="HarpoonLauncher" xml:space="preserve">
     <value>Harpoon Launcher</value>
   </data>
@@ -953,13 +944,10 @@ Some offsprings might be worse than in High-Stats-Mode, but you also have a chan
   <data name="lbImprintingFailInfo" xml:space="preserve">
     <value>If the creature is imprinted the extraction may fail because the game sometimes "forgets" to increase some stat-values during the imprinting-process. Usually it works after you put the creature in and out of a cryopod, up- and download it in an obelisk/terminal, go out of render-distance, or wait for a server-restart.</value>
   </data>
-  <data name="it" xml:space="preserve">
-    <value>Italian</value>
-  </data>
-  <data name="CraftingSpeed" xml:space="preserve">
+  <data name="Crafting Speed" xml:space="preserve">
     <value>Crafting Speed</value>
   </data>
-  <data name="CraftingSpeed_Abb" xml:space="preserve">
+  <data name="Crafting Speed_Abb" xml:space="preserve">
     <value>Cr</value>
   </data>
   <data name="Fortitude" xml:space="preserve">
@@ -983,12 +971,6 @@ Some offsprings might be worse than in High-Stats-Mode, but you also have a chan
   <data name="btUpdateLibraryCreature" xml:space="preserve">
     <value>Update creature in Library</value>
   </data>
-  <data name="es" xml:space="preserve">
-    <value>Spanish</value>
-  </data>
-  <data name="zh" xml:space="preserve">
-    <value>Chinese</value>
-  </data>
   <data name="CurrentCreature" xml:space="preserve">
     <value>Current Creature</value>
   </data>
@@ -1006,5 +988,261 @@ Some offsprings might be worse than in High-Stats-Mode, but you also have a chan
   </data>
   <data name="cbBPOnlyOneSuggestionForFemales" xml:space="preserve">
     <value>Only best suggestion for females</value>
+  </data>
+  <data name="Descendants" xml:space="preserve">
+    <value>Descendants</value>
+  </data>
+  <data name="ProbabilityForOneMutation" xml:space="preserve">
+    <value>Probability for one mutation</value>
+  </data>
+  <data name="matingTime" xml:space="preserve">
+    <value>Mating Time</value>
+  </data>
+  <data name="addedAt" xml:space="preserve">
+    <value>Added at</value>
+  </data>
+  <data name="All" xml:space="preserve">
+    <value>All</value>
+  </data>
+  <data name="na" xml:space="preserve">
+    <value>n/a</value>
+  </data>
+  <data name="showOnlyNaturalOccuring" xml:space="preserve">
+    <value>Show only natural occuring colors</value>
+  </data>
+  <data name="apply" xml:space="preserve">
+    <value>apply</value>
+  </data>
+  <data name="libraryFilter" xml:space="preserve">
+    <value>Library Filter</value>
+  </data>
+  <data name="owners" xml:space="preserve">
+    <value>owners</value>
+  </data>
+  <data name="servers" xml:space="preserve">
+    <value>servers</value>
+  </data>
+  <data name="tags" xml:space="preserve">
+    <value>tags</value>
+  </data>
+  <data name="tribes" xml:space="preserve">
+    <value>tribes</value>
+  </data>
+  <data name="useFilterInTopStatCalculation" xml:space="preserve">
+    <value>Use filter in top stat calculation</value>
+  </data>
+  <data name="clearColorsFilters" xml:space="preserve">
+    <value>Clear Color Filters</value>
+  </data>
+  <data name="groupLibraryBySpecies" xml:space="preserve">
+    <value>Group library by species</value>
+  </data>
+  <data name="libraryFilterToolStripMenuItem" xml:space="preserve">
+    <value>Filter library…</value>
+  </data>
+  <data name="onlyCreaturesWithThisColor" xml:space="preserve">
+    <value>Only creatures that have this color</value>
+  </data>
+  <data name="ownerFilterFromLibrary" xml:space="preserve">
+    <value>Owner filter from library</value>
+  </data>
+  <data name="possibleLevelRange" xml:space="preserve">
+    <value>Possible Level-Range: {0}–{1}</value>
+  </data>
+  <data name="serverFilterFromLibrary" xml:space="preserve">
+    <value>Server filter from library</value>
+  </data>
+  <data name="tribeFilterFromLibrary" xml:space="preserve">
+    <value>Tribe filter from library</value>
+  </data>
+  <data name="clear" xml:space="preserve">
+    <value>Clear</value>
+  </data>
+  <data name="filterAllNeededInfo" xml:space="preserve">
+    <value>Only creatures with all of these flags will be displayed</value>
+  </data>
+  <data name="filterByName" xml:space="preserve">
+    <value>Filter by name</value>
+  </data>
+  <data name="filterExcludeInfo" xml:space="preserve">
+    <value>Creatures with this flag will not be shown</value>
+  </data>
+  <data name="filterOneNeededInfo" xml:space="preserve">
+    <value>Only creatures with one of these flags will be displayed</value>
+  </data>
+  <data name="issueCauseTypo" xml:space="preserve">
+    <value>Double check if all stat-values are entered correctly.</value>
+  </data>
+  <data name="issueCauseWildTamedBred" xml:space="preserve">
+    <value>Make sure the correct state (wild, tamed, bred) for the creature is chosen.</value>
+  </data>
+  <data name="issueCauseTamingEffectivenessRange" xml:space="preserve">
+    <value>Taming-Effectiveness-Range too narrow, increase the upper and / or decrase the lower bound.</value>
+  </data>
+  <data name="issueCauseLockedDomLevel" xml:space="preserve">
+    <value>Uncheck all Lock-to-Zero-buttons in the stats (all lock-symbols should be green and opened).</value>
+  </data>
+  <data name="issueCauseImprintingLocked" xml:space="preserve">
+    <value>You locked the imprinting-value by checking "Exactly, don't adjust" and the tool won't adjust it, this may cause the extraction to fail.</value>
+  </data>
+  <data name="issueCauseImprintingNotUpdated" xml:space="preserve">
+    <value>Sometimes the game doesn't update the stat-value after an imprinting. Try the extraction after the creature was cryoed again.</value>
+  </data>
+  <data name="issueCauseImprintingNotPossible" xml:space="preserve">
+    <value>The imprinting-percentage given is not possible with the current multipliers and may cause wrong values during the extraction-process.
+Make sure the BabyCuddleIntervallMultiplier and the BabyMatureSpeedMultiplier are set correctly.
+They may have to be set to the value when the creature hatched/was born, even if they were changed.</value>
+  </data>
+  <data name="issueCauseSingleplayer" xml:space="preserve">
+    <value>If you have enabled the Singleplayer-Settings in the game, make sure the according checkbox is enabled in the settings in this application as well.</value>
+  </data>
+  <data name="issueCauseWildLevelSteps" xml:space="preserve">
+    <value>Adjust or disable the "Consider Wild-level - steps" in the settings.</value>
+  </data>
+  <data name="issueCauseMaxWildLevel" xml:space="preserve">
+    <value>The maximal wild level is set too low, go to the settings and adjust it.</value>
+  </data>
+  <data name="issueCauseStatMultipliers" xml:space="preserve">
+    <value>The stat multipliers in the Settings are not set to the multipliers of the server. Ask your admin for the correct multipliers and adjust them in the Settings.</value>
+  </data>
+  <data name="issueCauseOutdatedIngameValues" xml:space="preserve">
+    <value>The stats of the creature were changed recently and the game displays the old values. Level up a stat, that should trigger a recalculation of the values.</value>
+  </data>
+  <data name="issueCauseCreatureLevel" xml:space="preserve">
+    <value>Check if the total level of the creature is entered correctly.
+If the creature is bred, also check if the BabyImprintingStatScaleMultiplier is set correctly.</value>
+  </data>
+  <data name="issueCauseArkStatIssue" xml:space="preserve">
+    <value>This species is known to show wrong stat values ingame, this can prevent a successful extraction.</value>
+  </data>
+  <data name="BtApplyOTSPreset" xml:space="preserve">
+    <value>Apply OTS Preset</value>
+  </data>
+  <data name="BtSaveOTSPreset" xml:space="preserve">
+    <value>Save OTS</value>
+  </data>
+  <data name="BtSaveOTSPresetTT" xml:space="preserve">
+    <value>Save Owner, Tribe and Server as preset.
+The preset can be applied by the Apply Preset button</value>
+  </data>
+  <data name="BtApplyOTSPresetTT" xml:space="preserve">
+    <value>Set the values for owner, tribe and server from the saved preset</value>
+  </data>
+  <data name="noColor" xml:space="preserve">
+    <value>no color</value>
+  </data>
+  <data name="topLevel" xml:space="preserve">
+    <value>top level</value>
+  </data>
+  <data name="newTopLevel" xml:space="preserve">
+    <value>new top level</value>
+  </data>
+  <data name="clearColors" xml:space="preserve">
+    <value>clear colors</value>
+  </data>
+  <data name="holdCtrlForRandomColors" xml:space="preserve">
+    <value>Hold Ctrl for random colors</value>
+  </data>
+  <data name="BtBeepFailure" xml:space="preserve">
+    <value>import failed</value>
+  </data>
+  <data name="BtBeepSuccess" xml:space="preserve">
+    <value>import success</value>
+  </data>
+  <data name="BtBeepTop" xml:space="preserve">
+    <value>top stat</value>
+  </data>
+  <data name="BtBeepNewTop" xml:space="preserve">
+    <value>new top stat</value>
+  </data>
+  <data name="BtBeepFailureTT" xml:space="preserve">
+    <value>This sound is played when an automatic import failed, manual selection of levels may be needed.</value>
+  </data>
+  <data name="BtBeepSuccessTT" xml:space="preserve">
+    <value>This sound is played when an automatic import succeeded</value>
+  </data>
+  <data name="BtBeepTopTT" xml:space="preserve">
+    <value>This sound is played when a level of the imported creature is a top stat, i.e. equal to the current highest level in the library</value>
+  </data>
+  <data name="BtBeepNewTopTT" xml:space="preserve">
+    <value>This sound is played when an automatic imported creature has a higher level in a stat than all other creatures of that species in the library</value>
+  </data>
+  <data name="creatureOfFile" xml:space="preserve">
+    <value>Creature of the export file</value>
+  </data>
+  <data name="downloadingValuesSuccess" xml:space="preserve">
+    <value>Downloading and updating of the new species-stats was successful.</value>
+  </data>
+  <data name="updateSuccessTitle" xml:space="preserve">
+    <value>Update successful</value>
+  </data>
+  <data name="error" xml:space="preserve">
+    <value>Error</value>
+  </data>
+  <data name="valuesFileLoadingError" xml:space="preserve">
+    <value>The species values-file couldn't be loaded, this application does not work without. Try redownloading the tool.</value>
+  </data>
+  <data name="preTameLevel" xml:space="preserve">
+    <value>Pre tame level</value>
+  </data>
+  <data name="noValidData" xml:space="preserve">
+    <value>No valid data</value>
+  </data>
+  <data name="noValidExtractedCreatureToExport" xml:space="preserve">
+    <value>There is no valid extracted creature to export.</value>
+  </data>
+  <data name="noCreatureSelectedInLibrary" xml:space="preserve">
+    <value>There are no creatures in the library selected to copy to the clipboard.</value>
+  </data>
+  <data name="unknownSpecies" xml:space="preserve">
+    <value>unknown species</value>
+  </data>
+  <data name="BestPossibleSpeciesLibrary" xml:space="preserve">
+    <value>Best possible {0} for this library</value>
+  </data>
+  <data name="VariantSelector" xml:space="preserve">
+    <value>Variant Selector</value>
+  </data>
+  <data name="VariantSelectorInfo" xml:space="preserve">
+    <value>Species that contain one variant that is unchecked will be hidden.</value>
+  </data>
+  <data name="BPCancelRestrictionOn" xml:space="preserve">
+    <value>Cancel restriction on {0}</value>
+  </data>
+  <data name="BtGetExportFolderAutomatically" xml:space="preserve">
+    <value>Set export folder automatically</value>
+  </data>
+  <data name="ExportFolderDetectionFailed" xml:space="preserve">
+    <value>The export folder of Steam couldn't be detected automatically.</value>
+  </data>
+  <data name="incubation" xml:space="preserve">
+    <value>incubation</value>
+  </data>
+  <data name="noTimerSelected" xml:space="preserve">
+    <value>no timer selected</value>
+  </data>
+  <data name="paused" xml:space="preserve">
+    <value>paused</value>
+  </data>
+  <data name="expired" xml:space="preserve">
+    <value>expired</value>
+  </data>
+  <data name="mature" xml:space="preserve">
+    <value>mature</value>
+  </data>
+  <data name="notABabyAnymore" xml:space="preserve">
+    <value>not a baby anymore</value>
+  </data>
+  <data name="issueCauseModValues" xml:space="preserve">
+    <value>If the creature is from a mod, you may need to enable the according mod values in Settings - Mod value manager.</value>
+  </data>
+  <data name="extractionFailedHeader" xml:space="preserve">
+    <value>The extraction failed. See the following list of possible causes</value>
+  </data>
+  <data name="Parents" xml:space="preserve">
+    <value>Parents</value>
+  </data>
+  <data name="SystemLanguage" xml:space="preserve">
+    <value>System Language</value>
   </data>
 </root>

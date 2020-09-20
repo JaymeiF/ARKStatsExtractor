@@ -46,6 +46,8 @@ namespace ARKBreedingStats
             this.importingFromSavegameToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importingFromSavegameEmptyToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importExportedCreaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
+            this.copyLibrarydumpToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator10 = new System.Windows.Forms.ToolStripSeparator();
             this.quitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -105,18 +107,7 @@ namespace ARKBreedingStats
             this.toolStripSeparator7 = new System.Windows.Forms.ToolStripSeparator();
             this.copyCreatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteCreatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.viewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deadCreaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.unavailableCreaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.obeliskCreaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.neuteredCreaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.mutatedCreaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.cryopodCreaturesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.femalesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.malesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.speciesGroupToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator19 = new System.Windows.Forms.ToolStripSeparator();
-            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.libraryFilterToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.settingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openSettingsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator18 = new System.Windows.Forms.ToolStripSeparator();
@@ -130,6 +121,7 @@ namespace ARKBreedingStats
             this.BreedingPlanHelpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.extractionIssuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator12 = new System.Windows.Forms.ToolStripSeparator();
+            this.downloadSpeciesImagesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.checkForUpdatedStatsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.panelSums = new System.Windows.Forms.Panel();
             this.lbShouldBe = new System.Windows.Forms.Label();
@@ -140,6 +132,7 @@ namespace ARKBreedingStats
             this.rbWildExtractor = new System.Windows.Forms.RadioButton();
             this.tabControlMain = new System.Windows.Forms.TabControl();
             this.tabPageStatTesting = new System.Windows.Forms.TabPage();
+            this.pictureBoxColorRegionsTester = new System.Windows.Forms.PictureBox();
             this.statPotentials1 = new ARKBreedingStats.uiControls.StatPotentials();
             this.gbStatChart = new System.Windows.Forms.GroupBox();
             this.radarChart1 = new ARKBreedingStats.RadarChart();
@@ -162,7 +155,10 @@ namespace ARKBreedingStats
             this.lbTestingInfo = new System.Windows.Forms.Label();
             this.creatureInfoInputTester = new ARKBreedingStats.CreatureInfoInput();
             this.tabPageExtractor = new System.Windows.Forms.TabPage();
+            this.BtCopyIssueDumpToClipboard = new System.Windows.Forms.Button();
+            this.parentInheritanceExtractor = new ARKBreedingStats.uiControls.ParentInheritance();
             this.llOnlineHelpExtractionIssues = new System.Windows.Forms.LinkLabel();
+            this.PbCreatureColorsExtractor = new System.Windows.Forms.PictureBox();
             this.groupBoxRadarChartExtractor = new System.Windows.Forms.GroupBox();
             this.radarChartExtractor = new ARKBreedingStats.RadarChart();
             this.lbImprintingFailInfo = new System.Windows.Forms.Label();
@@ -183,31 +179,11 @@ namespace ARKBreedingStats
             this.tabControlLibFilter = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.listBoxSpeciesLib = new System.Windows.Forms.ListBox();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.checkedListBoxOwner = new System.Windows.Forms.CheckedListBox();
-            this.cbOwnerFilterAll = new System.Windows.Forms.CheckBox();
-            this.tabPageServer = new System.Windows.Forms.TabPage();
-            this.checkedListBoxFilterServers = new System.Windows.Forms.CheckedListBox();
-            this.cbServerFilterAll = new System.Windows.Forms.CheckBox();
-            this.tabPageTags = new System.Windows.Forms.TabPage();
-            this.checkedListBoxFilterTags = new System.Windows.Forms.CheckedListBox();
-            this.cbFilterTagsAll = new System.Windows.Forms.CheckBox();
             this.tabPage3 = new System.Windows.Forms.TabPage();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.checkedListBoxConsiderStatTop = new System.Windows.Forms.CheckedListBox();
             this.buttonRecalculateTops = new System.Windows.Forms.Button();
             this.label17 = new System.Windows.Forms.Label();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.checkBoxSpeciesGroups = new System.Windows.Forms.CheckBox();
-            this.checkBoxShowCryopodCreatures = new System.Windows.Forms.CheckBox();
-            this.cbLibraryShowMales = new System.Windows.Forms.CheckBox();
-            this.cbLibraryShowFemales = new System.Windows.Forms.CheckBox();
-            this.checkBoxShowObeliskCreatures = new System.Windows.Forms.CheckBox();
-            this.checkBoxUseFiltersInTopStatCalculation = new System.Windows.Forms.CheckBox();
-            this.checkBoxShowMutatedCreatures = new System.Windows.Forms.CheckBox();
-            this.checkBoxShowNeuteredCreatures = new System.Windows.Forms.CheckBox();
-            this.checkBoxShowUnavailableCreatures = new System.Windows.Forms.CheckBox();
-            this.checkBoxShowDead = new System.Windows.Forms.CheckBox();
             this.tabPageLibRadarChart = new System.Windows.Forms.TabPage();
             this.radarChartLibrary = new ARKBreedingStats.RadarChart();
             this.listViewLibrary = new System.Windows.Forms.ListView();
@@ -244,6 +220,7 @@ namespace ARKBreedingStats
             this.columnHeaderSpecies = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderStatus = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.columnHeaderTribe = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.columnHeaderStatusIcon = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.contextMenuStripLibrary = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.toolStripMenuItemEdit = new System.Windows.Forms.ToolStripMenuItem();
             this.editAllSelectedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -260,6 +237,9 @@ namespace ARKBreedingStats
             this.forSpreadsheetToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.copyInfographicToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeCooldownGrowingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setToMatureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearMatingCooldownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.justMatedToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.bestBreedingPartnersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItemStatus = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem2 = new System.Windows.Forms.ToolStripMenuItem();
@@ -321,6 +301,9 @@ namespace ARKBreedingStats
             this.toolStripButtonDeleteTempCreature = new System.Windows.Forms.ToolStripButton();
             this.tsBtAddAsExtractionTest = new System.Windows.Forms.ToolStripButton();
             this.copyToMultiplierTesterToolStripButton = new System.Windows.Forms.ToolStripButton();
+            this.ToolStripLabelFilter = new System.Windows.Forms.ToolStripLabel();
+            this.ToolStripTextBoxLibraryFilter = new System.Windows.Forms.ToolStripTextBox();
+            this.ToolStripButtonLibraryFilterClear = new System.Windows.Forms.ToolStripButton();
             this.panelToolBar = new System.Windows.Forms.Panel();
             this.btImportLastExported = new System.Windows.Forms.Button();
             this.pbSpecies = new System.Windows.Forms.PictureBox();
@@ -331,6 +314,8 @@ namespace ARKBreedingStats
             this.lbSpecies = new System.Windows.Forms.Label();
             this.lbLibrarySelectionInfo = new System.Windows.Forms.Label();
             this.speciesSelector1 = new ARKBreedingStats.SpeciesSelector();
+            this.contextMenuStripLibraryHeader = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.toolStripMenuItemResetLibraryColumnWidths = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownImprintingBonusTester)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NumericUpDownTestingTE)).BeginInit();
@@ -346,6 +331,7 @@ namespace ARKBreedingStats
             this.panelWildTamedBred.SuspendLayout();
             this.tabControlMain.SuspendLayout();
             this.tabPageStatTesting.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorRegionsTester)).BeginInit();
             this.gbStatChart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radarChart1)).BeginInit();
             this.panelWildTamedBredTester.SuspendLayout();
@@ -355,6 +341,7 @@ namespace ARKBreedingStats
             this.panelStatTesterFootnote.SuspendLayout();
             this.gpPreviewEdit.SuspendLayout();
             this.tabPageExtractor.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbCreatureColorsExtractor)).BeginInit();
             this.groupBoxRadarChartExtractor.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radarChartExtractor)).BeginInit();
             this.groupBoxTamingInfo.SuspendLayout();
@@ -366,12 +353,8 @@ namespace ARKBreedingStats
             this.tableLayoutPanelLibrary.SuspendLayout();
             this.tabControlLibFilter.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
-            this.tabPageServer.SuspendLayout();
-            this.tabPageTags.SuspendLayout();
             this.tabPage3.SuspendLayout();
             this.tableLayoutPanel2.SuspendLayout();
-            this.tabPage4.SuspendLayout();
             this.tabPageLibRadarChart.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.radarChartLibrary)).BeginInit();
             this.contextMenuStripLibrary.SuspendLayout();
@@ -389,12 +372,13 @@ namespace ARKBreedingStats
             this.toolStrip2.SuspendLayout();
             this.panelToolBar.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSpecies)).BeginInit();
+            this.contextMenuStripLibraryHeader.SuspendLayout();
             this.SuspendLayout();
             // 
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.aboutToolStripMenuItem.Text = "about…";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
             // 
@@ -411,6 +395,8 @@ namespace ARKBreedingStats
             this.toolStripSeparator15,
             this.importingFromSavegameToolStripMenuItem,
             this.importExportedCreaturesToolStripMenuItem,
+            this.toolStripSeparator19,
+            this.copyLibrarydumpToClipboardToolStripMenuItem,
             this.toolStripSeparator10,
             this.quitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -420,7 +406,7 @@ namespace ARKBreedingStats
             // newToolStripMenuItem
             // 
             this.newToolStripMenuItem.Name = "newToolStripMenuItem";
-            this.newToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.newToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.newToolStripMenuItem.Text = "&New Library";
             this.newToolStripMenuItem.Click += new System.EventHandler(this.newToolStripMenuItem_Click);
             // 
@@ -429,14 +415,14 @@ namespace ARKBreedingStats
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
             this.loadToolStripMenuItem.ShortcutKeyDisplayString = "";
             this.loadToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.loadToolStripMenuItem.Text = "&Load...";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
             // loadAndAddToolStripMenuItem
             // 
             this.loadAndAddToolStripMenuItem.Name = "loadAndAddToolStripMenuItem";
-            this.loadAndAddToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.loadAndAddToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.loadAndAddToolStripMenuItem.Text = "Load and A&dd...";
             this.loadAndAddToolStripMenuItem.ToolTipText = "Select a library-file and add all its creatures to the currently loaded library";
             this.loadAndAddToolStripMenuItem.Click += new System.EventHandler(this.loadAndAddToolStripMenuItem_Click);
@@ -445,7 +431,7 @@ namespace ARKBreedingStats
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
             this.saveToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.saveToolStripMenuItem.Text = "&Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -454,34 +440,34 @@ namespace ARKBreedingStats
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)(((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.Shift) 
             | System.Windows.Forms.Keys.S)));
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.saveAsToolStripMenuItem.Text = "Save &as...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(217, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(239, 6);
             // 
             // openFolderOfCurrentFileToolStripMenuItem
             // 
             this.openFolderOfCurrentFileToolStripMenuItem.Enabled = false;
             this.openFolderOfCurrentFileToolStripMenuItem.Name = "openFolderOfCurrentFileToolStripMenuItem";
-            this.openFolderOfCurrentFileToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.openFolderOfCurrentFileToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.openFolderOfCurrentFileToolStripMenuItem.Text = "Open folder of current file…";
             this.openFolderOfCurrentFileToolStripMenuItem.Click += new System.EventHandler(this.openFolderOfCurrentFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator15
             // 
             this.toolStripSeparator15.Name = "toolStripSeparator15";
-            this.toolStripSeparator15.Size = new System.Drawing.Size(217, 6);
+            this.toolStripSeparator15.Size = new System.Drawing.Size(239, 6);
             // 
             // importingFromSavegameToolStripMenuItem
             // 
             this.importingFromSavegameToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.importingFromSavegameEmptyToolStripMenuItem});
             this.importingFromSavegameToolStripMenuItem.Name = "importingFromSavegameToolStripMenuItem";
-            this.importingFromSavegameToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.importingFromSavegameToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.importingFromSavegameToolStripMenuItem.Text = "Importing from savegame";
             // 
             // importingFromSavegameEmptyToolStripMenuItem
@@ -494,18 +480,30 @@ namespace ARKBreedingStats
             // importExportedCreaturesToolStripMenuItem
             // 
             this.importExportedCreaturesToolStripMenuItem.Name = "importExportedCreaturesToolStripMenuItem";
-            this.importExportedCreaturesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.importExportedCreaturesToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.importExportedCreaturesToolStripMenuItem.Text = "Import exported Creatures";
+            // 
+            // toolStripSeparator19
+            // 
+            this.toolStripSeparator19.Name = "toolStripSeparator19";
+            this.toolStripSeparator19.Size = new System.Drawing.Size(239, 6);
+            // 
+            // copyLibrarydumpToClipboardToolStripMenuItem
+            // 
+            this.copyLibrarydumpToClipboardToolStripMenuItem.Name = "copyLibrarydumpToClipboardToolStripMenuItem";
+            this.copyLibrarydumpToClipboardToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
+            this.copyLibrarydumpToClipboardToolStripMenuItem.Text = "Copy library-dump to clipboard";
+            this.copyLibrarydumpToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyLibrarydumpToClipboardToolStripMenuItem_Click);
             // 
             // toolStripSeparator10
             // 
             this.toolStripSeparator10.Name = "toolStripSeparator10";
-            this.toolStripSeparator10.Size = new System.Drawing.Size(217, 6);
+            this.toolStripSeparator10.Size = new System.Drawing.Size(239, 6);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(242, 22);
             this.quitToolStripMenuItem.Text = "&Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 
@@ -596,7 +594,7 @@ namespace ARKBreedingStats
             // groupBoxPossibilities
             // 
             this.groupBoxPossibilities.Controls.Add(this.listViewPossibilities);
-            this.groupBoxPossibilities.Location = new System.Drawing.Point(556, 43);
+            this.groupBoxPossibilities.Location = new System.Drawing.Point(590, 43);
             this.groupBoxPossibilities.Name = "groupBoxPossibilities";
             this.groupBoxPossibilities.Size = new System.Drawing.Size(189, 295);
             this.groupBoxPossibilities.TabIndex = 11;
@@ -840,9 +838,9 @@ namespace ARKBreedingStats
             // 
             // lbInfoYellowStats
             // 
-            this.lbInfoYellowStats.Location = new System.Drawing.Point(556, 341);
+            this.lbInfoYellowStats.Location = new System.Drawing.Point(590, 341);
             this.lbInfoYellowStats.Name = "lbInfoYellowStats";
-            this.lbInfoYellowStats.Size = new System.Drawing.Size(177, 187);
+            this.lbInfoYellowStats.Size = new System.Drawing.Size(255, 126);
             this.lbInfoYellowStats.TabIndex = 15;
             this.lbInfoYellowStats.Text = resources.GetString("lbInfoYellowStats.Text");
             // 
@@ -913,7 +911,7 @@ namespace ARKBreedingStats
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.viewToolStripMenuItem,
+            this.libraryFilterToolStripMenuItem,
             this.settingsToolStripMenuItem,
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
@@ -1068,125 +1066,12 @@ namespace ARKBreedingStats
             this.pasteCreatureToolStripMenuItem.Text = "Paste Creature";
             this.pasteCreatureToolStripMenuItem.Click += new System.EventHandler(this.pasteCreatureToolStripMenuItem_Click);
             // 
-            // viewToolStripMenuItem
+            // libraryFilterToolStripMenuItem
             // 
-            this.viewToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deadCreaturesToolStripMenuItem,
-            this.unavailableCreaturesToolStripMenuItem,
-            this.obeliskCreaturesToolStripMenuItem,
-            this.neuteredCreaturesToolStripMenuItem,
-            this.mutatedCreaturesToolStripMenuItem,
-            this.cryopodCreaturesToolStripMenuItem,
-            this.femalesToolStripMenuItem,
-            this.malesToolStripMenuItem,
-            this.speciesGroupToolStripMenuItem,
-            this.toolStripSeparator19,
-            this.toolStripMenuItem1});
-            this.viewToolStripMenuItem.Name = "viewToolStripMenuItem";
-            this.viewToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
-            this.viewToolStripMenuItem.Text = "View";
-            // 
-            // deadCreaturesToolStripMenuItem
-            // 
-            this.deadCreaturesToolStripMenuItem.Checked = true;
-            this.deadCreaturesToolStripMenuItem.CheckOnClick = true;
-            this.deadCreaturesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.deadCreaturesToolStripMenuItem.Name = "deadCreaturesToolStripMenuItem";
-            this.deadCreaturesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.deadCreaturesToolStripMenuItem.Text = "Dead Creatures";
-            this.deadCreaturesToolStripMenuItem.Click += new System.EventHandler(this.deadCreaturesToolStripMenuItem_Click);
-            // 
-            // unavailableCreaturesToolStripMenuItem
-            // 
-            this.unavailableCreaturesToolStripMenuItem.Checked = true;
-            this.unavailableCreaturesToolStripMenuItem.CheckOnClick = true;
-            this.unavailableCreaturesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.unavailableCreaturesToolStripMenuItem.Name = "unavailableCreaturesToolStripMenuItem";
-            this.unavailableCreaturesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.unavailableCreaturesToolStripMenuItem.Text = "Unavailable Creatures";
-            this.unavailableCreaturesToolStripMenuItem.Click += new System.EventHandler(this.unavailableCreaturesToolStripMenuItem_Click);
-            // 
-            // obeliskCreaturesToolStripMenuItem
-            // 
-            this.obeliskCreaturesToolStripMenuItem.Checked = true;
-            this.obeliskCreaturesToolStripMenuItem.CheckOnClick = true;
-            this.obeliskCreaturesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.obeliskCreaturesToolStripMenuItem.Name = "obeliskCreaturesToolStripMenuItem";
-            this.obeliskCreaturesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.obeliskCreaturesToolStripMenuItem.Text = "Obelisk Creatures";
-            this.obeliskCreaturesToolStripMenuItem.Click += new System.EventHandler(this.obeliskCreaturesToolStripMenuItem_Click);
-            // 
-            // neuteredCreaturesToolStripMenuItem
-            // 
-            this.neuteredCreaturesToolStripMenuItem.Checked = true;
-            this.neuteredCreaturesToolStripMenuItem.CheckOnClick = true;
-            this.neuteredCreaturesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.neuteredCreaturesToolStripMenuItem.Name = "neuteredCreaturesToolStripMenuItem";
-            this.neuteredCreaturesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.neuteredCreaturesToolStripMenuItem.Text = "Neutered Creatures";
-            this.neuteredCreaturesToolStripMenuItem.Click += new System.EventHandler(this.neuteredCreaturesToolStripMenuItem_Click);
-            // 
-            // mutatedCreaturesToolStripMenuItem
-            // 
-            this.mutatedCreaturesToolStripMenuItem.Checked = true;
-            this.mutatedCreaturesToolStripMenuItem.CheckOnClick = true;
-            this.mutatedCreaturesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.mutatedCreaturesToolStripMenuItem.Name = "mutatedCreaturesToolStripMenuItem";
-            this.mutatedCreaturesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.mutatedCreaturesToolStripMenuItem.Text = "Mutated Creatures";
-            this.mutatedCreaturesToolStripMenuItem.Click += new System.EventHandler(this.mutatedCreaturesToolStripMenuItem_Click);
-            // 
-            // cryopodCreaturesToolStripMenuItem
-            // 
-            this.cryopodCreaturesToolStripMenuItem.Checked = true;
-            this.cryopodCreaturesToolStripMenuItem.CheckOnClick = true;
-            this.cryopodCreaturesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cryopodCreaturesToolStripMenuItem.Name = "cryopodCreaturesToolStripMenuItem";
-            this.cryopodCreaturesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.cryopodCreaturesToolStripMenuItem.Text = "Cryopod Creatures";
-            this.cryopodCreaturesToolStripMenuItem.Click += new System.EventHandler(this.cryopodCreaturesToolStripMenuItem_Click);
-            // 
-            // femalesToolStripMenuItem
-            // 
-            this.femalesToolStripMenuItem.Checked = true;
-            this.femalesToolStripMenuItem.CheckOnClick = true;
-            this.femalesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.femalesToolStripMenuItem.Name = "femalesToolStripMenuItem";
-            this.femalesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.femalesToolStripMenuItem.Text = "Females";
-            this.femalesToolStripMenuItem.Click += new System.EventHandler(this.femalesToolStripMenuItem_Click);
-            // 
-            // malesToolStripMenuItem
-            // 
-            this.malesToolStripMenuItem.Checked = true;
-            this.malesToolStripMenuItem.CheckOnClick = true;
-            this.malesToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.malesToolStripMenuItem.Name = "malesToolStripMenuItem";
-            this.malesToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.malesToolStripMenuItem.Text = "Males";
-            this.malesToolStripMenuItem.Click += new System.EventHandler(this.malesToolStripMenuItem_Click);
-            // 
-            // speciesGroupToolStripMenuItem
-            // 
-            this.speciesGroupToolStripMenuItem.Checked = true;
-            this.speciesGroupToolStripMenuItem.CheckOnClick = true;
-            this.speciesGroupToolStripMenuItem.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.speciesGroupToolStripMenuItem.Name = "speciesGroupToolStripMenuItem";
-            this.speciesGroupToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
-            this.speciesGroupToolStripMenuItem.Text = "Species Group";
-            this.speciesGroupToolStripMenuItem.Click += new System.EventHandler(this.speciesGroupToolStripMenuItem_Click);
-            // 
-            // toolStripSeparator19
-            // 
-            this.toolStripSeparator19.Name = "toolStripSeparator19";
-            this.toolStripSeparator19.Size = new System.Drawing.Size(217, 6);
-            // 
-            // toolStripMenuItem1
-            // 
-            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
-            this.toolStripMenuItem1.Size = new System.Drawing.Size(220, 22);
-            this.toolStripMenuItem1.Text = "Reset library column widths";
-            this.toolStripMenuItem1.Click += new System.EventHandler(this.toolStripMenuItemResetLibraryColumnWidths_Click);
+            this.libraryFilterToolStripMenuItem.Name = "libraryFilterToolStripMenuItem";
+            this.libraryFilterToolStripMenuItem.Size = new System.Drawing.Size(91, 20);
+            this.libraryFilterToolStripMenuItem.Text = "Library filter…";
+            this.libraryFilterToolStripMenuItem.Click += new System.EventHandler(this.libraryFilterToolStripMenuItem_Click);
             // 
             // settingsToolStripMenuItem
             // 
@@ -1249,6 +1134,7 @@ namespace ARKBreedingStats
             this.BreedingPlanHelpToolStripMenuItem,
             this.extractionIssuesToolStripMenuItem,
             this.toolStripSeparator12,
+            this.downloadSpeciesImagesToolStripMenuItem,
             this.checkForUpdatedStatsToolStripMenuItem});
             this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
             this.helpToolStripMenuItem.Size = new System.Drawing.Size(24, 20);
@@ -1257,38 +1143,45 @@ namespace ARKBreedingStats
             // toolStripSeparator11
             // 
             this.toolStripSeparator11.Name = "toolStripSeparator11";
-            this.toolStripSeparator11.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator11.Size = new System.Drawing.Size(207, 6);
             // 
             // onlinehelpToolStripMenuItem
             // 
             this.onlinehelpToolStripMenuItem.Name = "onlinehelpToolStripMenuItem";
-            this.onlinehelpToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.onlinehelpToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.onlinehelpToolStripMenuItem.Text = "Online Manual…";
             this.onlinehelpToolStripMenuItem.Click += new System.EventHandler(this.onlinehelpToolStripMenuItem_Click);
             // 
             // BreedingPlanHelpToolStripMenuItem
             // 
             this.BreedingPlanHelpToolStripMenuItem.Name = "BreedingPlanHelpToolStripMenuItem";
-            this.BreedingPlanHelpToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.BreedingPlanHelpToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.BreedingPlanHelpToolStripMenuItem.Text = "Breeding Plan…";
             this.BreedingPlanHelpToolStripMenuItem.Click += new System.EventHandler(this.breedingPlanToolStripMenuItem_Click);
             // 
             // extractionIssuesToolStripMenuItem
             // 
             this.extractionIssuesToolStripMenuItem.Name = "extractionIssuesToolStripMenuItem";
-            this.extractionIssuesToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.extractionIssuesToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.extractionIssuesToolStripMenuItem.Text = "Extraction Issues…";
             this.extractionIssuesToolStripMenuItem.Click += new System.EventHandler(this.extractionIssuesToolStripMenuItem_Click);
             // 
             // toolStripSeparator12
             // 
             this.toolStripSeparator12.Name = "toolStripSeparator12";
-            this.toolStripSeparator12.Size = new System.Drawing.Size(168, 6);
+            this.toolStripSeparator12.Size = new System.Drawing.Size(207, 6);
+            // 
+            // downloadSpeciesImagesToolStripMenuItem
+            // 
+            this.downloadSpeciesImagesToolStripMenuItem.Name = "downloadSpeciesImagesToolStripMenuItem";
+            this.downloadSpeciesImagesToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
+            this.downloadSpeciesImagesToolStripMenuItem.Text = "Download species images";
+            this.downloadSpeciesImagesToolStripMenuItem.Click += new System.EventHandler(this.downloadSpeciesImagesToolStripMenuItem_Click);
             // 
             // checkForUpdatedStatsToolStripMenuItem
             // 
             this.checkForUpdatedStatsToolStripMenuItem.Name = "checkForUpdatedStatsToolStripMenuItem";
-            this.checkForUpdatedStatsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.checkForUpdatedStatsToolStripMenuItem.Size = new System.Drawing.Size(210, 22);
             this.checkForUpdatedStatsToolStripMenuItem.Text = "Check for Updates";
             this.checkForUpdatedStatsToolStripMenuItem.Click += new System.EventHandler(this.checkForUpdatedStatsToolStripMenuItem_Click);
             // 
@@ -1386,13 +1279,14 @@ namespace ARKBreedingStats
             this.tabControlMain.Location = new System.Drawing.Point(0, 103);
             this.tabControlMain.Name = "tabControlMain";
             this.tabControlMain.SelectedIndex = 1;
-            this.tabControlMain.Size = new System.Drawing.Size(1232, 716);
+            this.tabControlMain.Size = new System.Drawing.Size(1232, 756);
             this.tabControlMain.TabIndex = 3;
             this.tabControlMain.SelectedIndexChanged += new System.EventHandler(this.tabControl1_SelectedIndexChanged);
             // 
             // tabPageStatTesting
             // 
             this.tabPageStatTesting.AutoScroll = true;
+            this.tabPageStatTesting.Controls.Add(this.pictureBoxColorRegionsTester);
             this.tabPageStatTesting.Controls.Add(this.statPotentials1);
             this.tabPageStatTesting.Controls.Add(this.gbStatChart);
             this.tabPageStatTesting.Controls.Add(this.panelWildTamedBredTester);
@@ -1403,14 +1297,22 @@ namespace ARKBreedingStats
             this.tabPageStatTesting.Location = new System.Drawing.Point(4, 22);
             this.tabPageStatTesting.Name = "tabPageStatTesting";
             this.tabPageStatTesting.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageStatTesting.Size = new System.Drawing.Size(1224, 690);
+            this.tabPageStatTesting.Size = new System.Drawing.Size(1224, 730);
             this.tabPageStatTesting.TabIndex = 1;
             this.tabPageStatTesting.Text = "Stat Testing";
             this.tabPageStatTesting.UseVisualStyleBackColor = true;
             // 
+            // pictureBoxColorRegionsTester
+            // 
+            this.pictureBoxColorRegionsTester.Location = new System.Drawing.Point(589, 470);
+            this.pictureBoxColorRegionsTester.Name = "pictureBoxColorRegionsTester";
+            this.pictureBoxColorRegionsTester.Size = new System.Drawing.Size(256, 256);
+            this.pictureBoxColorRegionsTester.TabIndex = 13;
+            this.pictureBoxColorRegionsTester.TabStop = false;
+            // 
             // statPotentials1
             // 
-            this.statPotentials1.Location = new System.Drawing.Point(556, 243);
+            this.statPotentials1.Location = new System.Drawing.Point(808, 9);
             this.statPotentials1.Name = "statPotentials1";
             this.statPotentials1.Size = new System.Drawing.Size(293, 433);
             this.statPotentials1.TabIndex = 12;
@@ -1418,7 +1320,7 @@ namespace ARKBreedingStats
             // gbStatChart
             // 
             this.gbStatChart.Controls.Add(this.radarChart1);
-            this.gbStatChart.Location = new System.Drawing.Point(556, 9);
+            this.gbStatChart.Location = new System.Drawing.Point(589, 9);
             this.gbStatChart.Name = "gbStatChart";
             this.gbStatChart.Size = new System.Drawing.Size(213, 228);
             this.gbStatChart.TabIndex = 11;
@@ -1635,17 +1537,20 @@ namespace ARKBreedingStats
         0,
         0,
         0};
-            this.creatureInfoInputTester.Size = new System.Drawing.Size(229, 518);
+            this.creatureInfoInputTester.Size = new System.Drawing.Size(262, 542);
             this.creatureInfoInputTester.TabIndex = 4;
             this.creatureInfoInputTester.TribeLock = false;
-            this.creatureInfoInputTester.Add2Library_Clicked += new System.Action<ARKBreedingStats.CreatureInfoInput>(this.creatureInfoInputTester_Add2Library_Clicked);
-            this.creatureInfoInputTester.Save2Library_Clicked += new System.Action<ARKBreedingStats.CreatureInfoInput>(this.creatureInfoInputTester_Save2Library_Clicked);
+            this.creatureInfoInputTester.Add2LibraryClicked += new System.Action<ARKBreedingStats.CreatureInfoInput>(this.creatureInfoInputTester_Add2Library_Clicked);
+            this.creatureInfoInputTester.Save2LibraryClicked += new System.Action<ARKBreedingStats.CreatureInfoInput>(this.creatureInfoInputTester_Save2Library_Clicked);
             this.creatureInfoInputTester.ParentListRequested += new System.Action<ARKBreedingStats.CreatureInfoInput>(this.CreatureInfoInput_ParentListRequested);
             // 
             // tabPageExtractor
             // 
             this.tabPageExtractor.AutoScroll = true;
+            this.tabPageExtractor.Controls.Add(this.BtCopyIssueDumpToClipboard);
+            this.tabPageExtractor.Controls.Add(this.parentInheritanceExtractor);
             this.tabPageExtractor.Controls.Add(this.llOnlineHelpExtractionIssues);
+            this.tabPageExtractor.Controls.Add(this.PbCreatureColorsExtractor);
             this.tabPageExtractor.Controls.Add(this.groupBoxRadarChartExtractor);
             this.tabPageExtractor.Controls.Add(this.lbImprintingFailInfo);
             this.tabPageExtractor.Controls.Add(this.groupBoxTamingInfo);
@@ -1664,15 +1569,32 @@ namespace ARKBreedingStats
             this.tabPageExtractor.Location = new System.Drawing.Point(4, 22);
             this.tabPageExtractor.Name = "tabPageExtractor";
             this.tabPageExtractor.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageExtractor.Size = new System.Drawing.Size(1224, 690);
+            this.tabPageExtractor.Size = new System.Drawing.Size(1224, 730);
             this.tabPageExtractor.TabIndex = 0;
             this.tabPageExtractor.Text = "Extractor";
             this.tabPageExtractor.UseVisualStyleBackColor = true;
             // 
+            // BtCopyIssueDumpToClipboard
+            // 
+            this.BtCopyIssueDumpToClipboard.Location = new System.Drawing.Point(589, 679);
+            this.BtCopyIssueDumpToClipboard.Name = "BtCopyIssueDumpToClipboard";
+            this.BtCopyIssueDumpToClipboard.Size = new System.Drawing.Size(329, 23);
+            this.BtCopyIssueDumpToClipboard.TabIndex = 53;
+            this.BtCopyIssueDumpToClipboard.Text = "Copy library dump to clipboard for a report";
+            this.BtCopyIssueDumpToClipboard.UseVisualStyleBackColor = true;
+            this.BtCopyIssueDumpToClipboard.Click += new System.EventHandler(this.BtCopyIssueDumpToClipboard_Click);
+            // 
+            // parentInheritanceExtractor
+            // 
+            this.parentInheritanceExtractor.Location = new System.Drawing.Point(851, 470);
+            this.parentInheritanceExtractor.Name = "parentInheritanceExtractor";
+            this.parentInheritanceExtractor.Size = new System.Drawing.Size(337, 182);
+            this.parentInheritanceExtractor.TabIndex = 52;
+            // 
             // llOnlineHelpExtractionIssues
             // 
             this.llOnlineHelpExtractionIssues.AutoSize = true;
-            this.llOnlineHelpExtractionIssues.Location = new System.Drawing.Point(559, 609);
+            this.llOnlineHelpExtractionIssues.Location = new System.Drawing.Point(593, 609);
             this.llOnlineHelpExtractionIssues.Name = "llOnlineHelpExtractionIssues";
             this.llOnlineHelpExtractionIssues.Size = new System.Drawing.Size(141, 13);
             this.llOnlineHelpExtractionIssues.TabIndex = 50;
@@ -1680,10 +1602,18 @@ namespace ARKBreedingStats
             this.llOnlineHelpExtractionIssues.Text = "Red Stat-boxes: Online-Help";
             this.llOnlineHelpExtractionIssues.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.llOnlineHelpExtractionIssues_LinkClicked);
             // 
+            // PbCreatureColorsExtractor
+            // 
+            this.PbCreatureColorsExtractor.Location = new System.Drawing.Point(589, 470);
+            this.PbCreatureColorsExtractor.Name = "PbCreatureColorsExtractor";
+            this.PbCreatureColorsExtractor.Size = new System.Drawing.Size(256, 256);
+            this.PbCreatureColorsExtractor.TabIndex = 51;
+            this.PbCreatureColorsExtractor.TabStop = false;
+            // 
             // groupBoxRadarChartExtractor
             // 
             this.groupBoxRadarChartExtractor.Controls.Add(this.radarChartExtractor);
-            this.groupBoxRadarChartExtractor.Location = new System.Drawing.Point(751, 6);
+            this.groupBoxRadarChartExtractor.Location = new System.Drawing.Point(785, 6);
             this.groupBoxRadarChartExtractor.Name = "groupBoxRadarChartExtractor";
             this.groupBoxRadarChartExtractor.Size = new System.Drawing.Size(150, 163);
             this.groupBoxRadarChartExtractor.TabIndex = 11;
@@ -1706,7 +1636,7 @@ namespace ARKBreedingStats
             this.lbImprintingFailInfo.BackColor = System.Drawing.Color.MistyRose;
             this.lbImprintingFailInfo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.lbImprintingFailInfo.ForeColor = System.Drawing.Color.Maroon;
-            this.lbImprintingFailInfo.Location = new System.Drawing.Point(562, 622);
+            this.lbImprintingFailInfo.Location = new System.Drawing.Point(596, 622);
             this.lbImprintingFailInfo.Name = "lbImprintingFailInfo";
             this.lbImprintingFailInfo.Size = new System.Drawing.Size(322, 54);
             this.lbImprintingFailInfo.TabIndex = 49;
@@ -1718,7 +1648,7 @@ namespace ARKBreedingStats
             // groupBoxTamingInfo
             // 
             this.groupBoxTamingInfo.Controls.Add(this.labelTamingInfo);
-            this.groupBoxTamingInfo.Location = new System.Drawing.Point(556, 60);
+            this.groupBoxTamingInfo.Location = new System.Drawing.Point(590, 60);
             this.groupBoxTamingInfo.Name = "groupBoxTamingInfo";
             this.groupBoxTamingInfo.Size = new System.Drawing.Size(174, 532);
             this.groupBoxTamingInfo.TabIndex = 48;
@@ -1735,7 +1665,7 @@ namespace ARKBreedingStats
             // 
             // button2TamingCalc
             // 
-            this.button2TamingCalc.Location = new System.Drawing.Point(556, 32);
+            this.button2TamingCalc.Location = new System.Drawing.Point(590, 32);
             this.button2TamingCalc.Name = "button2TamingCalc";
             this.button2TamingCalc.Size = new System.Drawing.Size(177, 23);
             this.button2TamingCalc.TabIndex = 9;
@@ -1809,7 +1739,7 @@ namespace ARKBreedingStats
             // 
             // labelErrorHelp
             // 
-            this.labelErrorHelp.Location = new System.Drawing.Point(556, 43);
+            this.labelErrorHelp.Location = new System.Drawing.Point(590, 43);
             this.labelErrorHelp.Name = "labelErrorHelp";
             this.labelErrorHelp.Size = new System.Drawing.Size(239, 569);
             this.labelErrorHelp.TabIndex = 40;
@@ -1866,10 +1796,10 @@ namespace ARKBreedingStats
         0,
         0,
         0};
-            this.creatureInfoInputExtractor.Size = new System.Drawing.Size(229, 518);
+            this.creatureInfoInputExtractor.Size = new System.Drawing.Size(262, 542);
             this.creatureInfoInputExtractor.TabIndex = 7;
             this.creatureInfoInputExtractor.TribeLock = false;
-            this.creatureInfoInputExtractor.Add2Library_Clicked += new System.Action<ARKBreedingStats.CreatureInfoInput>(this.creatureInfoInputExtractor_Add2Library_Clicked);
+            this.creatureInfoInputExtractor.Add2LibraryClicked += new System.Action<ARKBreedingStats.CreatureInfoInput>(this.creatureInfoInputExtractor_Add2Library_Clicked);
             this.creatureInfoInputExtractor.ParentListRequested += new System.Action<ARKBreedingStats.CreatureInfoInput>(this.CreatureInfoInput_ParentListRequested);
             // 
             // tabPageLibrary
@@ -1880,7 +1810,7 @@ namespace ARKBreedingStats
             this.tabPageLibrary.Location = new System.Drawing.Point(4, 22);
             this.tabPageLibrary.Name = "tabPageLibrary";
             this.tabPageLibrary.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageLibrary.Size = new System.Drawing.Size(1224, 690);
+            this.tabPageLibrary.Size = new System.Drawing.Size(1224, 730);
             this.tabPageLibrary.TabIndex = 2;
             this.tabPageLibrary.Text = "Library";
             this.tabPageLibrary.UseVisualStyleBackColor = true;
@@ -1899,23 +1829,19 @@ namespace ARKBreedingStats
             this.tableLayoutPanelLibrary.RowCount = 2;
             this.tableLayoutPanelLibrary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 396F));
             this.tableLayoutPanelLibrary.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanelLibrary.Size = new System.Drawing.Size(1201, 694);
+            this.tableLayoutPanelLibrary.Size = new System.Drawing.Size(1218, 724);
             this.tableLayoutPanelLibrary.TabIndex = 4;
             // 
             // tabControlLibFilter
             // 
             this.tabControlLibFilter.Controls.Add(this.tabPage1);
-            this.tabControlLibFilter.Controls.Add(this.tabPage2);
-            this.tabControlLibFilter.Controls.Add(this.tabPageServer);
-            this.tabControlLibFilter.Controls.Add(this.tabPageTags);
             this.tabControlLibFilter.Controls.Add(this.tabPage3);
-            this.tabControlLibFilter.Controls.Add(this.tabPage4);
             this.tabControlLibFilter.Controls.Add(this.tabPageLibRadarChart);
             this.tabControlLibFilter.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControlLibFilter.Location = new System.Drawing.Point(3, 399);
             this.tabControlLibFilter.Name = "tabControlLibFilter";
             this.tabControlLibFilter.SelectedIndex = 0;
-            this.tabControlLibFilter.Size = new System.Drawing.Size(195, 292);
+            this.tabControlLibFilter.Size = new System.Drawing.Size(195, 322);
             this.tabControlLibFilter.TabIndex = 5;
             // 
             // tabPage1
@@ -1924,7 +1850,7 @@ namespace ARKBreedingStats
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(187, 266);
+            this.tabPage1.Size = new System.Drawing.Size(187, 296);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Species";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -1935,111 +1861,9 @@ namespace ARKBreedingStats
             this.listBoxSpeciesLib.FormattingEnabled = true;
             this.listBoxSpeciesLib.Location = new System.Drawing.Point(3, 3);
             this.listBoxSpeciesLib.Name = "listBoxSpeciesLib";
-            this.listBoxSpeciesLib.Size = new System.Drawing.Size(181, 260);
+            this.listBoxSpeciesLib.Size = new System.Drawing.Size(181, 290);
             this.listBoxSpeciesLib.TabIndex = 0;
             this.listBoxSpeciesLib.SelectedIndexChanged += new System.EventHandler(this.listBoxSpeciesLib_SelectedIndexChanged);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Controls.Add(this.checkedListBoxOwner);
-            this.tabPage2.Controls.Add(this.cbOwnerFilterAll);
-            this.tabPage2.Location = new System.Drawing.Point(4, 22);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(187, 266);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Owner";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // checkedListBoxOwner
-            // 
-            this.checkedListBoxOwner.CheckOnClick = true;
-            this.checkedListBoxOwner.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBoxOwner.FormattingEnabled = true;
-            this.checkedListBoxOwner.Location = new System.Drawing.Point(3, 27);
-            this.checkedListBoxOwner.Name = "checkedListBoxOwner";
-            this.checkedListBoxOwner.Size = new System.Drawing.Size(181, 236);
-            this.checkedListBoxOwner.TabIndex = 0;
-            this.checkedListBoxOwner.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxOwner_ItemCheck);
-            // 
-            // cbOwnerFilterAll
-            // 
-            this.cbOwnerFilterAll.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cbOwnerFilterAll.Location = new System.Drawing.Point(3, 3);
-            this.cbOwnerFilterAll.Name = "cbOwnerFilterAll";
-            this.cbOwnerFilterAll.Size = new System.Drawing.Size(181, 24);
-            this.cbOwnerFilterAll.TabIndex = 1;
-            this.cbOwnerFilterAll.Text = "All";
-            this.cbOwnerFilterAll.UseVisualStyleBackColor = true;
-            this.cbOwnerFilterAll.CheckedChanged += new System.EventHandler(this.cbOwnerFilterAll_CheckedChanged);
-            // 
-            // tabPageServer
-            // 
-            this.tabPageServer.Controls.Add(this.checkedListBoxFilterServers);
-            this.tabPageServer.Controls.Add(this.cbServerFilterAll);
-            this.tabPageServer.Location = new System.Drawing.Point(4, 22);
-            this.tabPageServer.Name = "tabPageServer";
-            this.tabPageServer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageServer.Size = new System.Drawing.Size(187, 266);
-            this.tabPageServer.TabIndex = 5;
-            this.tabPageServer.Text = "Server";
-            this.tabPageServer.UseVisualStyleBackColor = true;
-            // 
-            // checkedListBoxFilterServers
-            // 
-            this.checkedListBoxFilterServers.CheckOnClick = true;
-            this.checkedListBoxFilterServers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBoxFilterServers.FormattingEnabled = true;
-            this.checkedListBoxFilterServers.Location = new System.Drawing.Point(3, 27);
-            this.checkedListBoxFilterServers.Name = "checkedListBoxFilterServers";
-            this.checkedListBoxFilterServers.Size = new System.Drawing.Size(181, 236);
-            this.checkedListBoxFilterServers.TabIndex = 2;
-            this.checkedListBoxFilterServers.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxFilterServers_ItemCheck);
-            // 
-            // cbServerFilterAll
-            // 
-            this.cbServerFilterAll.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cbServerFilterAll.Location = new System.Drawing.Point(3, 3);
-            this.cbServerFilterAll.Name = "cbServerFilterAll";
-            this.cbServerFilterAll.Size = new System.Drawing.Size(181, 24);
-            this.cbServerFilterAll.TabIndex = 3;
-            this.cbServerFilterAll.Text = "All";
-            this.cbServerFilterAll.UseVisualStyleBackColor = true;
-            this.cbServerFilterAll.CheckedChanged += new System.EventHandler(this.cbServerFilterAll_CheckedChanged);
-            // 
-            // tabPageTags
-            // 
-            this.tabPageTags.Controls.Add(this.checkedListBoxFilterTags);
-            this.tabPageTags.Controls.Add(this.cbFilterTagsAll);
-            this.tabPageTags.Location = new System.Drawing.Point(4, 22);
-            this.tabPageTags.Name = "tabPageTags";
-            this.tabPageTags.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTags.Size = new System.Drawing.Size(187, 266);
-            this.tabPageTags.TabIndex = 6;
-            this.tabPageTags.Text = "Tags";
-            this.tabPageTags.UseVisualStyleBackColor = true;
-            // 
-            // checkedListBoxFilterTags
-            // 
-            this.checkedListBoxFilterTags.CheckOnClick = true;
-            this.checkedListBoxFilterTags.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.checkedListBoxFilterTags.FormattingEnabled = true;
-            this.checkedListBoxFilterTags.Location = new System.Drawing.Point(3, 27);
-            this.checkedListBoxFilterTags.Name = "checkedListBoxFilterTags";
-            this.checkedListBoxFilterTags.Size = new System.Drawing.Size(181, 236);
-            this.checkedListBoxFilterTags.TabIndex = 4;
-            this.checkedListBoxFilterTags.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.checkedListBoxFilterTags_ItemCheck);
-            // 
-            // cbFilterTagsAll
-            // 
-            this.cbFilterTagsAll.Dock = System.Windows.Forms.DockStyle.Top;
-            this.cbFilterTagsAll.Location = new System.Drawing.Point(3, 3);
-            this.cbFilterTagsAll.Name = "cbFilterTagsAll";
-            this.cbFilterTagsAll.Size = new System.Drawing.Size(181, 24);
-            this.cbFilterTagsAll.TabIndex = 5;
-            this.cbFilterTagsAll.Text = "All";
-            this.cbFilterTagsAll.UseVisualStyleBackColor = true;
-            this.cbFilterTagsAll.CheckedChanged += new System.EventHandler(this.cbFilterTagsAll_CheckedChanged);
             // 
             // tabPage3
             // 
@@ -2047,7 +1871,7 @@ namespace ARKBreedingStats
             this.tabPage3.Location = new System.Drawing.Point(4, 22);
             this.tabPage3.Name = "tabPage3";
             this.tabPage3.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage3.Size = new System.Drawing.Size(187, 266);
+            this.tabPage3.Size = new System.Drawing.Size(187, 296);
             this.tabPage3.TabIndex = 2;
             this.tabPage3.Text = "Stats";
             this.tabPage3.UseVisualStyleBackColor = true;
@@ -2066,7 +1890,7 @@ namespace ARKBreedingStats
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 32F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 29F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(181, 260);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(181, 290);
             this.tableLayoutPanel2.TabIndex = 0;
             // 
             // checkedListBoxConsiderStatTop
@@ -2076,13 +1900,13 @@ namespace ARKBreedingStats
             this.checkedListBoxConsiderStatTop.FormattingEnabled = true;
             this.checkedListBoxConsiderStatTop.Location = new System.Drawing.Point(3, 35);
             this.checkedListBoxConsiderStatTop.Name = "checkedListBoxConsiderStatTop";
-            this.checkedListBoxConsiderStatTop.Size = new System.Drawing.Size(175, 193);
+            this.checkedListBoxConsiderStatTop.Size = new System.Drawing.Size(175, 223);
             this.checkedListBoxConsiderStatTop.TabIndex = 3;
             // 
             // buttonRecalculateTops
             // 
             this.buttonRecalculateTops.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.buttonRecalculateTops.Location = new System.Drawing.Point(3, 234);
+            this.buttonRecalculateTops.Location = new System.Drawing.Point(3, 264);
             this.buttonRecalculateTops.Name = "buttonRecalculateTops";
             this.buttonRecalculateTops.Size = new System.Drawing.Size(175, 23);
             this.buttonRecalculateTops.TabIndex = 2;
@@ -2099,161 +1923,13 @@ namespace ARKBreedingStats
             this.label17.TabIndex = 4;
             this.label17.Text = "Select the stats considered for the TopStat-Calculation and Coloring";
             // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.checkBoxSpeciesGroups);
-            this.tabPage4.Controls.Add(this.checkBoxShowCryopodCreatures);
-            this.tabPage4.Controls.Add(this.cbLibraryShowMales);
-            this.tabPage4.Controls.Add(this.cbLibraryShowFemales);
-            this.tabPage4.Controls.Add(this.checkBoxShowObeliskCreatures);
-            this.tabPage4.Controls.Add(this.checkBoxUseFiltersInTopStatCalculation);
-            this.tabPage4.Controls.Add(this.checkBoxShowMutatedCreatures);
-            this.tabPage4.Controls.Add(this.checkBoxShowNeuteredCreatures);
-            this.tabPage4.Controls.Add(this.checkBoxShowUnavailableCreatures);
-            this.tabPage4.Controls.Add(this.checkBoxShowDead);
-            this.tabPage4.Location = new System.Drawing.Point(4, 22);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage4.Size = new System.Drawing.Size(187, 266);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "View";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxSpeciesGroups
-            // 
-            this.checkBoxSpeciesGroups.AutoSize = true;
-            this.checkBoxSpeciesGroups.Checked = true;
-            this.checkBoxSpeciesGroups.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxSpeciesGroups.Location = new System.Drawing.Point(6, 213);
-            this.checkBoxSpeciesGroups.Name = "checkBoxSpeciesGroups";
-            this.checkBoxSpeciesGroups.Size = new System.Drawing.Size(131, 17);
-            this.checkBoxSpeciesGroups.TabIndex = 9;
-            this.checkBoxSpeciesGroups.Text = "Show Species Groups";
-            this.checkBoxSpeciesGroups.UseVisualStyleBackColor = true;
-            this.checkBoxSpeciesGroups.CheckedChanged += new System.EventHandler(this.checkBoxSpeciesGroups_CheckedChanged);
-            // 
-            // checkBoxShowCryopodCreatures
-            // 
-            this.checkBoxShowCryopodCreatures.AutoSize = true;
-            this.checkBoxShowCryopodCreatures.Checked = true;
-            this.checkBoxShowCryopodCreatures.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowCryopodCreatures.Location = new System.Drawing.Point(6, 121);
-            this.checkBoxShowCryopodCreatures.Name = "checkBoxShowCryopodCreatures";
-            this.checkBoxShowCryopodCreatures.Size = new System.Drawing.Size(143, 17);
-            this.checkBoxShowCryopodCreatures.TabIndex = 8;
-            this.checkBoxShowCryopodCreatures.Text = "Show Cryopod Creatures";
-            this.checkBoxShowCryopodCreatures.UseVisualStyleBackColor = true;
-            this.checkBoxShowCryopodCreatures.CheckedChanged += new System.EventHandler(this.checkBoxShowCryopodCreatures_CheckedChanged);
-            // 
-            // cbLibraryShowMales
-            // 
-            this.cbLibraryShowMales.AutoSize = true;
-            this.cbLibraryShowMales.Checked = true;
-            this.cbLibraryShowMales.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbLibraryShowMales.Location = new System.Drawing.Point(6, 167);
-            this.cbLibraryShowMales.Name = "cbLibraryShowMales";
-            this.cbLibraryShowMales.Size = new System.Drawing.Size(84, 17);
-            this.cbLibraryShowMales.TabIndex = 7;
-            this.cbLibraryShowMales.Text = "Show Males";
-            this.cbLibraryShowMales.UseVisualStyleBackColor = true;
-            this.cbLibraryShowMales.CheckedChanged += new System.EventHandler(this.cbLibraryShowMales_CheckedChanged);
-            // 
-            // cbLibraryShowFemales
-            // 
-            this.cbLibraryShowFemales.AutoSize = true;
-            this.cbLibraryShowFemales.Checked = true;
-            this.cbLibraryShowFemales.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.cbLibraryShowFemales.Location = new System.Drawing.Point(6, 144);
-            this.cbLibraryShowFemales.Name = "cbLibraryShowFemales";
-            this.cbLibraryShowFemales.Size = new System.Drawing.Size(95, 17);
-            this.cbLibraryShowFemales.TabIndex = 6;
-            this.cbLibraryShowFemales.Text = "Show Females";
-            this.cbLibraryShowFemales.UseVisualStyleBackColor = true;
-            this.cbLibraryShowFemales.CheckedChanged += new System.EventHandler(this.cbLibraryShowFemales_CheckedChanged);
-            // 
-            // checkBoxShowObeliskCreatures
-            // 
-            this.checkBoxShowObeliskCreatures.AutoSize = true;
-            this.checkBoxShowObeliskCreatures.Checked = true;
-            this.checkBoxShowObeliskCreatures.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowObeliskCreatures.Location = new System.Drawing.Point(6, 52);
-            this.checkBoxShowObeliskCreatures.Name = "checkBoxShowObeliskCreatures";
-            this.checkBoxShowObeliskCreatures.Size = new System.Drawing.Size(139, 17);
-            this.checkBoxShowObeliskCreatures.TabIndex = 5;
-            this.checkBoxShowObeliskCreatures.Text = "Show Obelisk Creatures";
-            this.checkBoxShowObeliskCreatures.UseVisualStyleBackColor = true;
-            this.checkBoxShowObeliskCreatures.CheckedChanged += new System.EventHandler(this.checkBoxShowObeliskCreatures_CheckedChanged);
-            // 
-            // checkBoxUseFiltersInTopStatCalculation
-            // 
-            this.checkBoxUseFiltersInTopStatCalculation.AutoSize = true;
-            this.checkBoxUseFiltersInTopStatCalculation.Location = new System.Drawing.Point(6, 190);
-            this.checkBoxUseFiltersInTopStatCalculation.Name = "checkBoxUseFiltersInTopStatCalculation";
-            this.checkBoxUseFiltersInTopStatCalculation.Size = new System.Drawing.Size(182, 17);
-            this.checkBoxUseFiltersInTopStatCalculation.TabIndex = 4;
-            this.checkBoxUseFiltersInTopStatCalculation.Text = "Use Filters in TopStat-Calculation";
-            this.checkBoxUseFiltersInTopStatCalculation.UseVisualStyleBackColor = true;
-            this.checkBoxUseFiltersInTopStatCalculation.CheckedChanged += new System.EventHandler(this.checkBoxUseFiltersInTopStatCalculation_CheckedChanged);
-            // 
-            // checkBoxShowMutatedCreatures
-            // 
-            this.checkBoxShowMutatedCreatures.AutoSize = true;
-            this.checkBoxShowMutatedCreatures.Checked = true;
-            this.checkBoxShowMutatedCreatures.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowMutatedCreatures.Location = new System.Drawing.Point(6, 98);
-            this.checkBoxShowMutatedCreatures.Name = "checkBoxShowMutatedCreatures";
-            this.checkBoxShowMutatedCreatures.Size = new System.Drawing.Size(143, 17);
-            this.checkBoxShowMutatedCreatures.TabIndex = 3;
-            this.checkBoxShowMutatedCreatures.Text = "Show Mutated Creatures";
-            this.checkBoxShowMutatedCreatures.UseVisualStyleBackColor = true;
-            this.checkBoxShowMutatedCreatures.CheckedChanged += new System.EventHandler(this.checkBoxShowMutatedCreatures_CheckedChanged);
-            // 
-            // checkBoxShowNeuteredCreatures
-            // 
-            this.checkBoxShowNeuteredCreatures.AutoSize = true;
-            this.checkBoxShowNeuteredCreatures.Checked = true;
-            this.checkBoxShowNeuteredCreatures.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowNeuteredCreatures.Location = new System.Drawing.Point(6, 75);
-            this.checkBoxShowNeuteredCreatures.Name = "checkBoxShowNeuteredCreatures";
-            this.checkBoxShowNeuteredCreatures.Size = new System.Drawing.Size(148, 17);
-            this.checkBoxShowNeuteredCreatures.TabIndex = 2;
-            this.checkBoxShowNeuteredCreatures.Text = "Show Neutered Creatures";
-            this.checkBoxShowNeuteredCreatures.UseVisualStyleBackColor = true;
-            this.checkBoxShowNeuteredCreatures.CheckedChanged += new System.EventHandler(this.checkBoxShowNeuteredCreatures_CheckedChanged);
-            // 
-            // checkBoxShowUnavailableCreatures
-            // 
-            this.checkBoxShowUnavailableCreatures.AutoSize = true;
-            this.checkBoxShowUnavailableCreatures.Checked = true;
-            this.checkBoxShowUnavailableCreatures.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowUnavailableCreatures.Location = new System.Drawing.Point(6, 29);
-            this.checkBoxShowUnavailableCreatures.Name = "checkBoxShowUnavailableCreatures";
-            this.checkBoxShowUnavailableCreatures.Size = new System.Drawing.Size(160, 17);
-            this.checkBoxShowUnavailableCreatures.TabIndex = 1;
-            this.checkBoxShowUnavailableCreatures.Text = "Show Unavailable Creatures";
-            this.checkBoxShowUnavailableCreatures.UseVisualStyleBackColor = true;
-            this.checkBoxShowUnavailableCreatures.CheckedChanged += new System.EventHandler(this.checkBoxShowUnavailableCreatures_CheckedChanged);
-            // 
-            // checkBoxShowDead
-            // 
-            this.checkBoxShowDead.AutoSize = true;
-            this.checkBoxShowDead.Checked = true;
-            this.checkBoxShowDead.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowDead.Location = new System.Drawing.Point(6, 6);
-            this.checkBoxShowDead.Name = "checkBoxShowDead";
-            this.checkBoxShowDead.Size = new System.Drawing.Size(130, 17);
-            this.checkBoxShowDead.TabIndex = 0;
-            this.checkBoxShowDead.Text = "Show Dead Creatures";
-            this.checkBoxShowDead.UseVisualStyleBackColor = true;
-            this.checkBoxShowDead.CheckedChanged += new System.EventHandler(this.checkBoxShowDead_CheckedChanged);
-            // 
             // tabPageLibRadarChart
             // 
             this.tabPageLibRadarChart.Controls.Add(this.radarChartLibrary);
             this.tabPageLibRadarChart.Location = new System.Drawing.Point(4, 22);
             this.tabPageLibRadarChart.Name = "tabPageLibRadarChart";
             this.tabPageLibRadarChart.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageLibRadarChart.Size = new System.Drawing.Size(187, 266);
+            this.tabPageLibRadarChart.Size = new System.Drawing.Size(187, 296);
             this.tabPageLibRadarChart.TabIndex = 4;
             this.tabPageLibRadarChart.Text = "Chart";
             this.tabPageLibRadarChart.UseVisualStyleBackColor = true;
@@ -2264,7 +1940,7 @@ namespace ARKBreedingStats
             this.radarChartLibrary.Image = ((System.Drawing.Image)(resources.GetObject("radarChartLibrary.Image")));
             this.radarChartLibrary.Location = new System.Drawing.Point(3, 3);
             this.radarChartLibrary.Name = "radarChartLibrary";
-            this.radarChartLibrary.Size = new System.Drawing.Size(181, 260);
+            this.radarChartLibrary.Size = new System.Drawing.Size(181, 290);
             this.radarChartLibrary.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.radarChartLibrary.TabIndex = 0;
             this.radarChartLibrary.TabStop = false;
@@ -2305,7 +1981,8 @@ namespace ARKBreedingStats
             this.columnHeaderColor5,
             this.columnHeaderSpecies,
             this.columnHeaderStatus,
-            this.columnHeaderTribe});
+            this.columnHeaderTribe,
+            this.columnHeaderStatusIcon});
             this.listViewLibrary.ContextMenuStrip = this.contextMenuStripLibrary;
             this.listViewLibrary.Dock = System.Windows.Forms.DockStyle.Fill;
             this.listViewLibrary.FullRowSelect = true;
@@ -2313,7 +1990,8 @@ namespace ARKBreedingStats
             this.listViewLibrary.Location = new System.Drawing.Point(204, 3);
             this.listViewLibrary.Name = "listViewLibrary";
             this.tableLayoutPanelLibrary.SetRowSpan(this.listViewLibrary, 2);
-            this.listViewLibrary.Size = new System.Drawing.Size(994, 688);
+            this.listViewLibrary.ShowItemToolTips = true;
+            this.listViewLibrary.Size = new System.Drawing.Size(1011, 718);
             this.listViewLibrary.TabIndex = 2;
             this.listViewLibrary.UseCompatibleStateImageBehavior = false;
             this.listViewLibrary.View = System.Windows.Forms.View.Details;
@@ -2323,197 +2001,217 @@ namespace ARKBreedingStats
             // 
             // columnHeaderName
             // 
+            this.columnHeaderName.DisplayIndex = 1;
             this.columnHeaderName.Text = "Name";
             this.columnHeaderName.Width = 97;
             // 
             // columnHeaderOwner
             // 
+            this.columnHeaderOwner.DisplayIndex = 2;
             this.columnHeaderOwner.Text = "Owner";
             this.columnHeaderOwner.Width = 48;
             // 
             // columnHeaderNote
             // 
+            this.columnHeaderNote.DisplayIndex = 3;
             this.columnHeaderNote.Text = "Notes";
             this.columnHeaderNote.Width = 48;
             // 
             // columnHeaderServer
             // 
+            this.columnHeaderServer.DisplayIndex = 4;
             this.columnHeaderServer.Text = "Server";
             // 
             // columnHeaderSex
             // 
+            this.columnHeaderSex.DisplayIndex = 5;
             this.columnHeaderSex.Text = "S";
             this.columnHeaderSex.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeaderSex.Width = 22;
             // 
             // columnHeaderAdded
             // 
-            this.columnHeaderAdded.DisplayIndex = 22;
+            this.columnHeaderAdded.DisplayIndex = 23;
             this.columnHeaderAdded.Text = "Added";
             // 
             // columnHeaderTopness
             // 
-            this.columnHeaderTopness.DisplayIndex = 18;
+            this.columnHeaderTopness.DisplayIndex = 19;
             this.columnHeaderTopness.Text = "Tp%";
             this.columnHeaderTopness.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderTopness.Width = 33;
             // 
             // columnHeaderTopStatsNr
             // 
-            this.columnHeaderTopStatsNr.DisplayIndex = 17;
+            this.columnHeaderTopStatsNr.DisplayIndex = 18;
             this.columnHeaderTopStatsNr.Text = "Top";
             this.columnHeaderTopStatsNr.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderTopStatsNr.Width = 31;
             // 
             // columnHeaderGen
             // 
-            this.columnHeaderGen.DisplayIndex = 19;
+            this.columnHeaderGen.DisplayIndex = 20;
             this.columnHeaderGen.Text = "Gen";
             this.columnHeaderGen.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.columnHeaderGen.Width = 34;
             // 
             // columnHeaderFound
             // 
-            this.columnHeaderFound.DisplayIndex = 20;
+            this.columnHeaderFound.DisplayIndex = 21;
             this.columnHeaderFound.Text = "LW";
             this.columnHeaderFound.Width = 30;
             // 
             // columnHeaderMutations
             // 
-            this.columnHeaderMutations.DisplayIndex = 21;
+            this.columnHeaderMutations.DisplayIndex = 22;
             this.columnHeaderMutations.Text = "Mu";
             this.columnHeaderMutations.Width = 30;
             // 
             // columnHeaderCooldown
             // 
-            this.columnHeaderCooldown.DisplayIndex = 23;
+            this.columnHeaderCooldown.DisplayIndex = 24;
             this.columnHeaderCooldown.Text = "Cooldown/Growing";
             // 
             // columnHeaderHP
             // 
-            this.columnHeaderHP.DisplayIndex = 5;
+            this.columnHeaderHP.DisplayIndex = 6;
             this.columnHeaderHP.Text = "HP";
             this.columnHeaderHP.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderHP.Width = 30;
             // 
             // columnHeaderSt
             // 
-            this.columnHeaderSt.DisplayIndex = 6;
+            this.columnHeaderSt.DisplayIndex = 7;
             this.columnHeaderSt.Text = "St";
             this.columnHeaderSt.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderSt.Width = 30;
             // 
             // columnHeaderTo
             // 
-            this.columnHeaderTo.DisplayIndex = 16;
+            this.columnHeaderTo.DisplayIndex = 17;
             this.columnHeaderTo.Text = "To";
             this.columnHeaderTo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderTo.Width = 30;
             // 
             // columnHeaderOx
             // 
-            this.columnHeaderOx.DisplayIndex = 7;
+            this.columnHeaderOx.DisplayIndex = 8;
             this.columnHeaderOx.Text = "Ox";
             this.columnHeaderOx.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderOx.Width = 30;
             // 
             // columnHeaderFo
             // 
-            this.columnHeaderFo.DisplayIndex = 8;
+            this.columnHeaderFo.DisplayIndex = 9;
             this.columnHeaderFo.Text = "Fo";
             this.columnHeaderFo.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderFo.Width = 30;
             // 
             // columnHeaderWa
             // 
-            this.columnHeaderWa.DisplayIndex = 9;
+            this.columnHeaderWa.DisplayIndex = 10;
             this.columnHeaderWa.Text = "Wa";
             this.columnHeaderWa.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderWa.Width = 30;
             // 
             // columnHeaderTemp
             // 
-            this.columnHeaderTemp.DisplayIndex = 10;
+            this.columnHeaderTemp.DisplayIndex = 11;
             this.columnHeaderTemp.Text = "Te";
             this.columnHeaderTemp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderTemp.Width = 30;
             // 
             // columnHeaderWe
             // 
-            this.columnHeaderWe.DisplayIndex = 11;
+            this.columnHeaderWe.DisplayIndex = 12;
             this.columnHeaderWe.Text = "We";
             this.columnHeaderWe.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderWe.Width = 30;
             // 
             // columnHeaderDm
             // 
-            this.columnHeaderDm.DisplayIndex = 12;
+            this.columnHeaderDm.DisplayIndex = 13;
             this.columnHeaderDm.Text = "Dm";
             this.columnHeaderDm.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderDm.Width = 30;
             // 
             // columnHeaderSp
             // 
-            this.columnHeaderSp.DisplayIndex = 13;
+            this.columnHeaderSp.DisplayIndex = 14;
             this.columnHeaderSp.Text = "Sp";
             this.columnHeaderSp.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderSp.Width = 30;
             // 
             // columnHeaderFr
             // 
-            this.columnHeaderFr.DisplayIndex = 14;
+            this.columnHeaderFr.DisplayIndex = 15;
             this.columnHeaderFr.Text = "Fr";
             this.columnHeaderFr.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderFr.Width = 30;
             // 
             // columnHeaderCr
             // 
-            this.columnHeaderCr.DisplayIndex = 15;
+            this.columnHeaderCr.DisplayIndex = 16;
             this.columnHeaderCr.Text = "Cr";
             this.columnHeaderCr.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             this.columnHeaderCr.Width = 30;
             // 
             // columnHeaderColor0
             // 
+            this.columnHeaderColor0.DisplayIndex = 25;
             this.columnHeaderColor0.Text = "C0";
             this.columnHeaderColor0.Width = 25;
             // 
             // columnHeaderColor1
             // 
+            this.columnHeaderColor1.DisplayIndex = 26;
             this.columnHeaderColor1.Text = "C1";
             this.columnHeaderColor1.Width = 25;
             // 
             // columnHeaderColor2
             // 
+            this.columnHeaderColor2.DisplayIndex = 27;
             this.columnHeaderColor2.Text = "C2";
             this.columnHeaderColor2.Width = 25;
             // 
             // columnHeaderColor3
             // 
+            this.columnHeaderColor3.DisplayIndex = 28;
             this.columnHeaderColor3.Text = "C3";
             this.columnHeaderColor3.Width = 25;
             // 
             // columnHeaderColor4
             // 
+            this.columnHeaderColor4.DisplayIndex = 29;
             this.columnHeaderColor4.Text = "C4";
             this.columnHeaderColor4.Width = 25;
             // 
             // columnHeaderColor5
             // 
+            this.columnHeaderColor5.DisplayIndex = 30;
             this.columnHeaderColor5.Text = "C5";
             this.columnHeaderColor5.Width = 25;
             // 
             // columnHeaderSpecies
             // 
+            this.columnHeaderSpecies.DisplayIndex = 31;
             this.columnHeaderSpecies.Text = "Species";
             // 
             // columnHeaderStatus
             // 
+            this.columnHeaderStatus.DisplayIndex = 32;
             this.columnHeaderStatus.Text = "Status";
             // 
             // columnHeaderTribe
             // 
+            this.columnHeaderTribe.DisplayIndex = 33;
             this.columnHeaderTribe.Text = "Tribe";
+            // 
+            // columnHeaderStatusIcon
+            // 
+            this.columnHeaderStatusIcon.DisplayIndex = 0;
+            this.columnHeaderStatusIcon.Text = "Status";
+            this.columnHeaderStatusIcon.Width = 35;
             // 
             // contextMenuStripLibrary
             // 
@@ -2539,6 +2237,7 @@ namespace ARKBreedingStats
             this.toolStripMenuItemRemove});
             this.contextMenuStripLibrary.Name = "contextMenuStripLibrary";
             this.contextMenuStripLibrary.Size = new System.Drawing.Size(259, 342);
+            this.contextMenuStripLibrary.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStripLibrary_Opening);
             // 
             // toolStripMenuItemEdit
             // 
@@ -2576,7 +2275,7 @@ namespace ARKBreedingStats
             this.toolStripMenuItemCopyCreatureName.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.B)));
             this.toolStripMenuItemCopyCreatureName.Size = new System.Drawing.Size(258, 22);
             this.toolStripMenuItemCopyCreatureName.Text = "Copy creature Name";
-            this.toolStripMenuItemCopyCreatureName.Click += new System.EventHandler(this.toolStripMenuItem1_Click);
+            this.toolStripMenuItemCopyCreatureName.Click += new System.EventHandler(this.toolStripMenuItemCopyCreatureName_Click);
             // 
             // toolStripSeparator9
             // 
@@ -2646,10 +2345,34 @@ namespace ARKBreedingStats
             // 
             // removeCooldownGrowingToolStripMenuItem
             // 
+            this.removeCooldownGrowingToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.setToMatureToolStripMenuItem,
+            this.clearMatingCooldownToolStripMenuItem,
+            this.justMatedToolStripMenuItem});
             this.removeCooldownGrowingToolStripMenuItem.Name = "removeCooldownGrowingToolStripMenuItem";
             this.removeCooldownGrowingToolStripMenuItem.Size = new System.Drawing.Size(258, 22);
-            this.removeCooldownGrowingToolStripMenuItem.Text = "Set to mature / ready to mate";
-            this.removeCooldownGrowingToolStripMenuItem.Click += new System.EventHandler(this.removeCooldownGrowingToolStripMenuItem_Click);
+            this.removeCooldownGrowingToolStripMenuItem.Text = "Set maturity / breeding state";
+            // 
+            // setToMatureToolStripMenuItem
+            // 
+            this.setToMatureToolStripMenuItem.Name = "setToMatureToolStripMenuItem";
+            this.setToMatureToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.setToMatureToolStripMenuItem.Text = "Set to mature";
+            this.setToMatureToolStripMenuItem.Click += new System.EventHandler(this.setToMatureToolStripMenuItem_Click);
+            // 
+            // clearMatingCooldownToolStripMenuItem
+            // 
+            this.clearMatingCooldownToolStripMenuItem.Name = "clearMatingCooldownToolStripMenuItem";
+            this.clearMatingCooldownToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.clearMatingCooldownToolStripMenuItem.Text = "Clear mating cooldown";
+            this.clearMatingCooldownToolStripMenuItem.Click += new System.EventHandler(this.clearMatingCooldownToolStripMenuItem_Click);
+            // 
+            // justMatedToolStripMenuItem
+            // 
+            this.justMatedToolStripMenuItem.Name = "justMatedToolStripMenuItem";
+            this.justMatedToolStripMenuItem.Size = new System.Drawing.Size(198, 22);
+            this.justMatedToolStripMenuItem.Text = "Just mated";
+            this.justMatedToolStripMenuItem.Click += new System.EventHandler(this.justMatedToolStripMenuItem_Click);
             // 
             // bestBreedingPartnersToolStripMenuItem
             // 
@@ -2765,7 +2488,7 @@ namespace ARKBreedingStats
             this.tabPagePedigree.Location = new System.Drawing.Point(4, 22);
             this.tabPagePedigree.Name = "tabPagePedigree";
             this.tabPagePedigree.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePedigree.Size = new System.Drawing.Size(1224, 690);
+            this.tabPagePedigree.Size = new System.Drawing.Size(1224, 730);
             this.tabPagePedigree.TabIndex = 3;
             this.tabPagePedigree.Text = "Pedigree";
             this.tabPagePedigree.UseVisualStyleBackColor = true;
@@ -2776,7 +2499,7 @@ namespace ARKBreedingStats
             this.pedigree1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pedigree1.Location = new System.Drawing.Point(3, 3);
             this.pedigree1.Name = "pedigree1";
-            this.pedigree1.Size = new System.Drawing.Size(1218, 684);
+            this.pedigree1.Size = new System.Drawing.Size(1218, 724);
             this.pedigree1.TabIndex = 0;
             // 
             // tabPageTaming
@@ -2785,7 +2508,7 @@ namespace ARKBreedingStats
             this.tabPageTaming.Location = new System.Drawing.Point(4, 22);
             this.tabPageTaming.Name = "tabPageTaming";
             this.tabPageTaming.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTaming.Size = new System.Drawing.Size(1224, 690);
+            this.tabPageTaming.Size = new System.Drawing.Size(1224, 730);
             this.tabPageTaming.TabIndex = 8;
             this.tabPageTaming.Text = "Taming";
             this.tabPageTaming.UseVisualStyleBackColor = true;
@@ -2796,7 +2519,7 @@ namespace ARKBreedingStats
             this.tamingControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tamingControl1.Location = new System.Drawing.Point(3, 3);
             this.tamingControl1.Name = "tamingControl1";
-            this.tamingControl1.Size = new System.Drawing.Size(1218, 684);
+            this.tamingControl1.Size = new System.Drawing.Size(1218, 724);
             this.tamingControl1.TabIndex = 0;
             this.tamingControl1.WeaponDamages = new double[] {
         100D,
@@ -2814,7 +2537,7 @@ namespace ARKBreedingStats
             this.tabPageBreedingPlan.Location = new System.Drawing.Point(4, 22);
             this.tabPageBreedingPlan.Name = "tabPageBreedingPlan";
             this.tabPageBreedingPlan.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageBreedingPlan.Size = new System.Drawing.Size(1224, 690);
+            this.tabPageBreedingPlan.Size = new System.Drawing.Size(1224, 730);
             this.tabPageBreedingPlan.TabIndex = 4;
             this.tabPageBreedingPlan.Text = "Breeding Plan";
             this.tabPageBreedingPlan.UseVisualStyleBackColor = true;
@@ -2827,7 +2550,7 @@ namespace ARKBreedingStats
             this.breedingPlan1.Location = new System.Drawing.Point(3, 3);
             this.breedingPlan1.MutationLimit = 0;
             this.breedingPlan1.Name = "breedingPlan1";
-            this.breedingPlan1.Size = new System.Drawing.Size(1218, 684);
+            this.breedingPlan1.Size = new System.Drawing.Size(1218, 724);
             this.breedingPlan1.TabIndex = 0;
             // 
             // tabPageRaising
@@ -2836,7 +2559,7 @@ namespace ARKBreedingStats
             this.tabPageRaising.Location = new System.Drawing.Point(4, 22);
             this.tabPageRaising.Name = "tabPageRaising";
             this.tabPageRaising.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageRaising.Size = new System.Drawing.Size(1224, 690);
+            this.tabPageRaising.Size = new System.Drawing.Size(1224, 730);
             this.tabPageRaising.TabIndex = 9;
             this.tabPageRaising.Text = "Raising";
             this.tabPageRaising.UseVisualStyleBackColor = true;
@@ -2847,7 +2570,7 @@ namespace ARKBreedingStats
             this.raisingControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.raisingControl1.Location = new System.Drawing.Point(3, 3);
             this.raisingControl1.Name = "raisingControl1";
-            this.raisingControl1.Size = new System.Drawing.Size(1218, 684);
+            this.raisingControl1.Size = new System.Drawing.Size(1218, 724);
             this.raisingControl1.TabIndex = 0;
             // 
             // tabPageTimer
@@ -2856,7 +2579,7 @@ namespace ARKBreedingStats
             this.tabPageTimer.Location = new System.Drawing.Point(4, 22);
             this.tabPageTimer.Name = "tabPageTimer";
             this.tabPageTimer.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageTimer.Size = new System.Drawing.Size(1224, 690);
+            this.tabPageTimer.Size = new System.Drawing.Size(1224, 730);
             this.tabPageTimer.TabIndex = 6;
             this.tabPageTimer.Text = "Timer";
             this.tabPageTimer.UseVisualStyleBackColor = true;
@@ -2866,7 +2589,7 @@ namespace ARKBreedingStats
             this.timerList1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.timerList1.Location = new System.Drawing.Point(3, 3);
             this.timerList1.Name = "timerList1";
-            this.timerList1.Size = new System.Drawing.Size(1218, 684);
+            this.timerList1.Size = new System.Drawing.Size(1218, 724);
             this.timerList1.TabIndex = 0;
             this.timerList1.TimerAlertsCSV = "";
             // 
@@ -2876,7 +2599,7 @@ namespace ARKBreedingStats
             this.tabPagePlayerTribes.Location = new System.Drawing.Point(4, 22);
             this.tabPagePlayerTribes.Name = "tabPagePlayerTribes";
             this.tabPagePlayerTribes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPagePlayerTribes.Size = new System.Drawing.Size(1224, 690);
+            this.tabPagePlayerTribes.Size = new System.Drawing.Size(1224, 730);
             this.tabPagePlayerTribes.TabIndex = 7;
             this.tabPagePlayerTribes.Text = "Player";
             this.tabPagePlayerTribes.UseVisualStyleBackColor = true;
@@ -2886,7 +2609,7 @@ namespace ARKBreedingStats
             this.tribesControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tribesControl1.Location = new System.Drawing.Point(3, 3);
             this.tribesControl1.Name = "tribesControl1";
-            this.tribesControl1.Size = new System.Drawing.Size(1218, 684);
+            this.tribesControl1.Size = new System.Drawing.Size(1218, 724);
             this.tribesControl1.TabIndex = 0;
             // 
             // tabPageNotes
@@ -2895,7 +2618,7 @@ namespace ARKBreedingStats
             this.tabPageNotes.Location = new System.Drawing.Point(4, 22);
             this.tabPageNotes.Name = "tabPageNotes";
             this.tabPageNotes.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageNotes.Size = new System.Drawing.Size(1224, 690);
+            this.tabPageNotes.Size = new System.Drawing.Size(1224, 730);
             this.tabPageNotes.TabIndex = 10;
             this.tabPageNotes.Text = "Notes";
             this.tabPageNotes.UseVisualStyleBackColor = true;
@@ -2905,7 +2628,7 @@ namespace ARKBreedingStats
             this.notesControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.notesControl1.Location = new System.Drawing.Point(3, 3);
             this.notesControl1.Name = "notesControl1";
-            this.notesControl1.Size = new System.Drawing.Size(1218, 684);
+            this.notesControl1.Size = new System.Drawing.Size(1218, 724);
             this.notesControl1.TabIndex = 0;
             // 
             // TabPageOCR
@@ -2914,7 +2637,7 @@ namespace ARKBreedingStats
             this.TabPageOCR.Location = new System.Drawing.Point(4, 22);
             this.TabPageOCR.Name = "TabPageOCR";
             this.TabPageOCR.Padding = new System.Windows.Forms.Padding(3);
-            this.TabPageOCR.Size = new System.Drawing.Size(1224, 690);
+            this.TabPageOCR.Size = new System.Drawing.Size(1224, 730);
             this.TabPageOCR.TabIndex = 5;
             this.TabPageOCR.Text = "Experimental OCR";
             this.TabPageOCR.UseVisualStyleBackColor = true;
@@ -2924,7 +2647,7 @@ namespace ARKBreedingStats
             this.ocrControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.ocrControl1.Location = new System.Drawing.Point(3, 3);
             this.ocrControl1.Name = "ocrControl1";
-            this.ocrControl1.Size = new System.Drawing.Size(1218, 684);
+            this.ocrControl1.Size = new System.Drawing.Size(1218, 724);
             this.ocrControl1.TabIndex = 2;
             // 
             // tabPageExtractionTests
@@ -2933,7 +2656,7 @@ namespace ARKBreedingStats
             this.tabPageExtractionTests.Location = new System.Drawing.Point(4, 22);
             this.tabPageExtractionTests.Name = "tabPageExtractionTests";
             this.tabPageExtractionTests.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageExtractionTests.Size = new System.Drawing.Size(1224, 690);
+            this.tabPageExtractionTests.Size = new System.Drawing.Size(1224, 730);
             this.tabPageExtractionTests.TabIndex = 11;
             this.tabPageExtractionTests.Text = "Extraction Tests";
             this.tabPageExtractionTests.UseVisualStyleBackColor = true;
@@ -2943,7 +2666,7 @@ namespace ARKBreedingStats
             this.extractionTestControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.extractionTestControl1.Location = new System.Drawing.Point(3, 3);
             this.extractionTestControl1.Name = "extractionTestControl1";
-            this.extractionTestControl1.Size = new System.Drawing.Size(1218, 684);
+            this.extractionTestControl1.Size = new System.Drawing.Size(1218, 724);
             this.extractionTestControl1.TabIndex = 0;
             // 
             // tabPageMultiplierTesting
@@ -2952,7 +2675,7 @@ namespace ARKBreedingStats
             this.tabPageMultiplierTesting.Location = new System.Drawing.Point(4, 22);
             this.tabPageMultiplierTesting.Name = "tabPageMultiplierTesting";
             this.tabPageMultiplierTesting.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPageMultiplierTesting.Size = new System.Drawing.Size(1224, 690);
+            this.tabPageMultiplierTesting.Size = new System.Drawing.Size(1224, 730);
             this.tabPageMultiplierTesting.TabIndex = 12;
             this.tabPageMultiplierTesting.Text = "Multiplier Testing";
             this.tabPageMultiplierTesting.UseVisualStyleBackColor = true;
@@ -2962,7 +2685,7 @@ namespace ARKBreedingStats
             this.statsMultiplierTesting1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.statsMultiplierTesting1.Location = new System.Drawing.Point(3, 3);
             this.statsMultiplierTesting1.Name = "statsMultiplierTesting1";
-            this.statsMultiplierTesting1.Size = new System.Drawing.Size(1218, 684);
+            this.statsMultiplierTesting1.Size = new System.Drawing.Size(1218, 724);
             this.statsMultiplierTesting1.TabIndex = 0;
             // 
             // btReadValuesFromArk
@@ -2991,7 +2714,7 @@ namespace ARKBreedingStats
             this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.toolStripProgressBar1,
             this.toolStripStatusLabel});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 819);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 859);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(1232, 22);
             this.statusStrip1.TabIndex = 44;
@@ -3032,7 +2755,10 @@ namespace ARKBreedingStats
             this.toolStripCBTempCreatures,
             this.toolStripButtonDeleteTempCreature,
             this.tsBtAddAsExtractionTest,
-            this.copyToMultiplierTesterToolStripButton});
+            this.copyToMultiplierTesterToolStripButton,
+            this.ToolStripLabelFilter,
+            this.ToolStripTextBoxLibraryFilter,
+            this.ToolStripButtonLibraryFilterClear});
             this.toolStrip2.Location = new System.Drawing.Point(0, 24);
             this.toolStrip2.Name = "toolStrip2";
             this.toolStrip2.Size = new System.Drawing.Size(1232, 25);
@@ -3197,7 +2923,7 @@ namespace ARKBreedingStats
             // 
             this.toolStripCBTempCreatures.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.toolStripCBTempCreatures.Name = "toolStripCBTempCreatures";
-            this.toolStripCBTempCreatures.Size = new System.Drawing.Size(121, 25);
+            this.toolStripCBTempCreatures.Size = new System.Drawing.Size(180, 25);
             this.toolStripCBTempCreatures.SelectedIndexChanged += new System.EventHandler(this.toolStripCBTempCreatures_SelectedIndexChanged);
             // 
             // toolStripButtonDeleteTempCreature
@@ -3232,6 +2958,27 @@ namespace ARKBreedingStats
             this.copyToMultiplierTesterToolStripButton.Text = "Copy to MultiplierTester";
             this.copyToMultiplierTesterToolStripButton.Click += new System.EventHandler(this.copyToMultiplierTesterToolStripButton_Click);
             // 
+            // ToolStripLabelFilter
+            // 
+            this.ToolStripLabelFilter.Name = "ToolStripLabelFilter";
+            this.ToolStripLabelFilter.Size = new System.Drawing.Size(36, 22);
+            this.ToolStripLabelFilter.Text = "Filter:";
+            // 
+            // ToolStripTextBoxLibraryFilter
+            // 
+            this.ToolStripTextBoxLibraryFilter.Name = "ToolStripTextBoxLibraryFilter";
+            this.ToolStripTextBoxLibraryFilter.Size = new System.Drawing.Size(200, 25);
+            this.ToolStripTextBoxLibraryFilter.TextChanged += new System.EventHandler(this.ToolStripTextBoxLibraryFilter_TextChanged);
+            // 
+            // ToolStripButtonLibraryFilterClear
+            // 
+            this.ToolStripButtonLibraryFilterClear.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+            this.ToolStripButtonLibraryFilterClear.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.ToolStripButtonLibraryFilterClear.Name = "ToolStripButtonLibraryFilterClear";
+            this.ToolStripButtonLibraryFilterClear.Size = new System.Drawing.Size(23, 22);
+            this.ToolStripButtonLibraryFilterClear.Text = "×";
+            this.ToolStripButtonLibraryFilterClear.Click += new System.EventHandler(this.ToolStripButtonLibraryFilterClear_Click);
+            // 
             // panelToolBar
             // 
             this.panelToolBar.Controls.Add(this.btReadValuesFromArk);
@@ -3254,7 +3001,7 @@ namespace ARKBreedingStats
             // 
             this.btImportLastExported.Location = new System.Drawing.Point(379, 3);
             this.btImportLastExported.Name = "btImportLastExported";
-            this.btImportLastExported.Size = new System.Drawing.Size(57, 44);
+            this.btImportLastExported.Size = new System.Drawing.Size(85, 44);
             this.btImportLastExported.TabIndex = 4;
             this.btImportLastExported.Text = "Last Export";
             this.btImportLastExported.UseVisualStyleBackColor = true;
@@ -3330,9 +3077,9 @@ namespace ARKBreedingStats
             // 
             // lbLibrarySelectionInfo
             // 
-            this.lbLibrarySelectionInfo.Location = new System.Drawing.Point(442, 3);
+            this.lbLibrarySelectionInfo.Location = new System.Drawing.Point(470, 3);
             this.lbLibrarySelectionInfo.Name = "lbLibrarySelectionInfo";
-            this.lbLibrarySelectionInfo.Size = new System.Drawing.Size(719, 45);
+            this.lbLibrarySelectionInfo.Size = new System.Drawing.Size(691, 45);
             this.lbLibrarySelectionInfo.TabIndex = 5;
             // 
             // speciesSelector1
@@ -3341,9 +3088,23 @@ namespace ARKBreedingStats
             this.speciesSelector1.LastSpecies = new string[0];
             this.speciesSelector1.Location = new System.Drawing.Point(0, 103);
             this.speciesSelector1.Name = "speciesSelector1";
-            this.speciesSelector1.Size = new System.Drawing.Size(1232, 716);
+            this.speciesSelector1.Size = new System.Drawing.Size(1232, 756);
             this.speciesSelector1.SplitterDistance = 500;
             this.speciesSelector1.TabIndex = 0;
+            // 
+            // contextMenuStripLibraryHeader
+            // 
+            this.contextMenuStripLibraryHeader.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripMenuItemResetLibraryColumnWidths});
+            this.contextMenuStripLibraryHeader.Name = "contextMenuStrip1";
+            this.contextMenuStripLibraryHeader.Size = new System.Drawing.Size(180, 26);
+            // 
+            // toolStripMenuItemResetLibraryColumnWidths
+            // 
+            this.toolStripMenuItemResetLibraryColumnWidths.Name = "toolStripMenuItemResetLibraryColumnWidths";
+            this.toolStripMenuItemResetLibraryColumnWidths.Size = new System.Drawing.Size(179, 22);
+            this.toolStripMenuItemResetLibraryColumnWidths.Text = "Reset column width";
+            this.toolStripMenuItemResetLibraryColumnWidths.Click += new System.EventHandler(this.toolStripMenuItemResetLibraryColumnWidths_Click);
             // 
             // Form1
             // 
@@ -3351,7 +3112,7 @@ namespace ARKBreedingStats
             this.AllowDrop = true;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1232, 841);
+            this.ClientSize = new System.Drawing.Size(1232, 881);
             this.Controls.Add(this.tabControlMain);
             this.Controls.Add(this.speciesSelector1);
             this.Controls.Add(this.panelToolBar);
@@ -3388,6 +3149,7 @@ namespace ARKBreedingStats
             this.panelWildTamedBred.PerformLayout();
             this.tabControlMain.ResumeLayout(false);
             this.tabPageStatTesting.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBoxColorRegionsTester)).EndInit();
             this.gbStatChart.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radarChart1)).EndInit();
             this.panelWildTamedBredTester.ResumeLayout(false);
@@ -3402,6 +3164,7 @@ namespace ARKBreedingStats
             this.gpPreviewEdit.PerformLayout();
             this.tabPageExtractor.ResumeLayout(false);
             this.tabPageExtractor.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PbCreatureColorsExtractor)).EndInit();
             this.groupBoxRadarChartExtractor.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radarChartExtractor)).EndInit();
             this.groupBoxTamingInfo.ResumeLayout(false);
@@ -3414,14 +3177,9 @@ namespace ARKBreedingStats
             this.tableLayoutPanelLibrary.ResumeLayout(false);
             this.tabControlLibFilter.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
-            this.tabPage2.ResumeLayout(false);
-            this.tabPageServer.ResumeLayout(false);
-            this.tabPageTags.ResumeLayout(false);
             this.tabPage3.ResumeLayout(false);
             this.tableLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel2.PerformLayout();
-            this.tabPage4.ResumeLayout(false);
-            this.tabPage4.PerformLayout();
             this.tabPageLibRadarChart.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.radarChartLibrary)).EndInit();
             this.contextMenuStripLibrary.ResumeLayout(false);
@@ -3442,6 +3200,7 @@ namespace ARKBreedingStats
             this.panelToolBar.ResumeLayout(false);
             this.panelToolBar.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pbSpecies)).EndInit();
+            this.contextMenuStripLibraryHeader.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -3524,24 +3283,19 @@ namespace ARKBreedingStats
         private System.Windows.Forms.ToolStripMenuItem onlinehelpToolStripMenuItem;
         private System.Windows.Forms.TabControl tabControlLibFilter;
         private System.Windows.Forms.TabPage tabPage1;
-        private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.ColumnHeader columnHeaderTopness;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.CheckedListBox checkedListBoxConsiderStatTop;
         private System.Windows.Forms.Button buttonRecalculateTops;
         private System.Windows.Forms.Label label17;
-        private System.Windows.Forms.CheckedListBox checkedListBoxOwner;
         private CreatureInfoInput creatureInfoInputExtractor;
         private CreatureInfoInput creatureInfoInputTester;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
-        private System.Windows.Forms.TabPage tabPage4;
-        private System.Windows.Forms.CheckBox checkBoxShowDead;
         private System.Windows.Forms.ToolStripMenuItem setStatusToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem aliveToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem deadToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem unavailableToolStripMenuItem;
-        private System.Windows.Forms.CheckBox checkBoxShowUnavailableCreatures;
         private System.Windows.Forms.ColumnHeader columnHeaderFound;
         private System.Windows.Forms.TabPage tabPageBreedingPlan;
         private System.Windows.Forms.ToolStripMenuItem multiSetterToolStripMenuItem;
@@ -3607,7 +3361,6 @@ namespace ARKBreedingStats
         private System.Windows.Forms.Label labelTamingInfo;
         private System.Windows.Forms.GroupBox groupBoxTamingInfo;
         private System.Windows.Forms.ColumnHeader columnHeaderAdded;
-        private System.Windows.Forms.CheckBox checkBoxShowNeuteredCreatures;
         private System.Windows.Forms.Label lbImprintingFailInfo;
         private System.Windows.Forms.Label lbImprintedCount;
         private System.Windows.Forms.Label lbImprintingCuddleCountExtractor;
@@ -3648,8 +3401,6 @@ namespace ARKBreedingStats
         private System.Windows.Forms.Label lbListening;
         private System.Windows.Forms.CheckBox cbToggleOverlay;
         private System.Windows.Forms.ToolStripButton toolStripButtonDeleteExpiredIncubationTimers;
-        private System.Windows.Forms.CheckBox checkBoxShowMutatedCreatures;
-        private System.Windows.Forms.CheckBox checkBoxUseFiltersInTopStatCalculation;
         private ocr.OCRControl ocrControl1;
         private System.Windows.Forms.TabPage tabPageLibRadarChart;
         private RadarChart radarChartLibrary;
@@ -3662,14 +3413,7 @@ namespace ARKBreedingStats
         private System.Windows.Forms.ColumnHeader columnHeaderNote;
         private System.Windows.Forms.ToolStripMenuItem obeliskToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem obeliskToolStripMenuItem1;
-        private System.Windows.Forms.CheckBox checkBoxShowObeliskCreatures;
         private System.Windows.Forms.Label lbLibrarySelectionInfo;
-        private System.Windows.Forms.ToolStripMenuItem viewToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deadCreaturesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem unavailableCreaturesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem obeliskCreaturesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem neuteredCreaturesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem mutatedCreaturesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator9;
         private System.Windows.Forms.CheckBox cbGuessSpecies;
         private System.Windows.Forms.ColumnHeader columnHeaderColor0;
@@ -3680,10 +3424,6 @@ namespace ARKBreedingStats
         private System.Windows.Forms.ColumnHeader columnHeaderColor5;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator10;
         private System.Windows.Forms.ColumnHeader columnHeaderServer;
-        private System.Windows.Forms.CheckBox cbOwnerFilterAll;
-        private System.Windows.Forms.TabPage tabPageServer;
-        private System.Windows.Forms.CheckedListBox checkedListBoxFilterServers;
-        private System.Windows.Forms.CheckBox cbServerFilterAll;
         private SpeciesSelector speciesSelector1;
         private uiControls.TextBoxSuggest tbSpeciesGlobal;
         private System.Windows.Forms.PictureBox pbSpecies;
@@ -3691,10 +3431,6 @@ namespace ARKBreedingStats
         private System.Windows.Forms.TabPage tabPageMultiplierTesting;
         private testCases.ExtractionTestControl extractionTestControl1;
         private System.Windows.Forms.ToolStripButton tsBtAddAsExtractionTest;
-        private System.Windows.Forms.CheckBox cbLibraryShowMales;
-        private System.Windows.Forms.CheckBox cbLibraryShowFemales;
-        private System.Windows.Forms.ToolStripMenuItem femalesToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem malesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importExportedCreaturesToolStripMenuItem;
         private System.Windows.Forms.Button btImportLastExported;
         private System.Windows.Forms.LinkLabel llOnlineHelpExtractionIssues;
@@ -3705,15 +3441,10 @@ namespace ARKBreedingStats
         private StatsMultiplierTesting statsMultiplierTesting1;
         private System.Windows.Forms.ToolStripButton copyToMultiplierTesterToolStripButton;
         private System.Windows.Forms.Label lbWildLevelTester;
-        private System.Windows.Forms.TabPage tabPageTags;
-        private System.Windows.Forms.CheckedListBox checkedListBoxFilterTags;
-        private System.Windows.Forms.CheckBox cbFilterTagsAll;
         private System.Windows.Forms.ToolStripMenuItem importValuesFromClipboardToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator13;
         private System.Windows.Forms.ToolStripMenuItem importingFromSavegameToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importingFromSavegameEmptyToolStripMenuItem;
-        private System.Windows.Forms.CheckBox checkBoxShowCryopodCreatures;
-        private System.Windows.Forms.ToolStripMenuItem cryopodCreaturesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem cryopodToolStripMenuItem;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelStatIOsExtractor;
         private System.Windows.Forms.FlowLayoutPanel flowLayoutPanelStatIOsTester;
@@ -3738,13 +3469,26 @@ namespace ARKBreedingStats
         private System.Windows.Forms.ToolStripMenuItem customStatOverridesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem openJsonDataFolderToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem speciesGroupToolStripMenuItem;
-        private System.Windows.Forms.CheckBox checkBoxSpeciesGroups;
         private System.Windows.Forms.ColumnHeader columnHeaderSpecies;
         private System.Windows.Forms.ColumnHeader columnHeaderStatus;
         private System.Windows.Forms.ColumnHeader columnHeaderTribe;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
-        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem copyInfographicToClipboardToolStripMenuItem;
+        private System.Windows.Forms.ColumnHeader columnHeaderStatusIcon;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripLibraryHeader;
+        private System.Windows.Forms.ToolStripMenuItem toolStripMenuItemResetLibraryColumnWidths;
+        private System.Windows.Forms.ToolStripMenuItem setToMatureToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearMatingCooldownToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem justMatedToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem libraryFilterToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBoxColorRegionsTester;
+        private System.Windows.Forms.ToolStripMenuItem downloadSpeciesImagesToolStripMenuItem;
+        private System.Windows.Forms.PictureBox PbCreatureColorsExtractor;
+        private System.Windows.Forms.ToolStripTextBox ToolStripTextBoxLibraryFilter;
+        private System.Windows.Forms.ToolStripButton ToolStripButtonLibraryFilterClear;
+        private System.Windows.Forms.ToolStripLabel ToolStripLabelFilter;
+        private uiControls.ParentInheritance parentInheritanceExtractor;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator19;
+        private System.Windows.Forms.ToolStripMenuItem copyLibrarydumpToClipboardToolStripMenuItem;
+        private System.Windows.Forms.Button BtCopyIssueDumpToClipboard;
     }
 }

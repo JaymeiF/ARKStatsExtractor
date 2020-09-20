@@ -8,11 +8,8 @@
     <Setting Name="consideredStats" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">387</Value>
     </Setting>
-    <Setting Name="formSize" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">1400, 1000</Value>
-    </Setting>
-    <Setting Name="formLocation" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">100, 100</Value>
+    <Setting Name="MainWindowRect" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">100, 100, 1400, 1000</Value>
     </Setting>
     <Setting Name="columnWidths" Type="System.Int32[]" Scope="User">
       <Value Profile="(Default)" />
@@ -47,7 +44,7 @@
     <Setting Name="lastSpecies" Type="System.String[]" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="oxygenForAll" Type="System.Boolean" Scope="User">
+    <Setting Name="DisplayHiddenStats" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
     <Setting Name="OCRApp" Type="System.String" Scope="User">
@@ -95,9 +92,6 @@
     <Setting Name="inventoryCheckTimer" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="LastImportFile" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
     <Setting Name="showColorsInLibrary" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
@@ -134,6 +128,9 @@
     <Setting Name="TribeNameLocked" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
+    <Setting Name="DefaultServerName" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
     <Setting Name="showOCRButton" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
@@ -149,11 +146,8 @@
     <Setting Name="UseServerFilterForBreedingPlan" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="importExportedLocation" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
-    </Setting>
-    <Setting Name="importExportedSize" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">700, 700</Value>
+    <Setting Name="ImportExportedFormRectangle" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">0, 0, 700, 700</Value>
     </Setting>
     <Setting Name="ApplyGlobalSpeciesToLibrary" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
@@ -197,11 +191,8 @@
     <Setting Name="PlaySoundOnAutoImport" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
     </Setting>
-    <Setting Name="PatternEditorSize" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
-    </Setting>
-    <Setting Name="PatternEditorLocation" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+    <Setting Name="PatternEditorFormRectangle" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">50, 50, 700, 700</Value>
     </Setting>
     <Setting Name="PatternEditorSplitterDistance" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">40</Value>
@@ -233,11 +224,8 @@
     <Setting Name="libraryColumnDisplayIndices" Type="System.Int32[]" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="CustomStatOverrideLocation" Type="System.Drawing.Point" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
-    </Setting>
-    <Setting Name="CustomStatOverrideSize" Type="System.Drawing.Size" Scope="User">
-      <Value Profile="(Default)">0, 0</Value>
+    <Setting Name="CustomStatOverrideFormRectangle" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">0, 0, 0, 0</Value>
     </Setting>
     <Setting Name="OverlayTimerPosition" Type="System.Drawing.Point" Scope="User">
       <Value Profile="(Default)">30, 30</Value>
@@ -268,6 +256,87 @@
     </Setting>
     <Setting Name="BreedingPlanOnePartnerMoreMutationsThanLimit" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LibraryHighlightTopCreatures" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="SaveImportCryo" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="UseCustomOverlayLocation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="CustomOverlayLocation" Type="System.Drawing.Point" Scope="User">
+      <Value Profile="(Default)">0, 0</Value>
+    </Setting>
+    <Setting Name="AdminConsoleCommandWithCheat" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FilterFlagsExclude" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FilterHideOwners" Type="System.String[]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FilterHideTribes" Type="System.String[]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FilterHideServers" Type="System.String[]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="FilterHideTags" Type="System.String[]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="useFiltersInTopStatCalculation" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="FilterOnlyIfColorId" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="LibraryGroupBySpecies" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">True</Value>
+    </Setting>
+    <Setting Name="LibraryFilterWindowRect" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">50, 50, 800, 600</Value>
+    </Setting>
+    <Setting Name="FilterFlagsAllNeeded" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="FilterFlagsOneNeeded" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="ModManagerWindowRect" Type="System.Drawing.Rectangle" Scope="User">
+      <Value Profile="(Default)">50, 50, 800, 600</Value>
+    </Setting>
+    <Setting Name="SpeciesSelectorCountLastSpecies" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">20</Value>
+    </Setting>
+    <Setting Name="applyNamePatternOnAutoImportForNewCreatures" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AlreadyAskedToDownloadImageFilesTropeognathus" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="LibrarySelectSelectedSpeciesOnLoad" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ImportExportUseTamerStringForOwner" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="MainWindowMaximized" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="DisabledVariants" Type="System.String[]" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="ImportExportedArchiveFolder" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DisplayInheritanceInOverlay" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="ColorMode" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">0</Value>
     </Setting>
   </Settings>
 </SettingsFile>

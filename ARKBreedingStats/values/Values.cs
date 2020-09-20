@@ -17,7 +17,17 @@ namespace ARKBreedingStats.values
     public class Values
     {
         public const int STATS_COUNT = 12;
-        public const string CURRENT_FORMAT_VERSION = "1.12";
+
+        /// <summary>
+        /// Checks if the version string is a format version that is supported by the version of this application.
+        /// </summary>
+        /// <param name="version"></param>
+        /// <returns></returns>
+        public static bool IsValidFormatVersion(string version)
+        => !string.IsNullOrEmpty(version) && (
+               version == "1.12"
+            || version == "1.13"
+            );
 
         private static Values _V;
 
@@ -36,6 +46,12 @@ namespace ARKBreedingStats.values
         public List<List<object>> colorDefinitions;
         [JsonProperty]
         public List<List<object>> dyeDefinitions;
+        /// <summary>
+        /// If a species for a blueprintpath is requested, the blueprintPath will be remapped if an according key is present.
+        /// This is needed if species are remapped ingame, e.g. if a variant is removed.
+        /// </summary>
+        [JsonProperty("remaps")]
+        private Dictionary<string, string> blueprintRemapping;
 
         public ARKColors Colors;
         public ARKColors Dyes;
@@ -87,6 +103,11 @@ namespace ARKBreedingStats.values
         /// For the main-values object this hash represents the current loaded mods and their order.
         /// </summary>
         public int loadedModsHash;
+
+        /// <summary>
+        /// Hash if no mod is loaded.
+        /// </summary>
+        public static int NoModsHash = CreatureCollection.CalculateModListHash(new List<Mod>());
 
         /// <summary>
         /// Returns the stat-index for the given order index (like it is ordered ingame).
@@ -147,11 +168,11 @@ namespace ARKBreedingStats.values
                 }
             }
 
-            OrderSpecies();
+            OrderSpeciesAndApplyCustomVariants();
 
             _V.LoadAliases();
             _V.UpdateSpeciesBlueprintDictionaries();
-            _V.loadedModsHash = CreatureCollection.CalculateModListHash(new List<Mod>());
+            _V.loadedModsHash = NoModsHash;
 
             // transfer extra loaded objects from the old object to the new one
             _V.modsManifest = modsManifest;
@@ -160,18 +181,16 @@ namespace ARKBreedingStats.values
 
         private static Values LoadValuesFile(string filePath)
         {
-            Values tmpV;
-            using (StreamReader file = File.OpenText(filePath))
+            if (FileService.LoadJsonFile(filePath, out Values readData, out string errorMessage))
             {
-                JsonSerializer serializer = new JsonSerializer();
-                tmpV = (Values)serializer.Deserialize(file, typeof(Values));
+                if (!IsValidFormatVersion(readData.format)) throw new FormatException("Unhandled format version");
+                return readData;
             }
-            if (tmpV.format != CURRENT_FORMAT_VERSION) throw new FormatException("Unhandled format version");
-            return tmpV;
+            throw new FileLoadException(errorMessage);
         }
 
         /// <summary>
-        /// Tries to load a modfile.
+        /// Tries to load a mod file.
         /// If the mod-values will be used, setModFileName should be true.
         /// If the file cannot be found or the format is wrong, the file is ignored and no exception is thrown if throwExceptionOnFail is false.
         /// </summary>
@@ -224,7 +243,7 @@ namespace ARKBreedingStats.values
             {
                 string filename = FileService.GetJsonPath(Path.Combine(FileService.ValuesFolder, mf));
 
-                if (TryLoadValuesFile(filename, setModFileName: true, throwExceptionOnFail, out Values modValues, out string modFileErrorMessage))
+                if (TryLoadValuesFile(filename, setModFileName: true, false, out Values modValues, out string modFileErrorMessage))
                 {
                     modifiedValues.Add(modValues);
                 }
@@ -234,7 +253,6 @@ namespace ARKBreedingStats.values
                 }
             }
 
-            int speciesUpdated = 0;
             int speciesAdded = 0;
             // update data if existing
             foreach (Values modValues in modifiedValues)
@@ -269,19 +287,19 @@ namespace ARKBreedingStats.values
 
             loadedModsHash = CreatureCollection.CalculateModListHash(mods);
 
-            if (speciesUpdated == 0 && speciesAdded == 0)
+            if (speciesAdded == 0)
                 return true; // nothing changed
 
             // sort new species
-            OrderSpecies();
+            OrderSpeciesAndApplyCustomVariants();
 
-            // mod-fooddata TODO
+            // mod food data TODO
 
             _V.LoadAliases();
             _V.UpdateSpeciesBlueprintDictionaries();
 
             resultsMessageSB.AppendLine($"The following mods were loaded:\n\n- {string.Join("\n- ", modifiedValues.Select(m => m.mod.title).ToArray())}\n\n"
-                           + $"Species with changed stats: {speciesUpdated}\nSpecies added: {speciesAdded}");
+                           + $"Species added: {speciesAdded}");
             resultsMessage = resultsMessageSB.ToString();
 
             return true;
@@ -307,7 +325,8 @@ namespace ARKBreedingStats.values
                 string modFilePath = Path.Combine(valuesFolder, mf);
                 if (!File.Exists(modFilePath))
                 {
-                    if (modsManifest.modsByFiles.ContainsKey(mf))
+                    if (modsManifest.modsByFiles.ContainsKey(mf)
+                        && modsManifest.modsByFiles[mf].onlineAvailable)
                         missingModValueFilesOnlineAvailable.Add(mf);
                     else
                         missingModValueFilesOnlineNotAvailable.Add(mf);
@@ -315,20 +334,16 @@ namespace ARKBreedingStats.values
                 else if (modsManifest.modsByFiles.ContainsKey(mf))
                 {
                     // check if an update is available
-                    bool downloadRecommended = true;
-
-
-                    if (TryLoadValuesFile(modFilePath, setModFileName: false, throwExceptionOnFail: false, out Values modValues, errorMessage: out _)
-                        && modValues.Version >= modsManifest.modsByFiles[mf].Version)
+                    if (modsManifest.modsByFiles[mf].onlineAvailable
+                        && modsManifest.modsByFiles[mf].Version != null
+                        && TryLoadValuesFile(modFilePath, setModFileName: false, throwExceptionOnFail: false,
+                            out Values modValues, errorMessage: out _)
+                        && modValues.Version < modsManifest.modsByFiles[mf].Version)
                     {
-                        downloadRecommended = false;
-                    }
-                    if (downloadRecommended)
                         modValueFilesWithAvailableUpdate.Add(mf);
+                    }
                 }
             }
-
-            // UpdateManualModValueFiles(); // TODO
 
             return (missingModValueFilesOnlineAvailable,
                     missingModValueFilesOnlineNotAvailable,
@@ -358,9 +373,22 @@ namespace ARKBreedingStats.values
             //    Clipboard.SetText(duplicateSpeciesNames);
         }
 
-        private void OrderSpecies()
+        private void OrderSpeciesAndApplyCustomVariants()
         {
             string fileName = FileService.GetJsonPath("sortNames.txt");
+
+            if (!File.Exists(fileName))
+            {
+                // default sorting for aberrant variants.
+                try
+                {
+                    File.WriteAllText(fileName, "^Aberrant (.*)$@$1a\n");
+                }
+                catch
+                {
+                }
+            }
+
             if (File.Exists(fileName))
             {
                 foreach (Species s in _V.species)
@@ -369,14 +397,16 @@ namespace ARKBreedingStats.values
                 string[] lines = File.ReadAllLines(fileName);
                 foreach (string l in lines)
                 {
-                    if (l.IndexOf("@", StringComparison.Ordinal) <= 0 || l.IndexOf("@", StringComparison.Ordinal) + 1 >= l.Length)
+                    if (l.IndexOf("@", StringComparison.Ordinal) <= 0 ||
+                        l.IndexOf("@", StringComparison.Ordinal) + 1 >= l.Length)
                         continue;
                     string matchName = l.Substring(0, l.IndexOf("@", StringComparison.Ordinal)).Trim();
                     string replaceName = l.Substring(l.IndexOf("@", StringComparison.Ordinal) + 1).Trim();
 
                     Regex r = new Regex(matchName);
 
-                    List<Species> matchedSpecies = _V.species.Where(s => string.IsNullOrEmpty(s.SortName) && r.IsMatch(s.name)).ToList();
+                    List<Species> matchedSpecies =
+                        _V.species.Where(s => string.IsNullOrEmpty(s.SortName) && r.IsMatch(s.name)).ToList();
 
                     foreach (Species s in matchedSpecies)
                     {
@@ -394,6 +424,28 @@ namespace ARKBreedingStats.values
 
             _V.species = _V.species.OrderBy(s => s.SortName).ToList();
             _V.speciesNames = _V.species.Select(s => s.name).ToList();
+
+            // apply custom species variants
+            var customSpeciesVariantsFilePath = FileService.GetJsonPath(FileService.CustomSpeciesVariants);
+
+            if (File.Exists(customSpeciesVariantsFilePath)
+                && FileService.LoadJsonFile(customSpeciesVariantsFilePath,
+                    out Dictionary<string, string[]> customSpeciesVariants, out var error))
+            {
+                if (customSpeciesVariants.Any())
+                {
+                    foreach (Species sp in _V.species)
+                    {
+                        if (customSpeciesVariants.TryGetValue(sp.blueprintPath, out var variants))
+                        {
+                            var spVars = (sp.variants?.ToList() ?? new List<string>());
+                            spVars.AddRange(variants);
+                            sp.variants = spVars.Any() ? spVars.Distinct().ToArray() : null;
+                            sp.InitializeNames();
+                        }
+                    }
+                }
+            }
         }
 
         /// <summary>
@@ -411,14 +463,13 @@ namespace ARKBreedingStats.values
                 throw new FileNotFoundException("No default server multiplier values found.\nIt's recommend to redownload ARK Smart Breeding.");
             }
 
-
             ServerMultipliers singlePlayerServerMultipliers = null;
 
             if (cc.singlePlayerSettings)
             {
-                /// The singleplayer multipliers are saved as a regular multiplierpreset, but they work differently
-                /// in the way they are multiplied on existing multipliers and won't work on their own.
-                /// The preset name "singleplayer" should only be used for this purpose.
+                // The singleplayer multipliers are saved as a regular multiplierpreset, but they work differently
+                // in the way they are multiplied on existing multipliers and won't work on their own.
+                // The preset name "singleplayer" should only be used for this purpose.
                 singlePlayerServerMultipliers = serverMultipliersPresets.GetPreset(ServerMultipliersPresets.SINGLEPLAYER);
                 if (singlePlayerServerMultipliers == null)
                     throw new FileNotFoundException("No server multiplier values for singleplayer settings found.\nIt's recommend to redownload ARK Smart Breeding.");
@@ -486,6 +537,8 @@ namespace ARKBreedingStats.values
                     sp.breeding.gestationTimeAdjusted = sp.breeding.gestationTime / currentServerMultipliers.EggHatchSpeedMultiplier;
                     sp.breeding.incubationTimeAdjusted = sp.breeding.incubationTime / currentServerMultipliers.EggHatchSpeedMultiplier;
                 }
+                if (currentServerMultipliers.MatingSpeedMultiplier > 0)
+                    sp.breeding.matingTimeAdjusted = sp.breeding.matingTime / currentServerMultipliers.MatingSpeedMultiplier;
                 if (currentServerMultipliers.BabyMatureSpeedMultiplier > 0)
                     sp.breeding.maturationTimeAdjusted = sp.breeding.maturationTime / currentServerMultipliers.BabyMatureSpeedMultiplier;
 
@@ -552,9 +605,19 @@ namespace ARKBreedingStats.values
                         blueprintToSpecies.Add(s.blueprintPath, s);
 
                     string name = s.DescriptiveName;
-                    if (!nameToSpecies.ContainsKey(name))
+                    var existingSpecies = nameToSpecies.TryGetValue(name, out var exSp) ? exSp : null;
+
+
+                    if (existingSpecies == null)
                         nameToSpecies.Add(name, s);
-                    else nameToSpecies[name] = s; // overwrite earlier entry, keep latest entry
+                    else if (
+                        (!existingSpecies.IsDomesticable && s.IsDomesticable) // prefer species that are domesticable
+                        || (existingSpecies.variants != null && existingSpecies.variants.Any() && (s.variants == null || !s.variants.Any())) // prefer species that are not variants
+                        || (existingSpecies.Mod == null && s.Mod != null) // prefer species from mods with the same name
+                        )
+                    {
+                        nameToSpecies[name] = s;
+                    }
 
                     Match classNameMatch = rClassName.Match(s.blueprintPath);
                     if (classNameMatch.Success)
@@ -578,26 +641,26 @@ namespace ARKBreedingStats.values
         {
             if (speciesNames.Contains(alias))
                 return alias;
-            return aliases.ContainsKey(alias) ? aliases[alias] : string.Empty;
+            return aliases.TryGetValue(alias, out var speciesName) ? speciesName : string.Empty;
         }
 
         /// <summary>
         /// Checks species names and loaded aliases for a match and sets the out parameter.
-        /// Especially when mods are used, this is not garantueed to result in the correct species.
+        /// Especially when mods are used, this is not guaranteed to result in the correct species.
         /// </summary>
         /// <param name="speciesName"></param>
-        /// <param name="species"></param>
+        /// <param name="recognizedSpecies"></param>
         /// <returns>True on success</returns>
-        public bool TryGetSpeciesByName(string speciesName, out Species species)
+        public bool TryGetSpeciesByName(string speciesName, out Species recognizedSpecies)
         {
-            species = null;
+            recognizedSpecies = null;
             if (string.IsNullOrEmpty(speciesName)) return false;
 
-            if (aliases.ContainsKey(speciesName))
-                speciesName = aliases[speciesName];
-            if (nameToSpecies.ContainsKey(speciesName))
+            if (aliases.TryGetValue(speciesName, out var realSpeciesName))
+                speciesName = realSpeciesName;
+            if (nameToSpecies.TryGetValue(speciesName, out var s))
             {
-                species = nameToSpecies[speciesName];
+                recognizedSpecies = s;
                 return true;
             }
 
@@ -609,16 +672,16 @@ namespace ARKBreedingStats.values
         /// Especially when mods are used, this is not garantueed to result in the correct species.
         /// </summary>
         /// <param name="speciesClassName"></param>
-        /// <param name="species"></param>
+        /// <param name="recognizedSpecies"></param>
         /// <returns>True on success</returns>
-        public bool TryGetSpeciesByClassName(string speciesClassName, out Species species)
+        public bool TryGetSpeciesByClassName(string speciesClassName, out Species recognizedSpecies)
         {
-            species = null;
+            recognizedSpecies = null;
             if (string.IsNullOrEmpty(speciesClassName)) return false;
 
-            if (classNameToSpecies.ContainsKey(speciesClassName))
+            if (classNameToSpecies.TryGetValue(speciesClassName, out var s))
             {
-                species = classNameToSpecies[speciesClassName];
+                recognizedSpecies = s;
                 return true;
             }
 
@@ -628,12 +691,16 @@ namespace ARKBreedingStats.values
         /// <summary>
         /// Returns the according species to the passed blueprintpath or null if unknown.
         /// </summary>
-        /// <param name="blueprintpath"></param>
+        /// <param name="blueprintPath"></param>
         /// <returns></returns>
-        public Species SpeciesByBlueprint(string blueprintpath)
+        public Species SpeciesByBlueprint(string blueprintPath)
         {
-            if (string.IsNullOrEmpty(blueprintpath)) return null;
-            return blueprintToSpecies.ContainsKey(blueprintpath) ? blueprintToSpecies[blueprintpath] : null;
+            if (string.IsNullOrEmpty(blueprintPath)) return null;
+            if (blueprintRemapping != null && blueprintRemapping.TryGetValue(blueprintPath, out var realBlueprintPath))
+            {
+                blueprintPath = realBlueprintPath;
+            }
+            return blueprintToSpecies.TryGetValue(blueprintPath, out var s) ? s : null;
         }
 
         /// <summary>
@@ -642,18 +709,7 @@ namespace ARKBreedingStats.values
         /// <param name="mm"></param>
         internal void SetModsManifest(ModsManifest mm)
         {
-            if (mm == null)
-                modsManifest = new ModsManifest();
-            else
-                modsManifest = mm;
-        }
-
-        /// <summary>
-        /// add possible mod-value files that are not listed in the manifest-file (manually created)
-        /// </summary>
-        internal void UpdateManualModValueFiles()
-        {
-            // TODO loop through modvalue files and check if file is not yet loaded in manifest.
+            modsManifest = mm ?? new ModsManifest();
         }
 
         private void LoadIgnoreSpeciesClassesFile()

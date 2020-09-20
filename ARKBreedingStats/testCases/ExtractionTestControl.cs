@@ -26,7 +26,7 @@ namespace ARKBreedingStats.testCases
 
                 if (!File.Exists(fileName))
                 {
-                    MessageBox.Show("Save file with name \"" + fileName + "\" does not exist!", "File not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Save file with name \"" + fileName + "\" does not exist!", $"File not found - {Utils.ApplicationNameVersion}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
 
@@ -39,7 +39,7 @@ namespace ARKBreedingStats.testCases
                     }
                     catch (Exception e)
                     {
-                        MessageBox.Show("File Couldn't be opened, we thought you should know.\nErrormessage:\n\n" + e.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("File Couldn't be opened, we thought you should know.\nErrormessage:\n\n" + e.Message, $"{Loc.S("error")} - {Utils.ApplicationNameVersion}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     finally
                     {
@@ -71,7 +71,7 @@ namespace ARKBreedingStats.testCases
             }
             catch (Exception e)
             {
-                MessageBox.Show("Error during serialization of testcase-data.\nErrormessage:\n\n" + e.Message, "Serialization-Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Error during serialization of testcase-data.\nErrormessage:\n\n" + e.Message, $"Serialization-Error - {Utils.ApplicationNameVersion}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -111,7 +111,7 @@ namespace ARKBreedingStats.testCases
 
         private void Tcc_RemoveTestCase(TestCaseControl tcc)
         {
-            cases.testCases.Remove(tcc.testCase);
+            cases.testCases.Remove(tcc.TestCase);
             tcc.Dispose();
             extractionTestControls.Remove(tcc);
             ShowTestCases();
@@ -193,7 +193,7 @@ namespace ARKBreedingStats.testCases
                 t.ClearTestResult();
             Invalidate();
             foreach (var t in extractionTestControls)
-                t.runTest();
+                t.RunTest();
         }
     }
 }

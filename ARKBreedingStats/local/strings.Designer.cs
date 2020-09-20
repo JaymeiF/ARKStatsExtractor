@@ -79,6 +79,24 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Added at.
+        /// </summary>
+        internal static string addedAt {
+            get {
+                return ResourceManager.GetString("addedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All.
+        /// </summary>
+        internal static string All {
+            get {
+                return ResourceManager.GetString("All", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to There is already a creature in your library that has all the available top-stats ({0} {1}).
         ///The currently selected conservative-breeding-mode might show some suggestions that may seem non-optimal.
         ///Change the breeding-mode to &quot;High Stats&quot; for better suggestions..
@@ -86,6 +104,15 @@ namespace ARKBreedingStats.local {
         internal static string AlreadyCreatureWithTopStats {
             get {
                 return ResourceManager.GetString("AlreadyCreatureWithTopStats", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to apply.
+        /// </summary>
+        internal static string apply {
+            get {
+                return ResourceManager.GetString("apply", resourceCulture);
             }
         }
         
@@ -126,6 +153,15 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Best possible {0} for this library.
+        /// </summary>
+        internal static string BestPossibleSpeciesLibrary {
+            get {
+                return ResourceManager.GetString("BestPossibleSpeciesLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Body.
         /// </summary>
         internal static string Body {
@@ -135,7 +171,7 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bonus-Level.
+        ///   Looks up a localized string similar to Bonus Level.
         /// </summary>
         internal static string BonusLevel {
             get {
@@ -149,6 +185,15 @@ namespace ARKBreedingStats.local {
         internal static string Bow {
             get {
                 return ResourceManager.GetString("Bow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Cancel restriction on {0}.
+        /// </summary>
+        internal static string BPCancelRestrictionOn {
+            get {
+                return ResourceManager.GetString("BPCancelRestrictionOn", resourceCulture);
             }
         }
         
@@ -252,6 +297,96 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Apply OTS Preset.
+        /// </summary>
+        internal static string BtApplyOTSPreset {
+            get {
+                return ResourceManager.GetString("BtApplyOTSPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set the values for owner, tribe and server from the saved preset.
+        /// </summary>
+        internal static string BtApplyOTSPresetTT {
+            get {
+                return ResourceManager.GetString("BtApplyOTSPresetTT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import failed.
+        /// </summary>
+        internal static string BtBeepFailure {
+            get {
+                return ResourceManager.GetString("BtBeepFailure", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This sound is played when an automatic import failed, manual selection of levels may be needed..
+        /// </summary>
+        internal static string BtBeepFailureTT {
+            get {
+                return ResourceManager.GetString("BtBeepFailureTT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to new top stat.
+        /// </summary>
+        internal static string BtBeepNewTop {
+            get {
+                return ResourceManager.GetString("BtBeepNewTop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This sound is played when an automatic imported creature has a higher level in a stat than all other creatures of that species in the library.
+        /// </summary>
+        internal static string BtBeepNewTopTT {
+            get {
+                return ResourceManager.GetString("BtBeepNewTopTT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to import success.
+        /// </summary>
+        internal static string BtBeepSuccess {
+            get {
+                return ResourceManager.GetString("BtBeepSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This sound is played when an automatic import succeeded.
+        /// </summary>
+        internal static string BtBeepSuccessTT {
+            get {
+                return ResourceManager.GetString("BtBeepSuccessTT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to top stat.
+        /// </summary>
+        internal static string BtBeepTop {
+            get {
+                return ResourceManager.GetString("BtBeepTop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This sound is played when a level of the imported creature is a top stat, i.e. equal to the current highest level in the library.
+        /// </summary>
+        internal static string BtBeepTopTT {
+            get {
+                return ResourceManager.GetString("BtBeepTopTT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Apply new Weightings.
         /// </summary>
         internal static string btBPApplyNewWeights {
@@ -293,6 +428,15 @@ namespace ARKBreedingStats.local {
         internal static string btExtractLevels {
             get {
                 return ResourceManager.GetString("btExtractLevels", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Set export folder automatically.
+        /// </summary>
+        internal static string BtGetExportFolderAutomatically {
+            get {
+                return ResourceManager.GetString("BtGetExportFolderAutomatically", resourceCulture);
             }
         }
         
@@ -358,6 +502,25 @@ namespace ARKBreedingStats.local {
         internal static string btSaveChanges {
             get {
                 return ResourceManager.GetString("btSaveChanges", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save OTS.
+        /// </summary>
+        internal static string BtSaveOTSPreset {
+            get {
+                return ResourceManager.GetString("BtSaveOTSPreset", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save Owner, Tribe and Server as preset.
+        ///The preset can be applied by the Apply Preset button.
+        /// </summary>
+        internal static string BtSaveOTSPresetTT {
+            get {
+                return ResourceManager.GetString("BtSaveOTSPresetTT", resourceCulture);
             }
         }
         
@@ -540,54 +703,54 @@ namespace ARKBreedingStats.local {
         /// <summary>
         ///   Looks up a localized string similar to Ch Capacity.
         /// </summary>
-        internal static string ChargeCapacity {
+        internal static string Charge_Capacity {
             get {
-                return ResourceManager.GetString("ChargeCapacity", resourceCulture);
+                return ResourceManager.GetString("Charge Capacity", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to CC.
         /// </summary>
-        internal static string ChargeCapacity_Abb {
+        internal static string Charge_Capacity_Abb {
             get {
-                return ResourceManager.GetString("ChargeCapacity_Abb", resourceCulture);
+                return ResourceManager.GetString("Charge Capacity_Abb", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Ch Emission Range.
         /// </summary>
-        internal static string ChargeEmissionRange {
+        internal static string Charge_Emission_Range {
             get {
-                return ResourceManager.GetString("ChargeEmissionRange", resourceCulture);
+                return ResourceManager.GetString("Charge Emission Range", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to CRa.
         /// </summary>
-        internal static string ChargeEmissionRange_Abb {
+        internal static string Charge_Emission_Range_Abb {
             get {
-                return ResourceManager.GetString("ChargeEmissionRange_Abb", resourceCulture);
+                return ResourceManager.GetString("Charge Emission Range_Abb", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Ch Regen.
         /// </summary>
-        internal static string ChargeRegeneration {
+        internal static string Charge_Regen {
             get {
-                return ResourceManager.GetString("ChargeRegeneration", resourceCulture);
+                return ResourceManager.GetString("Charge Regen", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to CRe.
         /// </summary>
-        internal static string ChargeRegeneration_Abb {
+        internal static string Charge_Regen_Abb {
             get {
-                return ResourceManager.GetString("ChargeRegeneration_Abb", resourceCulture);
+                return ResourceManager.GetString("Charge Regen_Abb", resourceCulture);
             }
         }
         
@@ -606,6 +769,33 @@ namespace ARKBreedingStats.local {
         internal static string checkForUpdatedStatsToolStripMenuItem {
             get {
                 return ResourceManager.GetString("checkForUpdatedStatsToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear.
+        /// </summary>
+        internal static string clear {
+            get {
+                return ResourceManager.GetString("clear", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to clear colors.
+        /// </summary>
+        internal static string clearColors {
+            get {
+                return ResourceManager.GetString("clearColors", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clear Color Filters.
+        /// </summary>
+        internal static string clearColorsFilters {
+            get {
+                return ResourceManager.GetString("clearColorsFilters", resourceCulture);
             }
         }
         
@@ -675,18 +865,18 @@ namespace ARKBreedingStats.local {
         /// <summary>
         ///   Looks up a localized string similar to Crafting Speed.
         /// </summary>
-        internal static string CraftingSpeed {
+        internal static string Crafting_Speed {
             get {
-                return ResourceManager.GetString("CraftingSpeed", resourceCulture);
+                return ResourceManager.GetString("Crafting Speed", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Cr.
         /// </summary>
-        internal static string CraftingSpeed_Abb {
+        internal static string Crafting_Speed_Abb {
             get {
-                return ResourceManager.GetString("CraftingSpeed_Abb", resourceCulture);
+                return ResourceManager.GetString("Crafting Speed_Abb", resourceCulture);
             }
         }
         
@@ -696,6 +886,15 @@ namespace ARKBreedingStats.local {
         internal static string Creature {
             get {
                 return ResourceManager.GetString("Creature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creature of the export file.
+        /// </summary>
+        internal static string creatureOfFile {
+            get {
+                return ResourceManager.GetString("creatureOfFile", resourceCulture);
             }
         }
         
@@ -754,15 +953,6 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to German.
-        /// </summary>
-        internal static string de {
-            get {
-                return ResourceManager.GetString("de", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Dead Creatures.
         /// </summary>
         internal static string deadCreaturesToolStripMenuItem {
@@ -786,6 +976,15 @@ namespace ARKBreedingStats.local {
         internal static string deleteSelectedToolStripMenuItem {
             get {
                 return ResourceManager.GetString("deleteSelectedToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Descendants.
+        /// </summary>
+        internal static string Descendants {
+            get {
+                return ResourceManager.GetString("Descendants", resourceCulture);
             }
         }
         
@@ -826,6 +1025,15 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Downloading and updating of the new species-stats was successful..
+        /// </summary>
+        internal static string downloadingValuesSuccess {
+            get {
+                return ResourceManager.GetString("downloadingValuesSuccess", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit.
         /// </summary>
         internal static string editToolStripMenuItem {
@@ -862,29 +1070,38 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to English.
+        ///   Looks up a localized string similar to Error.
         /// </summary>
-        internal static string en {
+        internal static string error {
             get {
-                return ResourceManager.GetString("en", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Spanish.
-        /// </summary>
-        internal static string es {
-            get {
-                return ResourceManager.GetString("es", resourceCulture);
+                return ResourceManager.GetString("error", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Event.
         /// </summary>
-        internal static string Event_ {
+        internal static string Event {
             get {
-                return ResourceManager.GetString("Event_", resourceCulture);
+                return ResourceManager.GetString("Event", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to expired.
+        /// </summary>
+        internal static string expired {
+            get {
+                return ResourceManager.GetString("expired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The export folder of Steam couldn&apos;t be detected automatically..
+        /// </summary>
+        internal static string ExportFolderDetectionFailed {
+            get {
+                return ResourceManager.GetString("ExportFolderDetectionFailed", resourceCulture);
             }
         }
         
@@ -894,6 +1111,15 @@ namespace ARKBreedingStats.local {
         internal static string exportValuesToClipboardToolStripMenuItem {
             get {
                 return ResourceManager.GetString("exportValuesToClipboardToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The extraction failed. See the following list of possible causes.
+        /// </summary>
+        internal static string extractionFailedHeader {
+            get {
+                return ResourceManager.GetString("extractionFailedHeader", resourceCulture);
             }
         }
         
@@ -948,6 +1174,42 @@ namespace ARKBreedingStats.local {
         internal static string fileToolStripMenuItem {
             get {
                 return ResourceManager.GetString("fileToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only creatures with all of these flags will be displayed.
+        /// </summary>
+        internal static string filterAllNeededInfo {
+            get {
+                return ResourceManager.GetString("filterAllNeededInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter by name.
+        /// </summary>
+        internal static string filterByName {
+            get {
+                return ResourceManager.GetString("filterByName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creatures with this flag will not be shown.
+        /// </summary>
+        internal static string filterExcludeInfo {
+            get {
+                return ResourceManager.GetString("filterExcludeInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only creatures with one of these flags will be displayed.
+        /// </summary>
+        internal static string filterOneNeededInfo {
+            get {
+                return ResourceManager.GetString("filterOneNeededInfo", resourceCulture);
             }
         }
         
@@ -1011,15 +1273,6 @@ namespace ARKBreedingStats.local {
         internal static string Fortitude_Abb {
             get {
                 return ResourceManager.GetString("Fortitude_Abb", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to French.
-        /// </summary>
-        internal static string fr {
-            get {
-                return ResourceManager.GetString("fr", resourceCulture);
             }
         }
         
@@ -1105,6 +1358,15 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Group library by species.
+        /// </summary>
+        internal static string groupLibraryBySpecies {
+            get {
+                return ResourceManager.GetString("groupLibraryBySpecies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Grown in.
         /// </summary>
         internal static string grownIn {
@@ -1155,6 +1417,15 @@ namespace ARKBreedingStats.local {
         internal static string helpToolStripMenuItem {
             get {
                 return ResourceManager.GetString("helpToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Hold Ctrl for random colors.
+        /// </summary>
+        internal static string holdCtrlForRandomColors {
+            get {
+                return ResourceManager.GetString("holdCtrlForRandomColors", resourceCulture);
             }
         }
         
@@ -1231,6 +1502,153 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to incubation.
+        /// </summary>
+        internal static string incubation {
+            get {
+                return ResourceManager.GetString("incubation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This species is known to show wrong stat values ingame, this can prevent a successful extraction..
+        /// </summary>
+        internal static string issueCauseArkStatIssue {
+            get {
+                return ResourceManager.GetString("issueCauseArkStatIssue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Check if the total level of the creature is entered correctly.
+        ///If the creature is bred, also check if the BabyImprintingStatScaleMultiplier is set correctly..
+        /// </summary>
+        internal static string issueCauseCreatureLevel {
+            get {
+                return ResourceManager.GetString("issueCauseCreatureLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You locked the imprinting-value by checking &quot;Exactly, don&apos;t adjust&quot; and the tool won&apos;t adjust it, this may cause the extraction to fail..
+        /// </summary>
+        internal static string issueCauseImprintingLocked {
+            get {
+                return ResourceManager.GetString("issueCauseImprintingLocked", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The imprinting-percentage given is not possible with the current multipliers and may cause wrong values during the extraction-process.
+        ///Make sure the BabyCuddleIntervallMultiplier and the BabyMatureSpeedMultiplier are set correctly.
+        ///They may have to be set to the value when the creature hatched/was born, even if they were changed..
+        /// </summary>
+        internal static string issueCauseImprintingNotPossible {
+            get {
+                return ResourceManager.GetString("issueCauseImprintingNotPossible", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sometimes the game doesn&apos;t update the stat-value after an imprinting. Try the extraction after the creature was cryoed again..
+        /// </summary>
+        internal static string issueCauseImprintingNotUpdated {
+            get {
+                return ResourceManager.GetString("issueCauseImprintingNotUpdated", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Uncheck all Lock-to-Zero-buttons in the stats (all lock-symbols should be green and opened)..
+        /// </summary>
+        internal static string issueCauseLockedDomLevel {
+            get {
+                return ResourceManager.GetString("issueCauseLockedDomLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The maximal wild level is set too low, go to the settings and adjust it..
+        /// </summary>
+        internal static string issueCauseMaxWildLevel {
+            get {
+                return ResourceManager.GetString("issueCauseMaxWildLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If the creature is from a mod, you may need to enable the according mod values in Settings - Mod value manager..
+        /// </summary>
+        internal static string issueCauseModValues {
+            get {
+                return ResourceManager.GetString("issueCauseModValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The stats of the creature were changed recently and the game displays the old values. Level up a stat, that should trigger a recalculation of the values..
+        /// </summary>
+        internal static string issueCauseOutdatedIngameValues {
+            get {
+                return ResourceManager.GetString("issueCauseOutdatedIngameValues", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to If you have enabled the Singleplayer-Settings in the game, make sure the according checkbox is enabled in the settings in this application as well..
+        /// </summary>
+        internal static string issueCauseSingleplayer {
+            get {
+                return ResourceManager.GetString("issueCauseSingleplayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The stat multipliers in the Settings are not set to the multipliers of the server. Ask your admin for the correct multipliers and adjust them in the Settings..
+        /// </summary>
+        internal static string issueCauseStatMultipliers {
+            get {
+                return ResourceManager.GetString("issueCauseStatMultipliers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Taming-Effectiveness-Range too narrow, increase the upper and / or decrase the lower bound..
+        /// </summary>
+        internal static string issueCauseTamingEffectivenessRange {
+            get {
+                return ResourceManager.GetString("issueCauseTamingEffectivenessRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Double check if all stat-values are entered correctly..
+        /// </summary>
+        internal static string issueCauseTypo {
+            get {
+                return ResourceManager.GetString("issueCauseTypo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Adjust or disable the &quot;Consider Wild-level - steps&quot; in the settings..
+        /// </summary>
+        internal static string issueCauseWildLevelSteps {
+            get {
+                return ResourceManager.GetString("issueCauseWildLevelSteps", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Make sure the correct state (wild, tamed, bred) for the creature is chosen..
+        /// </summary>
+        internal static string issueCauseWildTamedBred {
+            get {
+                return ResourceManager.GetString("issueCauseWildTamedBred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The extraction is potentially possible, but it seems the max wild level is set too low for a valid extraction. Check if you set the correct value in the settings.
         ///The current value is {0} and this creature seems to have a higher wild level than this.
         ///
@@ -1239,15 +1657,6 @@ namespace ARKBreedingStats.local {
         internal static string issueMaxWildLevelTooLow {
             get {
                 return ResourceManager.GetString("issueMaxWildLevelTooLow", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Italian.
-        /// </summary>
-        internal static string it {
-            get {
-                return ResourceManager.GetString("it", resourceCulture);
             }
         }
         
@@ -1504,6 +1913,24 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Library Filter.
+        /// </summary>
+        internal static string libraryFilter {
+            get {
+                return ResourceManager.GetString("libraryFilter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Filter library….
+        /// </summary>
+        internal static string libraryFilterToolStripMenuItem {
+            get {
+                return ResourceManager.GetString("libraryFilterToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Load and A&amp;dd....
         /// </summary>
         internal static string loadAndAddToolStripMenuItem {
@@ -1549,11 +1976,29 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mating Time.
+        /// </summary>
+        internal static string matingTime {
+            get {
+                return ResourceManager.GetString("matingTime", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Maturation.
         /// </summary>
         internal static string Maturation {
             get {
                 return ResourceManager.GetString("Maturation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to mature.
+        /// </summary>
+        internal static string mature {
+            get {
+                return ResourceManager.GetString("mature", resourceCulture);
             }
         }
         
@@ -1621,6 +2066,15 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to n/a.
+        /// </summary>
+        internal static string na {
+            get {
+                return ResourceManager.GetString("na", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Name.
         /// </summary>
         internal static string Name {
@@ -1684,11 +2138,47 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to new top level.
+        /// </summary>
+        internal static string newTopLevel {
+            get {
+                return ResourceManager.GetString("newTopLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to no color.
+        /// </summary>
+        internal static string noColor {
+            get {
+                return ResourceManager.GetString("noColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There are no creatures in the library selected to copy to the clipboard..
+        /// </summary>
+        internal static string noCreatureSelectedInLibrary {
+            get {
+                return ResourceManager.GetString("noCreatureSelectedInLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to No possible pairings found for {0}. Make sure at least one female and male are available in your library and that you didn&apos;t exclude all possible creatures via the tag-selector..
         /// </summary>
         internal static string NoPossiblePairingForSpeciesFound {
             get {
                 return ResourceManager.GetString("NoPossiblePairingForSpeciesFound", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to not a baby anymore.
+        /// </summary>
+        internal static string notABabyAnymore {
+            get {
+                return ResourceManager.GetString("notABabyAnymore", resourceCulture);
             }
         }
         
@@ -1729,11 +2219,38 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to no timer selected.
+        /// </summary>
+        internal static string noTimerSelected {
+            get {
+                return ResourceManager.GetString("noTimerSelected", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to not yet tamed.
         /// </summary>
         internal static string notYetTamed {
             get {
                 return ResourceManager.GetString("notYetTamed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No valid data.
+        /// </summary>
+        internal static string noValidData {
+            get {
+                return ResourceManager.GetString("noValidData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to There is no valid extracted creature to export..
+        /// </summary>
+        internal static string noValidExtractedCreatureToExport {
+            get {
+                return ResourceManager.GetString("noValidExtractedCreatureToExport", resourceCulture);
             }
         }
         
@@ -1771,6 +2288,15 @@ namespace ARKBreedingStats.local {
         internal static string onlinehelpToolStripMenuItem {
             get {
                 return ResourceManager.GetString("onlinehelpToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Only creatures that have this color.
+        /// </summary>
+        internal static string onlyCreaturesWithThisColor {
+            get {
+                return ResourceManager.GetString("onlyCreaturesWithThisColor", resourceCulture);
             }
         }
         
@@ -1829,6 +2355,24 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Owner filter from library.
+        /// </summary>
+        internal static string ownerFilterFromLibrary {
+            get {
+                return ResourceManager.GetString("ownerFilterFromLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to owners.
+        /// </summary>
+        internal static string owners {
+            get {
+                return ResourceManager.GetString("owners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Oxygen.
         /// </summary>
         internal static string Oxygen {
@@ -1847,11 +2391,29 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Parents.
+        /// </summary>
+        internal static string Parents {
+            get {
+                return ResourceManager.GetString("Parents", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Paste Creature.
         /// </summary>
         internal static string pasteCreatureToolStripMenuItem {
             get {
                 return ResourceManager.GetString("pasteCreatureToolStripMenuItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to paused.
+        /// </summary>
+        internal static string paused {
+            get {
+                return ResourceManager.GetString("paused", resourceCulture);
             }
         }
         
@@ -1874,11 +2436,38 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Possible Level-Range: {0}–{1}.
+        /// </summary>
+        internal static string possibleLevelRange {
+            get {
+                return ResourceManager.GetString("possibleLevelRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pre tame level.
+        /// </summary>
+        internal static string preTameLevel {
+            get {
+                return ResourceManager.GetString("preTameLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Probability for this Best Possible outcome.
         /// </summary>
         internal static string ProbabilityForBest {
             get {
                 return ResourceManager.GetString("ProbabilityForBest", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Probability for one mutation.
+        /// </summary>
+        internal static string ProbabilityForOneMutation {
+            get {
+                return ResourceManager.GetString("ProbabilityForOneMutation", resourceCulture);
             }
         }
         
@@ -1901,7 +2490,7 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to High Stats.
+        ///   Looks up a localized string similar to Best next generation.
         /// </summary>
         internal static string rbBPHighStats {
             get {
@@ -1921,7 +2510,7 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top Stats Lc.
+        ///   Looks up a localized string similar to Combine top stats lucky.
         /// </summary>
         internal static string rbBPTopStats {
             get {
@@ -1930,7 +2519,7 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top Stats Cn.
+        ///   Looks up a localized string similar to Combine top stats steady.
         /// </summary>
         internal static string rbBPTopStatsCn {
             get {
@@ -1939,7 +2528,7 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top Stats, Conservative.
+        ///   Looks up a localized string similar to Combine top stats steady
         ///Check for best long-term-results and if you want to go safe.
         ///This mode will get to the best possible offspring steady and surely.
         ///Some offsprings might be worse than in High-Stats-Mode, but that&apos;s the mode you go if you want to have that perfect creature in some generations..
@@ -1951,7 +2540,7 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Top Stats, Feeling Lucky.
+        ///   Looks up a localized string similar to Combine top stats lucky
         ///Check for best long-term-results and if you&apos;re feeling lucky. It can be faster to get the perfect creature than in the Top-Stat-Conservative-Mode if you&apos;re lucky.
         ///Some offsprings might be worse than in High-Stats-Mode, but you also have a chance to the best possible offspring..
         /// </summary>
@@ -2016,6 +2605,24 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Server filter from library.
+        /// </summary>
+        internal static string serverFilterFromLibrary {
+            get {
+                return ResourceManager.GetString("serverFilterFromLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to servers.
+        /// </summary>
+        internal static string servers {
+            get {
+                return ResourceManager.GetString("servers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Set Status.
         /// </summary>
         internal static string setStatusToolStripMenuItem {
@@ -2048,6 +2655,15 @@ namespace ARKBreedingStats.local {
         internal static string ShockingTranqDarts {
             get {
                 return ResourceManager.GetString("ShockingTranqDarts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show only natural occuring colors.
+        /// </summary>
+        internal static string showOnlyNaturalOccuring {
+            get {
+                return ResourceManager.GetString("showOnlyNaturalOccuring", resourceCulture);
             }
         }
         
@@ -2165,6 +2781,24 @@ namespace ARKBreedingStats.local {
         internal static string Status {
             get {
                 return ResourceManager.GetString("Status", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to System Language.
+        /// </summary>
+        internal static string SystemLanguage {
+            get {
+                return ResourceManager.GetString("SystemLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tags.
+        /// </summary>
+        internal static string tags {
+            get {
+                return ResourceManager.GetString("tags", resourceCulture);
             }
         }
         
@@ -2412,6 +3046,15 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to top level.
+        /// </summary>
+        internal static string topLevel {
+            get {
+                return ResourceManager.GetString("topLevel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Tp%.
         /// </summary>
         internal static string topPercentage {
@@ -2511,6 +3154,24 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tribe filter from library.
+        /// </summary>
+        internal static string tribeFilterFromLibrary {
+            get {
+                return ResourceManager.GetString("tribeFilterFromLibrary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to tribes.
+        /// </summary>
+        internal static string tribes {
+            get {
+                return ResourceManager.GetString("tribes", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Add as Test.
         /// </summary>
         internal static string tsBtAddAsExtractionTest {
@@ -2538,11 +3199,65 @@ namespace ARKBreedingStats.local {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to unknown species.
+        /// </summary>
+        internal static string unknownSpecies {
+            get {
+                return ResourceManager.GetString("unknownSpecies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to until.
         /// </summary>
         internal static string until {
             get {
                 return ResourceManager.GetString("until", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Update successful.
+        /// </summary>
+        internal static string updateSuccessTitle {
+            get {
+                return ResourceManager.GetString("updateSuccessTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use filter in top stat calculation.
+        /// </summary>
+        internal static string useFilterInTopStatCalculation {
+            get {
+                return ResourceManager.GetString("useFilterInTopStatCalculation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The species values-file couldn&apos;t be loaded, this application does not work without. Try redownloading the tool..
+        /// </summary>
+        internal static string valuesFileLoadingError {
+            get {
+                return ResourceManager.GetString("valuesFileLoadingError", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Variant Selector.
+        /// </summary>
+        internal static string VariantSelector {
+            get {
+                return ResourceManager.GetString("VariantSelector", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Species that contain one variant that is unchecked will be hidden..
+        /// </summary>
+        internal static string VariantSelectorInfo {
+            get {
+                return ResourceManager.GetString("VariantSelectorInfo", resourceCulture);
             }
         }
         
@@ -2660,15 +3375,6 @@ namespace ARKBreedingStats.local {
         internal static string WorstPossible {
             get {
                 return ResourceManager.GetString("WorstPossible", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Chinese.
-        /// </summary>
-        internal static string zh {
-            get {
-                return ResourceManager.GetString("zh", resourceCulture);
             }
         }
     }

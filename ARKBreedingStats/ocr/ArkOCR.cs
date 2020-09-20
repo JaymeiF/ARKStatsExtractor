@@ -19,10 +19,10 @@ namespace ARKBreedingStats.ocr
         public int whiteThreshold = 155;
         public OCRTemplate ocrConfig;
         private static ArkOCR _OCR;
-        private static OCRControl ocrControl;
-        public readonly Dictionary<string, Point> lastLetterPositions = new Dictionary<string, Point>();
+        private static OCRControl _ocrControl;
+        //private readonly Dictionary<string, Point> _lastLetterPositions = new Dictionary<string, Point>(); // TODO remove?
         public string screenCaptureApplicationName;
-        public Process ScreenCaptureProcess;
+        private Process _screenCaptureProcess;
         public int waitBeforeScreenCapture;
         public bool enableOutput = false;
 
@@ -30,47 +30,38 @@ namespace ARKBreedingStats.ocr
 
         public ArkOCR()
         {
-            screenCaptureApplicationName = "ShooterGame";
+            screenCaptureApplicationName = Properties.Settings.Default.OCRApp;
 
             Process[] p = Process.GetProcessesByName(screenCaptureApplicationName);
             if (p.Length > 0)
-                ScreenCaptureProcess = p[0];
+                _screenCaptureProcess = p[0];
 
             waitBeforeScreenCapture = 500;
         }
 
-        public bool setResolution()
+        public Bitmap GetScreenshotOfProcess() => Win32API.GetScreenshotOfProcess(screenCaptureApplicationName, waitBeforeScreenCapture);
+
+        /// <summary>
+        /// Checks if the resolution of the default set process is supported by the currently load ocrConfig.
+        /// </summary>
+        public bool CheckResolutionSupportedByOcr()
         {
-            return setResolution(GetScreenshotOfProcess());
+            return CheckResolutionSupportedByOcr(GetScreenshotOfProcess());
         }
 
-        public Bitmap GetScreenshotOfProcess() => Win32Stuff.GetSreenshotOfProcess(screenCaptureApplicationName, waitBeforeScreenCapture);
-
-        // figure out the current resolution and positions
-        // return true if the calibration was successful
-        public bool setResolution(Bitmap screenshot)
+        /// <summary>
+        /// Checks if the screenshot is supported by the currently load ocrConfig.
+        /// </summary>
+        public bool CheckResolutionSupportedByOcr(Bitmap screenshot)
         {
-            if (screenshot == null)
+            if (screenshot == null
+                || ocrConfig == null)
                 return false;
 
             if (screenshot.Width == ocrConfig.resolutionWidth && screenshot.Height == ocrConfig.resolutionHeight)
                 return true;
 
             return false; // resolution not supported
-        }
-
-        private PictureBox AddBitmapToDebug(Bitmap bmp)
-        {
-            if (ocrControl.debugPanel != null)
-            {
-                PictureBox b = new PictureBox();
-                b.SizeMode = PictureBoxSizeMode.AutoSize;
-                b.Image = bmp;
-                ocrControl.debugPanel.Controls.Add(b);
-                ocrControl.debugPanel.Controls.SetChildIndex(b, 0);
-                return b;
-            }
-            return null;
         }
 
         public Bitmap SubImage(Bitmap source, int x, int y, int width, int height)
@@ -451,7 +442,7 @@ namespace ARKBreedingStats.ocr
         //    return Rectangle.Empty;
         //}
 
-        public double[] doOCR(out string OCRText, out string dinoName, out string species, out string ownerName, out string tribeName, out Sex sex, string useImageFilePath = "", bool changeForegroundWindow = true)
+        public double[] DoOcr(out string OCRText, out string dinoName, out string species, out string ownerName, out string tribeName, out Sex sex, string useImageFilePath = "", bool changeForegroundWindow = true)
         {
             string finishedText = "";
             dinoName = "";
@@ -468,8 +459,8 @@ namespace ARKBreedingStats.ocr
 
             Bitmap screenshotbmp;
 
-            ocrControl.debugPanel.Controls.Clear();
-            ocrControl.ClearLists();
+            _ocrControl.debugPanel.Controls.Clear();
+            _ocrControl.ClearLists();
 
             if (System.IO.File.Exists(useImageFilePath))
             {
@@ -478,7 +469,7 @@ namespace ARKBreedingStats.ocr
             else
             {
                 // grab screenshot from ark
-                screenshotbmp = Win32Stuff.GetSreenshotOfProcess(screenCaptureApplicationName, waitBeforeScreenCapture, true);
+                screenshotbmp = Win32API.GetScreenshotOfProcess(screenCaptureApplicationName, waitBeforeScreenCapture, true);
             }
             if (screenshotbmp == null)
             {
@@ -486,7 +477,7 @@ namespace ARKBreedingStats.ocr
                 return finalValues;
             }
 
-            if (!setResolution(screenshotbmp))
+            if (!CheckResolutionSupportedByOcr(screenshotbmp))
             {
                 OCRText = "Error while calibrating: The game-resolution is not supported by the currently loaded OCR-configuration.\n"
                     + $"The tested image has a resolution of {screenshotbmp.Width.ToString()} × {screenshotbmp.Height.ToString()} px,\n"
@@ -518,17 +509,17 @@ namespace ARKBreedingStats.ocr
                 }
             }
 
-            if (enableOutput)
+            if (enableOutput && _ocrControl != null)
             {
-                AddBitmapToDebug(screenshotbmp);
-                ocrControl.SetScreenshot(screenshotbmp);
+                _ocrControl.AddBitmapToDebug(screenshotbmp);
+                _ocrControl.SetScreenshot(screenshotbmp);
             }
 
             finalValues = new double[ocrConfig.labelRectangles.Count];
             finalValues[8] = -1; // set imprinting to -1 to mark it as unknown and to set a difference to a creature with 0% imprinting.
 
             if (changeForegroundWindow)
-                Win32Stuff.SetForegroundWindow(Application.OpenForms[0].Handle);
+                Win32API.SetForegroundWindow(Application.OpenForms[0].Handle);
 
 
             bool wild = false; // todo: set to true and find out if the creature is wild in the first loop
@@ -571,7 +562,7 @@ namespace ARKBreedingStats.ocr
                 }
 
 
-                lastLetterPositions[statName] = new Point(rec.X + lastLetterPosition(removePixelsUnderThreshold(GetGreyScale(testbmp), whiteThreshold)), rec.Y);
+                //_lastLetterPositions[statName] = new Point(rec.X + lastLetterPosition(removePixelsUnderThreshold(GetGreyScale(testbmp), whiteThreshold)), rec.Y); // TODO remove?
 
                 finishedText += (finishedText.Length == 0 ? "" : "\r\n") + statName + ":\t" + statOCR;
 
@@ -605,17 +596,17 @@ namespace ARKBreedingStats.ocr
                 {
                     if (statName == "NameSpecies" || statName == "Owner" || statName == "Tribe")
                         continue;
-                    if (statName == "Torpor" && false)
-                    {
-                        // probably it's a wild creature
-                        // todo
-                    }
-                    else
-                    {
-                        finishedText += "error reading stat " + statName;
-                        finalValues[stI] = 0;
-                        continue;
-                    }
+                    //if (statName == "Torpor")
+                    //{
+                    //    // probably it's a wild creature
+                    //    // todo
+                    //}
+                    //else
+                    //{
+                    finishedText += "error reading stat " + statName;
+                    finalValues[stI] = 0;
+                    continue;
+                    //}
                 }
 
                 if (statName == "NameSpecies" || statName == "Owner" || statName == "Tribe")
@@ -848,7 +839,7 @@ namespace ARKBreedingStats.ocr
 
                             // add letter to list of recognized
                             if (enableOutput)
-                                ocrControl.AddLetterToRecognized(HWs, c, fontSize);
+                                _ocrControl.AddLetterToRecognized(HWs, c, fontSize);
                         }
                         else
                         {
@@ -863,7 +854,7 @@ namespace ARKBreedingStats.ocr
 
                                         // add letter to config
                                         if (enableOutput)
-                                            ocrControl.AddLetterToRecognized(HWs, ocrConfig.letters[ocrIndex][l], fontSize);
+                                            _ocrControl.AddLetterToRecognized(HWs, ocrConfig.letters[ocrIndex][l], fontSize);
 
                                         if ((int)letterArrays[l][0] - offsets[l] > 0)
                                             letterStart += (int)letterArrays[l][0] - offsets[l];
@@ -1001,27 +992,27 @@ namespace ARKBreedingStats.ocr
 
         internal void setOCRControl(OCRControl ocrControlObject)
         {
-            ocrControl = ocrControlObject;
+            _ocrControl = ocrControlObject;
         }
 
         public bool isDinoInventoryVisible()
         {
-            if (ScreenCaptureProcess == null)
+            if (_screenCaptureProcess == null)
             {
                 Process[] p = Process.GetProcessesByName(screenCaptureApplicationName);
                 if (p.Length > 0)
-                    ScreenCaptureProcess = p[0];
+                    _screenCaptureProcess = p[0];
                 else return false;
             }
 
-            if (Win32Stuff.GetForegroundWindow() != ScreenCaptureProcess.MainWindowHandle)
+            if (Win32API.GetForegroundWindow() != _screenCaptureProcess.MainWindowHandle)
                 return false;
 
-            Bitmap screenshotbmp = Win32Stuff.GetSreenshotOfProcess(screenCaptureApplicationName, waitBeforeScreenCapture);
+            Bitmap screenshotbmp = Win32API.GetScreenshotOfProcess(screenCaptureApplicationName, waitBeforeScreenCapture);
 
             if (screenshotbmp == null)
                 return false;
-            if (!setResolution(screenshotbmp))
+            if (!CheckResolutionSupportedByOcr(screenshotbmp))
                 return false;
 
             const string statName = "Level";

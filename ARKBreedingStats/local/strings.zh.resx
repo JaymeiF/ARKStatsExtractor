@@ -118,7 +118,7 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="aboutToolStripMenuItem" xml:space="preserve">
-    <value>关于</value>
+    <value>关于…</value>
     <comment>…</comment>
   </data>
   <data name="added" xml:space="preserve">
@@ -270,22 +270,22 @@
   <data name="cbToggleOverlay" xml:space="preserve">
     <value>覆盖</value>
   </data>
-  <data name="ChargeCapacity" xml:space="preserve">
+  <data name="Charge Capacity" xml:space="preserve">
     <value>光宠蓄电量</value>
   </data>
-  <data name="ChargeCapacity_Abb" xml:space="preserve">
+  <data name="Charge Capacity_Abb" xml:space="preserve">
     <value>光宠蓄电量</value>
   </data>
-  <data name="ChargeEmissionRange" xml:space="preserve">
+  <data name="Charge Emission Range" xml:space="preserve">
     <value>Ch 光宠照明范围</value>
   </data>
-  <data name="ChargeEmissionRange_Abb" xml:space="preserve">
+  <data name="Charge Emission Range_Abb" xml:space="preserve">
     <value>光宠照明范围</value>
   </data>
-  <data name="ChargeRegeneration" xml:space="preserve">
+  <data name="Charge Regen" xml:space="preserve">
     <value>光充电量回复</value>
   </data>
-  <data name="ChargeRegeneration_Abb" xml:space="preserve">
+  <data name="Charge Regen_Abb" xml:space="preserve">
     <value>光宠电量回复</value>
   </data>
   <data name="Chart" xml:space="preserve">
@@ -296,9 +296,6 @@
   </data>
   <data name="Club" xml:space="preserve">
     <value>Club</value>
-  </data>
-  <data name="cnBPIncludeCooldowneds" xml:space="preserve">
-    <value>包括具有冷却的生物</value>
   </data>
   <data name="Colors" xml:space="preserve">
     <value>颜色</value>
@@ -336,9 +333,6 @@
   <data name="Damage_Abb" xml:space="preserve">
     <value>伤害</value>
   </data>
-  <data name="de" xml:space="preserve">
-    <value>德语</value>
-  </data>
   <data name="deadCreaturesToolStripMenuItem" xml:space="preserve">
     <value>已死亡生物</value>
   </data>
@@ -372,10 +366,7 @@
   <data name="ElectricProdHits" xml:space="preserve">
     <value>电击棍击中</value>
   </data>
-  <data name="en" xml:space="preserve">
-    <value>英语</value>
-  </data>
-  <data name="Event_" xml:space="preserve">
+  <data name="Event" xml:space="preserve">
     <value>活动</value>
   </data>
   <data name="exportValuesToClipboardToolStripMenuItem" xml:space="preserve">
@@ -433,7 +424,7 @@
     <value>武器信息 [%]</value>
   </data>
   <data name="Generation_Abb" xml:space="preserve">
-    <value>Gen</value>
+    <value>代</value>
   </data>
   <data name="gpPreviewEdit" xml:space="preserve">
     <value>回顾 / 编辑</value>
@@ -460,7 +451,7 @@
     <value>?</value>
   </data>
   <data name="ImmobilizedBy" xml:space="preserve">
-    <value>Immobilized by</value>
+    <value>被固定</value>
   </data>
   <data name="importCreatedJsonfileToolStripMenuItem" xml:space="preserve">
     <value>导入 .json文件…</value>
@@ -480,6 +471,7 @@
   <data name="issueMaxWildLevelTooLow" xml:space="preserve">
     <value>此次提取理论上成立, 但是对于完成一个有效提取, 最大野生等级似乎被设置太低. 请检查是否在设定中输入了正确的值.
 当前值为 {0}, 该生物似乎拥有高于当前值的野生等级.
+
 由于其他原因造成的提取失败,请在关闭此提示框后参阅右侧列表.</value>
   </data>
   <data name="lbBPBreedingScore" xml:space="preserve">
@@ -538,8 +530,8 @@
 如果数据不匹配,请点击标位黄色的属性然后修改其可能的数据分布.</value>
   </data>
   <data name="lbSumWildTT" xml:space="preserve">
-    <value>This is an indicator if the sum of the wild levels is valid.
-If a number with a plus sign is shown, the sum is too high and you need to choose another possibility from the lists of yellow stats.</value>
+    <value>这是总体野生等级是否有效的指示器.
+如果数字后显示带加号则表明总和过高,您需要从黄色的列表中选取另外一种可能性.</value>
   </data>
   <data name="lbTamingTime" xml:space="preserve">
     <value>驯服时间</value>
@@ -568,9 +560,6 @@ If a number with a plus sign is shown, the sum is too high and you need to choos
   </data>
   <data name="library" xml:space="preserve">
     <value>库</value>
-  </data>
-  <data name="loadAndAddToolStripMenuItem 加载和添加..." xml:space="preserve">
-    <value />
   </data>
   <data name="loadToolStripMenuItem" xml:space="preserve">
     <value>&amp;读取...</value>
@@ -704,7 +693,7 @@ If a number with a plus sign is shown, the sum is too high and you need to choos
     <value>抚养</value>
   </data>
   <data name="rbBPHighStats" xml:space="preserve">
-    <value>高状态</value>
+    <value>最好的下一代</value>
   </data>
   <data name="rbBPHighStatsTT" xml:space="preserve">
     <value>查询下一代的最佳结果.
@@ -744,7 +733,7 @@ If a number with a plus sign is shown, the sum is too high and you need to choos
     <value>服务器</value>
   </data>
   <data name="setStatusToolStripMenuItem" xml:space="preserve">
-    <value>Set Status</value>
+    <value>设置属性</value>
   </data>
   <data name="settingsToolStripMenuItem" xml:space="preserve">
     <value>设置</value>
@@ -864,10 +853,10 @@ If a number with a plus sign is shown, the sum is too high and you need to choos
     <value>保存输入值直到提取问题被解决. 正确提取前此生物无法用于程序的其他地方.</value>
   </data>
   <data name="Top" xml:space="preserve">
-    <value>Top</value>
+    <value>最大</value>
   </data>
   <data name="topPercentage" xml:space="preserve">
-    <value>Tp%</value>
+    <value>最大%</value>
   </data>
   <data name="topPercentileLevel" xml:space="preserve">
     <value>该等级在你能找到的所有中排前 {0} %.</value>
@@ -934,5 +923,117 @@ If a number with a plus sign is shown, the sum is too high and you need to choos
   </data>
   <data name="WorstPossible" xml:space="preserve">
     <value>最差可能</value>
+  </data>
+  <data name="loadAndAddToolStripMenuItem" xml:space="preserve">
+    <value>加载和添加…</value>
+  </data>
+  <data name="cbBPIncludeCooldowneds" xml:space="preserve">
+    <value>包括具有冷却的生物</value>
+  </data>
+  <data name="noColor" xml:space="preserve">
+    <value>没有颜色</value>
+  </data>
+  <data name="servers" xml:space="preserve">
+    <value>伺服器</value>
+  </data>
+  <data name="showOnlyNaturalOccuring" xml:space="preserve">
+    <value>仅显示自然发生的颜色</value>
+  </data>
+  <data name="addedAt" xml:space="preserve">
+    <value>添加到</value>
+  </data>
+  <data name="cbBPMutationLimitOnlyOnePartner" xml:space="preserve">
+    <value>一对种可能有多个变异</value>
+  </data>
+  <data name="cbBPOnlyOneSuggestionForFemales" xml:space="preserve">
+    <value>仅母系最优建议</value>
+  </data>
+  <data name="Crafting Speed" xml:space="preserve">
+    <value>制作速度</value>
+  </data>
+  <data name="Crafting Speed_Abb" xml:space="preserve">
+    <value>制作速度</value>
+  </data>
+  <data name="CurrentCreature" xml:space="preserve">
+    <value>当前生物</value>
+  </data>
+  <data name="importingFromSavegameEmptyToolStripMenuItem" xml:space="preserve">
+    <value>首先请配置 "导入保存游戏"</value>
+  </data>
+  <data name="importingFromSavegameToolStripMenuItem" xml:space="preserve">
+    <value>从保存游戏导入</value>
+  </data>
+  <data name="lbImprintingFailInfo" xml:space="preserve">
+    <value>游戏可能没有及时修改受留痕加成影响的数值(通常收球再扔出/上传再下载/让龙离开渲染距离再回来/服务器重启可以解决)
+到达此留痕加成所需的留痕次数.</value>
+  </data>
+  <data name="matingTime" xml:space="preserve">
+    <value>交配时长</value>
+  </data>
+  <data name="OrOneAscerbicMushroom" xml:space="preserve">
+    <value>每个黑色蘑菇</value>
+  </data>
+  <data name="ProbabilityForOneMutation" xml:space="preserve">
+    <value>单次变异可能性</value>
+  </data>
+  <data name="speciesNotTameable" xml:space="preserve">
+    <value>已选中午中不可被驯服, 您可能选中了此生物不可驯服的变种.</value>
+  </data>
+  <data name="Temperature" xml:space="preserve">
+    <value>温度</value>
+  </data>
+  <data name="Temperature_Abb" xml:space="preserve">
+    <value>温度</value>
+  </data>
+  <data name="TorporDepletion" xml:space="preserve">
+    <value>眩晕消耗</value>
+  </data>
+  <data name="TranqSpearBolts" xml:space="preserve">
+    <value>鱼叉麻醉箭</value>
+  </data>
+  <data name="until" xml:space="preserve">
+    <value>直到</value>
+  </data>
+  <data name="Water" xml:space="preserve">
+    <value>水份</value>
+  </data>
+  <data name="Water_Abb" xml:space="preserve">
+    <value>水份</value>
+  </data>
+  <data name="BPCancelRestrictionOn" xml:space="preserve">
+    <value>取消对 {0} 的限制</value>
+  </data>
+  <data name="BtGetExportFolderAutomatically" xml:space="preserve">
+    <value>自动设置导出文件夹</value>
+  </data>
+  <data name="ExportFolderDetectionFailed" xml:space="preserve">
+    <value>无法自动检测Steam的导出文件夹。</value>
+  </data>
+  <data name="incubation" xml:space="preserve">
+    <value>孵化</value>
+  </data>
+  <data name="noTimerSelected" xml:space="preserve">
+    <value>未选择计时器</value>
+  </data>
+  <data name="paused" xml:space="preserve">
+    <value>已暂停</value>
+  </data>
+  <data name="expired" xml:space="preserve">
+    <value>已过期</value>
+  </data>
+  <data name="mature" xml:space="preserve">
+    <value>成熟</value>
+  </data>
+  <data name="notABabyAnymore" xml:space="preserve">
+    <value>不再是婴儿</value>
+  </data>
+  <data name="extractionFailedHeader" xml:space="preserve">
+    <value>提取失败。 请参阅以下可能的原因列表</value>
+  </data>
+  <data name="Parents" xml:space="preserve">
+    <value>父母</value>
+  </data>
+  <data name="SystemLanguage" xml:space="preserve">
+    <value>系统语言</value>
   </data>
 </root>

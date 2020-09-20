@@ -47,11 +47,13 @@
             this.bestBreedingPartnersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.setCooldownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeCooldownGrowingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TsMiViewInPedigree = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exportToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plainTextbreedingValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.plainTextcurrentValuesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openWikipageInBrowserToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.copyNameToClipboardToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.contextMenuStrip1.SuspendLayout();
@@ -203,11 +205,13 @@
             this.bestBreedingPartnersToolStripMenuItem,
             this.setCooldownToolStripMenuItem,
             this.removeCooldownGrowingToolStripMenuItem,
+            this.TsMiViewInPedigree,
             this.toolStripSeparator1,
+            this.copyNameToClipboardToolStripMenuItem,
             this.exportToClipboardToolStripMenuItem,
             this.openWikipageInBrowserToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(232, 164);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(232, 208);
             this.contextMenuStrip1.Opening += new System.ComponentModel.CancelEventHandler(this.contextMenuStrip1_Opening);
             // 
             // editToolStripMenuItem
@@ -237,6 +241,18 @@
             this.removeCooldownGrowingToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
             this.removeCooldownGrowingToolStripMenuItem.Text = "Remove Cooldown / Growing";
             this.removeCooldownGrowingToolStripMenuItem.Click += new System.EventHandler(this.removeCooldownGrowingToolStripMenuItem_Click);
+            // 
+            // TsMiViewInPedigree
+            // 
+            this.TsMiViewInPedigree.Name = "TsMiViewInPedigree";
+            this.TsMiViewInPedigree.Size = new System.Drawing.Size(231, 22);
+            this.TsMiViewInPedigree.Text = "View in Pedigree";
+            this.TsMiViewInPedigree.Click += new System.EventHandler(this.TsMiViewInPedigree_Click);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(228, 6);
             // 
             // exportToClipboardToolStripMenuItem
             // 
@@ -268,10 +284,12 @@
             this.openWikipageInBrowserToolStripMenuItem.Text = "Open Wiki-page in Browser";
             this.openWikipageInBrowserToolStripMenuItem.Click += new System.EventHandler(this.OpenWikipageInBrowserToolStripMenuItem_Click);
             // 
-            // toolStripSeparator1
+            // copyNameToClipboardToolStripMenuItem
             // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(228, 6);
+            this.copyNameToClipboardToolStripMenuItem.Name = "copyNameToClipboardToolStripMenuItem";
+            this.copyNameToClipboardToolStripMenuItem.Size = new System.Drawing.Size(231, 22);
+            this.copyNameToClipboardToolStripMenuItem.Text = "Copy Name to Clipboard";
+            this.copyNameToClipboardToolStripMenuItem.Click += new System.EventHandler(this.copyNameToClipboardToolStripMenuItem_Click);
             // 
             // PedigreeCreature
             // 
@@ -314,5 +332,7 @@
         private System.Windows.Forms.ToolStripMenuItem removeCooldownGrowingToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openWikipageInBrowserToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ToolStripMenuItem TsMiViewInPedigree;
+        private System.Windows.Forms.ToolStripMenuItem copyNameToClipboardToolStripMenuItem;
     }
 }

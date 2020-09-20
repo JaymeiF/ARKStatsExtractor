@@ -68,7 +68,7 @@ namespace ARKBreedingStats.species
         /// </summary>
         private double[] statImprintMultOverride;
         [JsonProperty]
-        public List<ColorRegion> colors; // every species has up to 6 colorregions
+        public List<ColorRegion> colors; // every species has up to 6 color regions
         [JsonProperty]
         public TamingData taming;
         [JsonProperty]
@@ -81,16 +81,24 @@ namespace ARKBreedingStats.species
         /// Information about the mod. If this value equals null, the species is probably from the base-game.
         /// </summary>
         private Mod _mod;
+
         /// <summary>
-        /// Determines if species has different stat-names.
+        /// Custom stat names of the species, e.g. glowSpecies use this.
+        /// The key is the stat index as string, the value the statName.
+        /// If this property is null, the default names are used.
         /// </summary>
-        public bool IsGlowSpecies;
+        [JsonProperty]
+        public Dictionary<string, string> statNames;
+
         /// <summary>
         /// True if the species is tameable or domesticable in other ways (e.g. raising from collected eggs).
         /// </summary>
         public bool IsDomesticable;
 
-        public const int COLOR_REGION_COUNT = 6;
+        /// <summary>
+        /// Number of possible color regions for all species.
+        /// </summary>
+        public const int ColorRegionCount = 6;
 
         /// <summary>
         /// creates properties that are not created during deserialization. They are set later with the raw-values with the multipliers applied.
@@ -100,22 +108,13 @@ namespace ARKBreedingStats.species
         {
             // TODO: Base species are maybe not used ingame and may only lead to confusion (e.g. Giganotosaurus).
 
-            // ignore variants that already appear in the species name, e.g. Corrupted
-            if (variants != null && variants.Any())
-            {
-                VariantInfo = string.Join(", ", variants.Where(v => !name.Contains(v)));
-            }
-
-            DescriptiveName = name + (string.IsNullOrEmpty(VariantInfo) ? string.Empty : " (" + VariantInfo + ")");
-            SortName = DescriptiveName;
-            string modSuffix = string.IsNullOrEmpty(_mod?.title) ? string.Empty : _mod.title;
-            DescriptiveNameAndMod = DescriptiveName + (string.IsNullOrEmpty(modSuffix) ? "" : " (" + modSuffix + ")");
+            InitializeNames();
             stats = new List<CreatureStat>();
             usedStats = 0;
             double[][] completeRaws = new double[Values.STATS_COUNT][];
             for (int s = 0; s < Values.STATS_COUNT; s++)
             {
-                stats.Add(new CreatureStat((StatNames)s));
+                stats.Add(new CreatureStat());
                 completeRaws[s] = new double[] { 0, 0, 0, 0, 0 };
                 if (fullStatsRaw.Length > s && fullStatsRaw[s] != null)
                 {
@@ -137,8 +136,8 @@ namespace ARKBreedingStats.species
                 TamedBaseHealthMultiplier = 1;
 
             if (colors == null)
-                colors = new List<ColorRegion>(COLOR_REGION_COUNT);
-            for (int ci = colors.Count; ci < COLOR_REGION_COUNT; ci++)
+                colors = new List<ColorRegion>(ColorRegionCount);
+            for (int ci = colors.Count; ci < ColorRegionCount; ci++)
                 colors.Add(null);
             if (string.IsNullOrEmpty(blueprintPath))
                 blueprintPath = string.Empty;
@@ -159,17 +158,39 @@ namespace ARKBreedingStats.species
                 boneDamageAdjusters = boneDamageAdjustersCleanedUp;
             }
 
-            IsGlowSpecies = new List<string> { "Bulbdog", "Featherlight", "Glowbug", "Glowtail", "Shinehorn" }.Contains(name);
             IsDomesticable = (taming != null && (taming.nonViolent || taming.violent)) || breeding != null;
 
             if (statImprintMult == null) statImprintMult = new double[] { 0.2, 0, 0.2, 0, 0.2, 0.2, 0, 0.2, 0.2, 0.2, 0, 0 }; // default values for the stat imprint multipliers
         }
 
+        /// <summary>
+        /// Sets the name, descriptive name and variant info.
+        /// </summary>
+        public void InitializeNames()
+        {
+            // ignore variants that already appear in the species name, e.g. Corrupted
+            if (variants != null && variants.Any())
+            {
+                VariantInfo = string.Join(", ", variants.Where(v => !name.Contains(v)));
+            }
+
+            DescriptiveName = name + (string.IsNullOrEmpty(VariantInfo) ? string.Empty : " (" + VariantInfo + ")");
+            SortName = DescriptiveName;
+            string modSuffix = string.IsNullOrEmpty(_mod?.title) ? string.Empty : _mod.title;
+            DescriptiveNameAndMod = DescriptiveName + (string.IsNullOrEmpty(modSuffix) ? "" : " (" + modSuffix + ")");
+        }
+
         public void InitializeColors(ARKColors arkColors)
         {
-            for (int i = 0; i < COLOR_REGION_COUNT; i++)
+            for (int i = 0; i < ColorRegionCount; i++)
                 colors[i]?.Initialize(arkColors);
         }
+
+        /// <summary>
+        /// Array indicating which color regions are used by this species.
+        /// </summary>
+        public bool[] EnabledColorRegions => colors?.Select(n => !string.IsNullOrEmpty(n?.name)).ToArray() ??
+                                             new[] { true, true, true, true, true, true, };
 
         /// <summary>
         /// Indicates the multipliers for each stat applied to the imprinting-bonus.
@@ -245,21 +266,25 @@ namespace ARKBreedingStats.species
 
         public override bool Equals(object obj)
         {
-            return Equals(obj as Species);
+            return obj is Species other && !string.IsNullOrEmpty(other.blueprintPath) && other.blueprintPath == blueprintPath;
         }
 
-        public bool Equals(Species other)
+        public static bool operator ==(Species a, Species b)
         {
-            return other != null && !string.IsNullOrEmpty(blueprintPath)
-                && other.blueprintPath == blueprintPath;
+            if (a is null)
+                return b is null;
+
+            return ReferenceEquals(a, b) || a.Equals(b);
         }
+
+        public static bool operator !=(Species a, Species b) => !(a == b);
 
         public Mod Mod
         {
             set
             {
                 _mod = value;
-                DescriptiveNameAndMod = DescriptiveName + (string.IsNullOrEmpty(_mod?.title) ? "" : " (" + _mod.title + ")");
+                InitializeNames();
             }
             get => _mod;
         }

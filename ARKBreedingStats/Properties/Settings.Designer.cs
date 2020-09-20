@@ -12,7 +12,7 @@ namespace ARKBreedingStats.Properties {
     
     
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.5.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("Microsoft.VisualStudio.Editors.SettingsDesigner.SettingsSingleFileGenerator", "16.7.0.0")]
     internal sealed partial class Settings : global::System.Configuration.ApplicationSettingsBase {
         
         private static Settings defaultInstance = ((Settings)(global::System.Configuration.ApplicationSettingsBase.Synchronized(new Settings())));
@@ -49,25 +49,13 @@ namespace ARKBreedingStats.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("1400, 1000")]
-        public global::System.Drawing.Size formSize {
+        [global::System.Configuration.DefaultSettingValueAttribute("100, 100, 1400, 1000")]
+        public global::System.Drawing.Rectangle MainWindowRect {
             get {
-                return ((global::System.Drawing.Size)(this["formSize"]));
+                return ((global::System.Drawing.Rectangle)(this["MainWindowRect"]));
             }
             set {
-                this["formSize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("100, 100")]
-        public global::System.Drawing.Point formLocation {
-            get {
-                return ((global::System.Drawing.Point)(this["formLocation"]));
-            }
-            set {
-                this["formLocation"] = value;
+                this["MainWindowRect"] = value;
             }
         }
         
@@ -202,12 +190,12 @@ namespace ARKBreedingStats.Properties {
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool oxygenForAll {
+        public bool DisplayHiddenStats {
             get {
-                return ((bool)(this["oxygenForAll"]));
+                return ((bool)(this["DisplayHiddenStats"]));
             }
             set {
-                this["oxygenForAll"] = value;
+                this["DisplayHiddenStats"] = value;
             }
         }
         
@@ -392,18 +380,6 @@ namespace ARKBreedingStats.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string LastImportFile {
-            get {
-                return ((string)(this["LastImportFile"]));
-            }
-            set {
-                this["LastImportFile"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool showColorsInLibrary {
             get {
@@ -546,6 +522,18 @@ namespace ARKBreedingStats.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string DefaultServerName {
+            get {
+                return ((string)(this["DefaultServerName"]));
+            }
+            set {
+                this["DefaultServerName"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("False")]
         public bool showOCRButton {
             get {
@@ -606,25 +594,13 @@ namespace ARKBreedingStats.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
-        public global::System.Drawing.Point importExportedLocation {
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 700, 700")]
+        public global::System.Drawing.Rectangle ImportExportedFormRectangle {
             get {
-                return ((global::System.Drawing.Point)(this["importExportedLocation"]));
+                return ((global::System.Drawing.Rectangle)(this["ImportExportedFormRectangle"]));
             }
             set {
-                this["importExportedLocation"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("700, 700")]
-        public global::System.Drawing.Size importExportedSize {
-            get {
-                return ((global::System.Drawing.Size)(this["importExportedSize"]));
-            }
-            set {
-                this["importExportedSize"] = value;
+                this["ImportExportedFormRectangle"] = value;
             }
         }
         
@@ -798,25 +774,13 @@ namespace ARKBreedingStats.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
-        public global::System.Drawing.Size PatternEditorSize {
+        [global::System.Configuration.DefaultSettingValueAttribute("50, 50, 700, 700")]
+        public global::System.Drawing.Rectangle PatternEditorFormRectangle {
             get {
-                return ((global::System.Drawing.Size)(this["PatternEditorSize"]));
+                return ((global::System.Drawing.Rectangle)(this["PatternEditorFormRectangle"]));
             }
             set {
-                this["PatternEditorSize"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
-        public global::System.Drawing.Point PatternEditorLocation {
-            get {
-                return ((global::System.Drawing.Point)(this["PatternEditorLocation"]));
-            }
-            set {
-                this["PatternEditorLocation"] = value;
+                this["PatternEditorFormRectangle"] = value;
             }
         }
         
@@ -941,25 +905,13 @@ namespace ARKBreedingStats.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
-        public global::System.Drawing.Point CustomStatOverrideLocation {
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0, 0, 0")]
+        public global::System.Drawing.Rectangle CustomStatOverrideFormRectangle {
             get {
-                return ((global::System.Drawing.Point)(this["CustomStatOverrideLocation"]));
+                return ((global::System.Drawing.Rectangle)(this["CustomStatOverrideFormRectangle"]));
             }
             set {
-                this["CustomStatOverrideLocation"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
-        public global::System.Drawing.Size CustomStatOverrideSize {
-            get {
-                return ((global::System.Drawing.Size)(this["CustomStatOverrideSize"]));
-            }
-            set {
-                this["CustomStatOverrideSize"] = value;
+                this["CustomStatOverrideFormRectangle"] = value;
             }
         }
         
@@ -1077,6 +1029,325 @@ namespace ARKBreedingStats.Properties {
             }
             set {
                 this["BreedingPlanOnePartnerMoreMutationsThanLimit"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LibraryHighlightTopCreatures {
+            get {
+                return ((bool)(this["LibraryHighlightTopCreatures"]));
+            }
+            set {
+                this["LibraryHighlightTopCreatures"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool SaveImportCryo {
+            get {
+                return ((bool)(this["SaveImportCryo"]));
+            }
+            set {
+                this["SaveImportCryo"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool UseCustomOverlayLocation {
+            get {
+                return ((bool)(this["UseCustomOverlayLocation"]));
+            }
+            set {
+                this["UseCustomOverlayLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0, 0")]
+        public global::System.Drawing.Point CustomOverlayLocation {
+            get {
+                return ((global::System.Drawing.Point)(this["CustomOverlayLocation"]));
+            }
+            set {
+                this["CustomOverlayLocation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AdminConsoleCommandWithCheat {
+            get {
+                return ((bool)(this["AdminConsoleCommandWithCheat"]));
+            }
+            set {
+                this["AdminConsoleCommandWithCheat"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int FilterFlagsExclude {
+            get {
+                return ((int)(this["FilterFlagsExclude"]));
+            }
+            set {
+                this["FilterFlagsExclude"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string[] FilterHideOwners {
+            get {
+                return ((string[])(this["FilterHideOwners"]));
+            }
+            set {
+                this["FilterHideOwners"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string[] FilterHideTribes {
+            get {
+                return ((string[])(this["FilterHideTribes"]));
+            }
+            set {
+                this["FilterHideTribes"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string[] FilterHideServers {
+            get {
+                return ((string[])(this["FilterHideServers"]));
+            }
+            set {
+                this["FilterHideServers"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string[] FilterHideTags {
+            get {
+                return ((string[])(this["FilterHideTags"]));
+            }
+            set {
+                this["FilterHideTags"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool useFiltersInTopStatCalculation {
+            get {
+                return ((bool)(this["useFiltersInTopStatCalculation"]));
+            }
+            set {
+                this["useFiltersInTopStatCalculation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int FilterOnlyIfColorId {
+            get {
+                return ((int)(this["FilterOnlyIfColorId"]));
+            }
+            set {
+                this["FilterOnlyIfColorId"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool LibraryGroupBySpecies {
+            get {
+                return ((bool)(this["LibraryGroupBySpecies"]));
+            }
+            set {
+                this["LibraryGroupBySpecies"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50, 50, 800, 600")]
+        public global::System.Drawing.Rectangle LibraryFilterWindowRect {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["LibraryFilterWindowRect"]));
+            }
+            set {
+                this["LibraryFilterWindowRect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int FilterFlagsAllNeeded {
+            get {
+                return ((int)(this["FilterFlagsAllNeeded"]));
+            }
+            set {
+                this["FilterFlagsAllNeeded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int FilterFlagsOneNeeded {
+            get {
+                return ((int)(this["FilterFlagsOneNeeded"]));
+            }
+            set {
+                this["FilterFlagsOneNeeded"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("50, 50, 800, 600")]
+        public global::System.Drawing.Rectangle ModManagerWindowRect {
+            get {
+                return ((global::System.Drawing.Rectangle)(this["ModManagerWindowRect"]));
+            }
+            set {
+                this["ModManagerWindowRect"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("20")]
+        public int SpeciesSelectorCountLastSpecies {
+            get {
+                return ((int)(this["SpeciesSelectorCountLastSpecies"]));
+            }
+            set {
+                this["SpeciesSelectorCountLastSpecies"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool applyNamePatternOnAutoImportForNewCreatures {
+            get {
+                return ((bool)(this["applyNamePatternOnAutoImportForNewCreatures"]));
+            }
+            set {
+                this["applyNamePatternOnAutoImportForNewCreatures"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool AlreadyAskedToDownloadImageFilesTropeognathus {
+            get {
+                return ((bool)(this["AlreadyAskedToDownloadImageFilesTropeognathus"]));
+            }
+            set {
+                this["AlreadyAskedToDownloadImageFilesTropeognathus"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool LibrarySelectSelectedSpeciesOnLoad {
+            get {
+                return ((bool)(this["LibrarySelectSelectedSpeciesOnLoad"]));
+            }
+            set {
+                this["LibrarySelectSelectedSpeciesOnLoad"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool ImportExportUseTamerStringForOwner {
+            get {
+                return ((bool)(this["ImportExportUseTamerStringForOwner"]));
+            }
+            set {
+                this["ImportExportUseTamerStringForOwner"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool MainWindowMaximized {
+            get {
+                return ((bool)(this["MainWindowMaximized"]));
+            }
+            set {
+                this["MainWindowMaximized"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        public string[] DisabledVariants {
+            get {
+                return ((string[])(this["DisabledVariants"]));
+            }
+            set {
+                this["DisabledVariants"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ImportExportedArchiveFolder {
+            get {
+                return ((string)(this["ImportExportedArchiveFolder"]));
+            }
+            set {
+                this["ImportExportedArchiveFolder"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool DisplayInheritanceInOverlay {
+            get {
+                return ((bool)(this["DisplayInheritanceInOverlay"]));
+            }
+            set {
+                this["DisplayInheritanceInOverlay"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        public int ColorMode {
+            get {
+                return ((int)(this["ColorMode"]));
+            }
+            set {
+                this["ColorMode"] = value;
             }
         }
     }

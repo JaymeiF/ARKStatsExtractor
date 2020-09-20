@@ -4,6 +4,7 @@ using ARKBreedingStats.species;
 using ARKBreedingStats.values;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows.Forms;
@@ -32,63 +33,6 @@ namespace ARKBreedingStats.uiControls
                     modInfos = Values.V.modsManifest.modsByFiles.Select(smi => smi.Value).Where(mi => mi.mod != null).ToList();
                 }
                 UpdateModListBoxes();
-            }
-        }
-
-        private void BtLoadModFile_Click(object sender, EventArgs e)
-        {
-            string valuesFolder = FileService.GetJsonPath(FileService.ValuesFolder);
-            using (OpenFileDialog dlg = new OpenFileDialog
-            {
-                Filter = "Additional values-file (*.json)|*.json",
-                InitialDirectory = valuesFolder,
-            })
-            {
-                if (dlg.ShowDialog() == DialogResult.OK)
-                {
-                    string filePath = dlg.FileName;
-                    // copy to json folder if loaded from somewhere else
-                    if (!filePath.StartsWith(valuesFolder))
-                    {
-                        try
-                        {
-                            string destination = Path.Combine(valuesFolder, Path.GetFileName(filePath));
-                            File.Copy(filePath, destination);
-                            filePath = destination;
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Trying to copy the file to the application's json folder failed.\n" +
-                                    "The program won't be able to load it at its next start.\n\n" +
-                                    "Error message:\n\n" + ex.Message, "Copy file", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-
-                    bool modFileLoaded = false;
-                    Values modValues = null;
-                    try
-                    {
-                        modFileLoaded = Values.TryLoadValuesFile(filePath, setModFileName: true, throwExceptionOnFail: true, out modValues, errorMessage: out _);
-                    }
-                    catch (FormatException)
-                    {
-                        Form1.FormatExceptionMessageBox(filePath);
-                    }
-
-                    if (modFileLoaded && modValues != null)
-                    {
-                        if (cc.ModList.Contains(modValues.mod))
-                        {
-                            MessageBox.Show("The mod\n" + modValues.mod.title + "\nis already loaded.", "Already loaded", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        else
-                        {
-                            cc.ModList.Add(modValues.mod);
-                            Values.V.UpdateManualModValueFiles();
-                            UpdateModListBoxes();
-                        }
-                    }
-                }
             }
         }
 
@@ -151,7 +95,10 @@ namespace ARKBreedingStats.uiControls
 
             foreach (ModInfo mi in modInfos)
             {
-                if (!mi.currentlyInLibrary) lbAvailableModFiles.Items.Add(mi);
+                if (!mi.currentlyInLibrary)
+                {
+                    lbAvailableModFiles.Items.Add(mi);
+                }
             }
 
             lbModList.SelectedItem = selectedMiLib;
@@ -178,8 +125,10 @@ namespace ARKBreedingStats.uiControls
         {
             if (modInfo?.mod == null) return;
             lbModName.Text = modInfo.mod.title;
+            LbModVersion.Text = modInfo.version;
             lbModTag.Text = modInfo.mod.tag;
             lbModId.Text = modInfo.mod.id;
+            llbSteamPage.Visible = modInfo.onlineAvailable; // it's assumed that the officially supported mods all have a steam page
         }
 
         private void BtClose_Click(object sender, EventArgs e)
@@ -242,6 +191,23 @@ namespace ARKBreedingStats.uiControls
         private void LbModList_MouseDoubleClick(object sender, MouseEventArgs e)
         {
             RemoveSelectedMod();
+        }
+
+        private void BtRemoveAllMods_Click(object sender, EventArgs e)
+        {
+            ModInfo mi = (ModInfo)lbModList.SelectedItem;
+            if (mi?.mod == null || cc?.ModList == null) return;
+
+            cc.ModList.Clear();
+
+            UpdateModListBoxes();
+            lbModList.SelectedIndex = -1;
+            lbAvailableModFiles.SelectedItem = null;
+        }
+
+        private void linkLabelCustomModManual_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            Process.Start("https://github.com/cadon/ARKStatsExtractor/wiki/Mod-Values");
         }
     }
 }

@@ -13,6 +13,9 @@ namespace ARKBreedingStats.Library
     {
         public const string CURRENT_FORMAT_VERSION = "1.13";
 
+        public const int MaxDomLevelDefault = 73;
+        public const int MaxDomLevelSinglePlayerDefault = 88;
+
         [JsonProperty]
         public string FormatVersion;
         [JsonProperty]
@@ -24,17 +27,7 @@ namespace ARKBreedingStats.Library
         [JsonProperty]
         public List<IncubationTimerEntry> incubationListEntries = new List<IncubationTimerEntry>();
         [JsonProperty]
-        public List<string> hiddenOwners = new List<string>(); // which owners are not selected to be shown
-        [JsonProperty]
-        public List<string> hiddenServers = new List<string>();
-        [JsonProperty]
-        public List<string> dontShowTags = new List<string>(); // which tags are selected to be not shown
-        [JsonProperty]
-        internal CreatureFlags showFlags = CreatureFlags.Available | CreatureFlags.Cryopod | CreatureFlags.Dead | CreatureFlags.Mutated | CreatureFlags.Neutered | CreatureFlags.Obelisk | CreatureFlags.Unavailable;
-        [JsonProperty]
-        public bool useFiltersInTopStatCalculation = false;
-        [JsonProperty]
-        public int maxDomLevel = 73;
+        public int maxDomLevel = MaxDomLevelDefault;
         [JsonProperty]
         public int maxWildLevel = 150;
         [JsonProperty]
@@ -90,17 +83,34 @@ namespace ARKBreedingStats.Library
         [JsonProperty]
         public List<Note> noteList = new List<Note>();
         public List<string> tags = new List<string>();
+        /// <summary>
+        /// Which tags are checked for including in the breeding plan
+        /// </summary>
         [JsonProperty]
-        public List<string> tagsInclude = new List<string>(); // which tags are checked for including in the breedingplan
+        public List<string> tagsInclude = new List<string>();
+        /// <summary>
+        /// Which tags are checked for excluding in the breeding plan
+        /// </summary>
         [JsonProperty]
-        public List<string> tagsExclude = new List<string>(); // which tags are checked for excluding in the breedingplan
+        public List<string> tagsExclude = new List<string>();
 
-        public string[] ownerList; // temporary list of all owners (used in autocomplete / dropdowns)
-        public string[] serverList; // temporary list of all servers (used in autocomplete / dropdowns)
+        /// <summary>
+        /// Temporary list of all owners (used in autocomplete / dropdowns)
+        /// </summary>
+        public string[] ownerList;
+        /// <summary>
+        /// Temporary list of all servers (used in autocomplete / dropdowns)
+        /// </summary>
+        public string[] serverList;
+        /// <summary>
+        /// All existing color ids for each species (by blueprint path). Each species has an array of 7 int[].
+        /// Index 0-5 is an array of the colors of the according region, index 6 is an array of all colors in all regions.
+        /// </summary>
+        private readonly Dictionary<string, List<int>[]> _existingColors = new Dictionary<string, List<int>[]>();
 
         /// <summary>
         /// Some mods allow to change stat values of species in an extra ini file. These overrides are stored here.
-        /// The last item is an array of possible imprintingMultiplier overrides.
+        /// The last item (i.e. index Values.STATS_COUNT) is an array of possible imprintingMultiplier overrides.
         /// </summary>
         [JsonProperty]
         public Dictionary<string, double?[][]> CustomSpeciesStats;
@@ -118,15 +128,15 @@ namespace ARKBreedingStats.Library
         /// <summary>
         /// Calculates a hashcode for a list of mods and their order. Can be used to check for changes.
         /// </summary>
-        public static int CalculateModListHash(List<string> modIDList)
+        public static int CalculateModListHash(List<string> modIdList)
         {
-            if (modIDList == null) { return 0; }
-            return string.Join(",", modIDList).GetHashCode();
+            if (modIdList == null) { return 0; }
+            return string.Join(",", modIdList).GetHashCode();
         }
 
         /// <summary>
-        /// Recalculates the modListHash for comparison and sets the mod-IDs of the modvalues for the library.
-        /// Should be called after the mods are changed.
+        /// Recalculates the modListHash for comparison and sets the mod-IDs of the modValues for the library.
+        /// Should be called after the loaded mods are changed.
         /// </summary>
         public void UpdateModList()
         {
@@ -147,149 +157,154 @@ namespace ARKBreedingStats.Library
         /// <summary>
         /// Returns true if the currently loaded modValues differ from the listed modValues of the library-file.
         /// </summary>
-        public bool ModValueReloadNeeded { get { return modListHash == 0 || modListHash != Values.V.loadedModsHash; } }
+        public bool ModValueReloadNeeded => modListHash == 0 || modListHash != Values.V.loadedModsHash;
 
         /// <summary>
         /// Adds creatures to the current library.
         /// </summary>
         /// <param name="creaturesToMerge">List of creatures to add</param>
-        /// <param name="update">If true and a creature is already added, its parameters will be updated</param>
-        /// <param name="updateStatus">If true the creature status will be updated</param>
         /// <param name="addPreviouslylDeletedCreatures">If true creatures will be added even if they were just deleted.</param>
         /// <returns></returns>
-        public bool MergeCreatureList(List<Creature> creaturesToMerge, bool update = false, bool updateStatus = true, bool addPreviouslylDeletedCreatures = false)
+        public bool MergeCreatureList(List<Creature> creaturesToMerge, bool addPreviouslylDeletedCreatures = false)
         {
-            bool creaturesWereAdded = false;
-            foreach (Creature creature in creaturesToMerge)
+            bool creaturesWereAddedOrUpdated = false;
+            Species onlyThisSpeciesAdded = null;
+            bool onlyOneSpeciesAdded = true;
+
+            foreach (Creature creatureNew in creaturesToMerge)
             {
-                if (!addPreviouslylDeletedCreatures && DeletedCreatureGuids != null && DeletedCreatureGuids.Contains(creature.guid)) continue;
+                if (!addPreviouslylDeletedCreatures && DeletedCreatureGuids != null && DeletedCreatureGuids.Contains(creatureNew.guid)) continue;
 
-                if (!creatures.Contains(creature))
+                if (onlyOneSpeciesAdded)
                 {
-                    creatures.Add(creature);
-                    creaturesWereAdded = true;
-                }
-                else if (update)
-                {
-                    // Merge in some specific parts: imprinting level, dom stats, name
-                    var old = creatures.Single(c => c.guid == creature.guid);
-                    if (old.Species == null)
-                        old.Species = creature.Species;
-                    else if (old.Species != creature.Species) continue;
-
-                    if (creature.Mother != null)
-                        old.Mother = creature.Mother;
-                    else if (creature.motherGuid != Guid.Empty)
-                        old.motherGuid = creature.motherGuid;
-                    if (creature.Father != null)
-                        old.Father = creature.Father;
-                    else if (creature.fatherGuid != Guid.Empty)
-                        old.fatherGuid = creature.fatherGuid;
-
-                    bool recalculate = false;
-                    if (old.flags.HasFlag(CreatureFlags.Placeholder) ||
-                        (old.status == CreatureStatus.Unavailable && creature.status == CreatureStatus.Available))
-                    {
-                        old.colors = creature.colors;
-                        old.cooldownUntil = creature.cooldownUntil;
-                        old.domesticatedAt = creature.domesticatedAt;
-                        old.sex = creature.sex;
-                        old.generation = creature.generation;
-                        old.growingUntil = creature.growingUntil;
-                        old.imprinterName = creature.imprinterName;
-                        old.imprintingBonus = creature.imprintingBonus;
-                        old.isBred = creature.isBred;
-                        old.levelFound = creature.levelFound;
-                        old.levelsDom = creature.levelsDom;
-                        old.levelsWild = creature.levelsWild;
-                        old.motherName = creature.motherName;
-                        old.fatherName = creature.fatherName;
-                        old.mutationsMaternal = creature.mutationsMaternal;
-                        old.mutationsPaternal = creature.mutationsPaternal;
-                        old.name = creature.name;
-                        old.note = creature.note;
-                        old.owner = creature.owner;
-                        old.server = creature.server;
-                        old.flags = creature.flags;
-                        if (updateStatus)
-                            old.status = creature.status;
-                        old.tamingEff = creature.tamingEff;
-                        old.topBreedingCreature = creature.topBreedingCreature;
-                        old.topBreedingStats = creature.topBreedingStats;
-                        old.topStatsCount = creature.topStatsCount;
-                        old.topStatsCountBP = creature.topStatsCountBP;
-                        old.topness = creature.topness;
-                        old.tribe = creature.tribe;
-                        old.valuesBreeding = creature.valuesBreeding;
-                        old.valuesDom = creature.valuesDom;
-                        old.ArkId = creature.ArkId;
-                        old.ArkIdImported = creature.ArkIdImported;
-                        creaturesWereAdded = true;
-                        recalculate = true;
-                    }
+                    if (onlyThisSpeciesAdded == null || onlyThisSpeciesAdded == creatureNew.Species)
+                        onlyThisSpeciesAdded = creatureNew.Species;
                     else
+                        onlyOneSpeciesAdded = false;
+                }
+
+                if (!creatures.Contains(creatureNew))
+                {
+                    creatures.Add(creatureNew);
+                    creaturesWereAddedOrUpdated = true;
+                    continue;
+                }
+
+                // creature is already in the library. Update it's properties.
+                var creatureExisting = creatures.Single(c => c.guid == creatureNew.guid);
+                if (creatureExisting.Species == null)
+                    creatureExisting.Species = creatureNew.Species;
+                else if (creatureExisting.speciesBlueprint != creatureNew.speciesBlueprint) continue;
+
+                if (creatureNew.Mother != null)
+                    creatureExisting.Mother = creatureNew.Mother;
+                else if (creatureNew.motherGuid != Guid.Empty)
+                    creatureExisting.motherGuid = creatureNew.motherGuid;
+                if (creatureNew.Father != null)
+                    creatureExisting.Father = creatureNew.Father;
+                else if (creatureNew.fatherGuid != Guid.Empty)
+                    creatureExisting.fatherGuid = creatureNew.fatherGuid;
+
+                if (!string.IsNullOrEmpty(creatureNew.motherName))
+                    creatureExisting.motherName = creatureNew.motherName;
+                if (!string.IsNullOrEmpty(creatureNew.fatherName))
+                    creatureExisting.fatherName = creatureNew.fatherName;
+
+                // if the new ArkId is imported, use that
+                if (creatureExisting.ArkId != creatureNew.ArkId && Utils.IsArkIdImported(creatureNew.ArkId, creatureNew.guid))
+                {
+                    creatureExisting.ArkId = creatureNew.ArkId;
+                    creatureExisting.ArkIdImported = true;
+                }
+
+                creatureExisting.colors = creatureNew.colors;
+                creatureExisting.Status = creatureNew.Status;
+                creatureExisting.sex = creatureNew.sex;
+                creatureExisting.cooldownUntil = creatureNew.cooldownUntil;
+                if (!creatureExisting.domesticatedAt.HasValue || creatureExisting.domesticatedAt.Value.Year < 2000
+                    || (creatureNew.domesticatedAt.HasValue && creatureNew.domesticatedAt.Value.Year > 2000 && creatureExisting.domesticatedAt > creatureNew.domesticatedAt))
+                    creatureExisting.domesticatedAt = creatureNew.domesticatedAt;
+                creatureExisting.generation = creatureNew.generation;
+                creatureExisting.growingUntil = creatureNew.growingUntil;
+                creatureExisting.imprintingBonus = creatureNew.imprintingBonus;
+                creatureExisting.isBred = creatureNew.isBred;
+                if (!string.IsNullOrEmpty(creatureNew.note))
+                    creatureExisting.note = creatureNew.note;
+
+                UpdateString(ref creatureExisting.name, ref creatureNew.name);
+                UpdateString(ref creatureExisting.owner, ref creatureNew.owner);
+                UpdateString(ref creatureExisting.tribe, ref creatureNew.tribe);
+                UpdateString(ref creatureExisting.server, ref creatureNew.server);
+                UpdateString(ref creatureExisting.imprinterName, ref creatureNew.imprinterName);
+
+                void UpdateString(ref string oldCreatureValue, ref string newCreatureValue)
+                {
+                    if (oldCreatureValue != newCreatureValue)
                     {
-                        if (old.name != creature.name)
-                        {
-                            old.name = creature.name;
-                            creaturesWereAdded = true;
-                        }
+                        oldCreatureValue = newCreatureValue;
+                        creaturesWereAddedOrUpdated = true;
+                    }
+                }
 
-                        if (old.server != creature.server)
-                        {
-                            old.server = creature.server;
-                            creaturesWereAdded = true;
-                        }
-
-                        if (!old.levelsWild.SequenceEqual(creature.levelsWild))
-                        {
-                            old.levelsWild = creature.levelsWild;
-                            recalculate = true;
-                            creaturesWereAdded = true;
-                        }
-
-                        if (!old.levelsDom.SequenceEqual(creature.levelsDom))
-                        {
-                            old.levelsDom = creature.levelsDom;
-                            recalculate = true;
-                            creaturesWereAdded = true;
-                        }
-
-                        if (old.imprintingBonus != creature.imprintingBonus)
-                        {
-                            old.imprintingBonus = creature.imprintingBonus;
-                            recalculate = true;
-                            creaturesWereAdded = true;
-                        }
-
-                        if (old.tamingEff != creature.tamingEff)
-                        {
-                            old.tamingEff = creature.tamingEff;
-                            recalculate = true;
-                            creaturesWereAdded = true;
-                        }
-                        // usually not necessary, mutations will not change, but if in ARK before exporting the ancestors screen was not opened, 0 will be assumed by ARK.
-                        if (creature.mutationsMaternal != 0 || creature.mutationsPaternal != 0)
-                        {
-                            old.mutationsMaternal = creature.mutationsMaternal;
-                            old.mutationsPaternal = creature.mutationsPaternal;
-                        }
-                        if (old.motherGuid == Guid.Empty || old.fatherGuid == Guid.Empty)
-                        {
-                            old.motherGuid = creature.motherGuid;
-                            old.motherName = creature.motherName;
-                            old.fatherGuid = creature.fatherGuid;
-                            old.fatherName = creature.fatherName;
-                        }
-                        old.colors = creature.colors;
-                        old.status = creature.status;
+                bool recalculate = false;
+                if (creatureExisting.flags.HasFlag(CreatureFlags.Placeholder) ||
+                    (creatureExisting.Status == CreatureStatus.Unavailable && creatureNew.Status == CreatureStatus.Available))
+                {
+                    creatureExisting.levelFound = creatureNew.levelFound;
+                    creatureExisting.levelsDom = creatureNew.levelsDom;
+                    creatureExisting.levelsWild = creatureNew.levelsWild;
+                    creatureExisting.mutationsMaternal = creatureNew.mutationsMaternal;
+                    creatureExisting.mutationsPaternal = creatureNew.mutationsPaternal;
+                    creatureExisting.tamingEff = creatureNew.tamingEff;
+                    creaturesWereAddedOrUpdated = true;
+                    recalculate = true;
+                }
+                else
+                {
+                    if (!creatureExisting.levelsWild.SequenceEqual(creatureNew.levelsWild))
+                    {
+                        creatureExisting.levelsWild = creatureNew.levelsWild;
+                        recalculate = true;
+                        creaturesWereAddedOrUpdated = true;
                     }
 
-                    if (recalculate)
-                        old.RecalculateCreatureValues(getWildLevelStep());
+                    if (!creatureExisting.levelsDom.SequenceEqual(creatureNew.levelsDom))
+                    {
+                        creatureExisting.levelsDom = creatureNew.levelsDom;
+                        recalculate = true;
+                        creaturesWereAddedOrUpdated = true;
+                    }
+
+                    if (creatureExisting.imprintingBonus != creatureNew.imprintingBonus)
+                    {
+                        creatureExisting.imprintingBonus = creatureNew.imprintingBonus;
+                        recalculate = true;
+                        creaturesWereAddedOrUpdated = true;
+                    }
+
+                    if (creatureExisting.tamingEff != creatureNew.tamingEff)
+                    {
+                        creatureExisting.tamingEff = creatureNew.tamingEff;
+                        recalculate = true;
+                        creaturesWereAddedOrUpdated = true;
+                    }
+                    // usually not necessary, mutations will not change, but if in ARK before exporting the ancestors screen was not opened, 0 will be assumed by ARK.
+                    if (creatureNew.mutationsMaternal != 0 || creatureNew.mutationsPaternal != 0)
+                    {
+                        creatureExisting.mutationsMaternal = creatureNew.mutationsMaternal;
+                        creatureExisting.mutationsPaternal = creatureNew.mutationsPaternal;
+                    }
                 }
+                creatureExisting.flags = creatureNew.flags;
+
+                if (recalculate)
+                    creatureExisting.RecalculateCreatureValues(getWildLevelStep());
             }
-            return creaturesWereAdded;
+
+            if (creaturesWereAddedOrUpdated)
+                ResetExistingColors(onlyOneSpeciesAdded ? onlyThisSpeciesAdded : null);
+
+            return creaturesWereAddedOrUpdated;
         }
 
         /// <summary>
@@ -409,6 +424,74 @@ namespace ARKBreedingStats.Library
                 c.domesticatedAt = c.domesticatedAt?.ToLocalTime();
                 c.addedToLibrary = c.addedToLibrary?.ToLocalTime();
             }
+        }
+
+        /// <summary>
+        /// Reset the lists of available color ids. Call this method after a creature was added or removed from the collection.
+        /// </summary>
+        /// <param name="species"></param>
+        internal void ResetExistingColors(Species species = null)
+        {
+            if (species == null)
+                _existingColors.Clear();
+            else if (!string.IsNullOrEmpty(species.blueprintPath))
+                _existingColors.Remove(species.blueprintPath);
+        }
+
+        /// <summary>
+        /// Returns a tuple that indicates if a color id is already available in that species
+        /// (inTheRegion, inAnyRegion).
+        /// </summary>
+        /// <returns></returns>
+        internal ColorExisting[] ColorAlreadyAvailable(Species species, int[] colorIds)
+        {
+            if (string.IsNullOrEmpty(species?.blueprintPath)) return null;
+
+            if (!_existingColors.TryGetValue(species.blueprintPath, out var speciesExistingColors))
+            {
+                speciesExistingColors = new List<int>[Species.ColorRegionCount + 1];
+                for (int i = 0; i < Species.ColorRegionCount + 1; i++) speciesExistingColors[i] = new List<int>();
+                foreach (Creature c in creatures)
+                {
+                    if (c.flags.HasFlag(CreatureFlags.Placeholder) || c.Species == null || c.speciesBlueprint != species.blueprintPath)
+                        continue;
+
+                    for (int i = 0; i < Species.ColorRegionCount; i++)
+                    {
+                        int cColorId = c.colors[i];
+                        if (!speciesExistingColors[i].Contains(cColorId))
+                            speciesExistingColors[i].Add(cColorId);
+                        if (!speciesExistingColors[Species.ColorRegionCount].Contains(cColorId))
+                            speciesExistingColors[Species.ColorRegionCount].Add(cColorId);
+                    }
+                }
+
+                _existingColors.Add(species.blueprintPath, speciesExistingColors);
+            }
+
+            var results = new ColorExisting[Species.ColorRegionCount];
+            for (int ci = 0; ci < Species.ColorRegionCount; ci++)
+                results[ci] = speciesExistingColors[ci].Contains(colorIds[ci]) ? ColorExisting.ColorExistingInRegion
+                    : speciesExistingColors[Species.ColorRegionCount].Contains(colorIds[ci]) ? ColorExisting.ColorExistingInOtherRegion
+                    : ColorExisting.ColorIsNew;
+            return results;
+        }
+
+        internal enum ColorExisting
+        {
+            Unknown,
+            /// <summary>
+            /// The color is already available in that region on a creature of that species.
+            /// </summary>
+            ColorExistingInRegion,
+            /// <summary>
+            /// The color is already available in a different region on a creature of that species.
+            /// </summary>
+            ColorExistingInOtherRegion,
+            /// <summary>
+            /// The color is not existing on any region on any creature of that species.
+            /// </summary>
+            ColorIsNew
         }
     }
 }

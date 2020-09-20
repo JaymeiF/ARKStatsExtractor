@@ -34,6 +34,8 @@
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.lbAvailableModFiles = new System.Windows.Forms.ListBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.LbModVersion = new System.Windows.Forms.Label();
             this.lbAvailableForDownload = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.llbSteamPage = new System.Windows.Forms.LinkLabel();
@@ -47,10 +49,11 @@
             this.label1 = new System.Windows.Forms.Label();
             this.btMoveDown = new System.Windows.Forms.Button();
             this.btMoveUp = new System.Windows.Forms.Button();
-            this.btLoadModFile = new System.Windows.Forms.Button();
             this.btClose = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.btAddMod = new System.Windows.Forms.Button();
+            this.BtRemoveAllMods = new System.Windows.Forms.Button();
+            this.linkLabelCustomModManual = new System.Windows.Forms.LinkLabel();
             this.tableLayoutPanel1.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -84,6 +87,7 @@
             this.tableLayoutPanel1.Controls.Add(this.btClose, 3, 2);
             this.tableLayoutPanel1.Controls.Add(this.groupBox2, 2, 0);
             this.tableLayoutPanel1.Controls.Add(this.btAddMod, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.BtRemoveAllMods, 1, 2);
             this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -131,6 +135,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.label5);
+            this.groupBox1.Controls.Add(this.LbModVersion);
             this.groupBox1.Controls.Add(this.lbAvailableForDownload);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.llbSteamPage);
@@ -147,10 +153,31 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Mod info";
             // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 44);
+            this.label5.Margin = new System.Windows.Forms.Padding(3);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(65, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Mod version";
+            // 
+            // LbModVersion
+            // 
+            this.LbModVersion.AutoSize = true;
+            this.LbModVersion.Location = new System.Drawing.Point(106, 44);
+            this.LbModVersion.Margin = new System.Windows.Forms.Padding(3);
+            this.LbModVersion.Name = "LbModVersion";
+            this.LbModVersion.Size = new System.Drawing.Size(41, 13);
+            this.LbModVersion.TabIndex = 9;
+            this.LbModVersion.Text = "version";
+            // 
             // lbAvailableForDownload
             // 
+            this.lbAvailableForDownload.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.lbAvailableForDownload.AutoSize = true;
-            this.lbAvailableForDownload.Location = new System.Drawing.Point(6, 185);
+            this.lbAvailableForDownload.Location = new System.Drawing.Point(7, 215);
             this.lbAvailableForDownload.Name = "lbAvailableForDownload";
             this.lbAvailableForDownload.Size = new System.Drawing.Size(223, 13);
             this.lbAvailableForDownload.TabIndex = 7;
@@ -160,6 +187,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(6, 25);
+            this.label2.Margin = new System.Windows.Forms.Padding(3);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 0;
@@ -168,7 +196,8 @@
             // llbSteamPage
             // 
             this.llbSteamPage.AutoSize = true;
-            this.llbSteamPage.Location = new System.Drawing.Point(6, 79);
+            this.llbSteamPage.Location = new System.Drawing.Point(6, 101);
+            this.llbSteamPage.Margin = new System.Windows.Forms.Padding(3);
             this.llbSteamPage.Name = "llbSteamPage";
             this.llbSteamPage.Size = new System.Drawing.Size(88, 13);
             this.llbSteamPage.TabIndex = 6;
@@ -179,7 +208,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 61);
+            this.label3.Location = new System.Drawing.Point(7, 82);
+            this.label3.Margin = new System.Windows.Forms.Padding(3);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(39, 13);
             this.label3.TabIndex = 1;
@@ -188,7 +218,8 @@
             // lbModId
             // 
             this.lbModId.AutoSize = true;
-            this.lbModId.Location = new System.Drawing.Point(106, 61);
+            this.lbModId.Location = new System.Drawing.Point(106, 82);
+            this.lbModId.Margin = new System.Windows.Forms.Padding(3);
             this.lbModId.Name = "lbModId";
             this.lbModId.Size = new System.Drawing.Size(15, 13);
             this.lbModId.TabIndex = 5;
@@ -197,7 +228,8 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(6, 43);
+            this.label4.Location = new System.Drawing.Point(7, 63);
+            this.label4.Margin = new System.Windows.Forms.Padding(3);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(46, 13);
             this.label4.TabIndex = 2;
@@ -206,7 +238,8 @@
             // lbModTag
             // 
             this.lbModTag.AutoSize = true;
-            this.lbModTag.Location = new System.Drawing.Point(106, 43);
+            this.lbModTag.Location = new System.Drawing.Point(106, 63);
+            this.lbModTag.Margin = new System.Windows.Forms.Padding(3);
             this.lbModTag.Name = "lbModTag";
             this.lbModTag.Size = new System.Drawing.Size(22, 13);
             this.lbModTag.TabIndex = 4;
@@ -217,6 +250,7 @@
             this.lbModName.AutoSize = true;
             this.lbModName.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbModName.Location = new System.Drawing.Point(106, 25);
+            this.lbModName.Margin = new System.Windows.Forms.Padding(3);
             this.lbModName.Name = "lbModName";
             this.lbModName.Size = new System.Drawing.Size(46, 16);
             this.lbModName.TabIndex = 3;
@@ -224,11 +258,11 @@
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.linkLabelCustomModManual);
             this.panel1.Controls.Add(this.btOpenValuesFolder);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.btMoveDown);
             this.panel1.Controls.Add(this.btMoveUp);
-            this.panel1.Controls.Add(this.btLoadModFile);
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(509, 3);
             this.panel1.Name = "panel1";
@@ -274,17 +308,6 @@
             this.btMoveUp.UseVisualStyleBackColor = true;
             this.btMoveUp.Click += new System.EventHandler(this.BtMoveUp_Click);
             // 
-            // btLoadModFile
-            // 
-            this.btLoadModFile.Location = new System.Drawing.Point(199, 9);
-            this.btLoadModFile.Name = "btLoadModFile";
-            this.btLoadModFile.Size = new System.Drawing.Size(145, 23);
-            this.btLoadModFile.TabIndex = 1;
-            this.btLoadModFile.Text = "Load Mod-Values file";
-            this.btLoadModFile.UseVisualStyleBackColor = true;
-            this.btLoadModFile.Visible = false;
-            this.btLoadModFile.Click += new System.EventHandler(this.BtLoadModFile_Click);
-            // 
             // btClose
             // 
             this.btClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -319,6 +342,28 @@
             this.btAddMod.UseVisualStyleBackColor = true;
             this.btAddMod.Click += new System.EventHandler(this.BtAddMod_Click);
             // 
+            // BtRemoveAllMods
+            // 
+            this.BtRemoveAllMods.Location = new System.Drawing.Point(236, 477);
+            this.BtRemoveAllMods.Name = "BtRemoveAllMods";
+            this.BtRemoveAllMods.Size = new System.Drawing.Size(34, 23);
+            this.BtRemoveAllMods.TabIndex = 7;
+            this.BtRemoveAllMods.Text = "≪";
+            this.BtRemoveAllMods.UseVisualStyleBackColor = true;
+            this.BtRemoveAllMods.Click += new System.EventHandler(this.BtRemoveAllMods_Click);
+            // 
+            // linkLabelCustomModManual
+            // 
+            this.linkLabelCustomModManual.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.linkLabelCustomModManual.AutoSize = true;
+            this.linkLabelCustomModManual.Location = new System.Drawing.Point(188, 213);
+            this.linkLabelCustomModManual.Name = "linkLabelCustomModManual";
+            this.linkLabelCustomModManual.Size = new System.Drawing.Size(202, 13);
+            this.linkLabelCustomModManual.TabIndex = 5;
+            this.linkLabelCustomModManual.TabStop = true;
+            this.linkLabelCustomModManual.Text = "Manual how to manually create a mod file";
+            this.linkLabelCustomModManual.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelCustomModManual_LinkClicked);
+            // 
             // ModValuesManager
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -328,13 +373,14 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Name = "ModValuesManager";
             this.ShowInTaskbar = false;
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
             this.Text = "Mod Values Manager";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.groupBox3.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -348,7 +394,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button btMoveDown;
         private System.Windows.Forms.Button btMoveUp;
-        private System.Windows.Forms.Button btLoadModFile;
         private System.Windows.Forms.Button btClose;
         private System.Windows.Forms.LinkLabel llbSteamPage;
         private System.Windows.Forms.Label lbModId;
@@ -365,5 +410,9 @@
         private System.Windows.Forms.Button btAddMod;
         private System.Windows.Forms.Label lbAvailableForDownload;
         private System.Windows.Forms.Button btOpenValuesFolder;
+        private System.Windows.Forms.Button BtRemoveAllMods;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Label LbModVersion;
+        private System.Windows.Forms.LinkLabel linkLabelCustomModManual;
     }
 }

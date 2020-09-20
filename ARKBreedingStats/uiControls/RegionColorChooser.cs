@@ -4,108 +4,116 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
+using ARKBreedingStats.Library;
+using ARKBreedingStats.values;
 
 namespace ARKBreedingStats.uiControls
 {
     public partial class RegionColorChooser : UserControl
     {
-        public delegate void RegionColorChosenEventHandler();
-
-        public event RegionColorChosenEventHandler RegionColorChosen;
-        private readonly Button[] buttonColors;
-        private int[] _colorIDs;
+        public event Action RegionColorChosen;
+        private readonly Panel[] _panels;
+        private readonly Button[] _buttonColors;
+        private int[] _selectedRegionColorIds;
         public readonly bool[] ColorRegionsUseds;
-        private readonly MyColorPicker colorPicker;
-        private List<ColorRegion> colorRegions;
-        private readonly ToolTip tt = new ToolTip();
+        private readonly MyColorPicker _colorPicker;
+        private List<ColorRegion> _colorRegions;
+        private readonly ToolTip _tt = new ToolTip();
+        /// <summary>
+        /// If true, the button text will display the region and color id.
+        /// </summary>
+        public bool VerboseButtonTexts { get; set; }
 
         public RegionColorChooser()
         {
             InitializeComponent();
-            buttonColors = new[] { buttonColor0, buttonColor1, buttonColor2, buttonColor3, buttonColor4, buttonColor5 };
-            _colorIDs = new int[6];
-            ColorRegionsUseds = new bool[6];
-            colorPicker = new MyColorPicker();
-            tt.AutoPopDelay = 7000;
+
+            _buttonColors = new Button[Species.ColorRegionCount];
+            _panels = new Panel[Species.ColorRegionCount];
+            for (int i = 0; i < Species.ColorRegionCount; i++)
+            {
+                var p = new Panel { Width = 27, Height = 27, Margin = new Padding(1) };
+                _panels[i] = p;
+                var b = new Button { Width = 23, Height = 23, Left = 2, Top = 2, Text = i.ToString() };
+                var ii = i;
+                b.Click += (s, e) => ChooseColor(ii, b);
+                _buttonColors[i] = b;
+                p.Controls.Add(b);
+                flowLayoutPanel1.Controls.Add(p);
+            }
+
+            _selectedRegionColorIds = new int[Species.ColorRegionCount];
+            ColorRegionsUseds = new bool[Species.ColorRegionCount];
+            _colorPicker = new MyColorPicker();
+            _tt.AutoPopDelay = 7000;
             Disposed += RegionColorChooser_Disposed;
+        }
+
+        public void SetOneButtonPerRow(bool onePerRow)
+        {
+            foreach (var b in _buttonColors)
+                flowLayoutPanel1.SetFlowBreak(b, onePerRow);
         }
 
         public void SetSpecies(Species species, int[] colorIDs)
         {
-            _colorIDs = colorIDs.ToArray();
+            _selectedRegionColorIds = colorIDs.ToArray();
 
             if (species?.colors != null)
-                colorRegions = species.colors;
+                _colorRegions = species.colors;
             else
             {
                 // species-info is not available, show all region-buttons
-                colorRegions = new List<ColorRegion>();
-                for (int i = 0; i < 6; i++)
+                _colorRegions = new List<ColorRegion>();
+                for (int i = 0; i < Species.ColorRegionCount; i++)
                 {
-                    colorRegions.Add(new ColorRegion());
+                    _colorRegions.Add(new ColorRegion());
                 }
             }
-            for (int r = 0; r < buttonColors.Length; r++)
+            for (int r = 0; r < _buttonColors.Length; r++)
             {
-                ColorRegionsUseds[r] = !string.IsNullOrEmpty(colorRegions[r]?.name);
-                buttonColors[r].Visible = ColorRegionsUseds[r];
+                ColorRegionsUseds[r] = !string.IsNullOrEmpty(_colorRegions[r]?.name);
+                _panels[r].Visible = ColorRegionsUseds[r];
 
                 if (ColorRegionsUseds[r])
                 {
-                    SetColorButton(buttonColors[r], r);
+                    SetColorButton(_buttonColors[r], r);
                 }
             }
         }
 
-        public int[] ColorIDs => _colorIDs.ToArray();
+        public int[] ColorIDs => _selectedRegionColorIds.ToArray();
 
         public void Clear()
         {
-            for (int r = 0; r < buttonColors.Length; r++)
+            for (int r = 0; r < _buttonColors.Length; r++)
             {
-                _colorIDs[r] = 0;
-                SetColorButton(buttonColors[r], r);
+                _selectedRegionColorIds[r] = 0;
+                SetColorButton(_buttonColors[r], r);
             }
+            RegionColorChosen?.Invoke();
         }
 
-        private void buttonColor0_Click(object sender, EventArgs e)
+        internal void RandomColors()
         {
-            ChooseColor(0, buttonColor0);
-        }
-
-        private void buttonColor1_Click(object sender, EventArgs e)
-        {
-            ChooseColor(1, buttonColor1);
-        }
-
-        private void buttonColor2_Click(object sender, EventArgs e)
-        {
-            ChooseColor(2, buttonColor2);
-        }
-
-        private void buttonColor3_Click(object sender, EventArgs e)
-        {
-            ChooseColor(3, buttonColor3);
-        }
-
-        private void buttonColor4_Click(object sender, EventArgs e)
-        {
-            ChooseColor(4, buttonColor4);
-        }
-
-        private void buttonColor5_Click(object sender, EventArgs e)
-        {
-            ChooseColor(5, buttonColor5);
+            var rand = new Random();
+            for (int r = 0; r < _buttonColors.Length; r++)
+            {
+                _selectedRegionColorIds[r] = rand.Next(99) + 1;
+                SetColorButton(_buttonColors[r], r);
+            }
+            RegionColorChosen?.Invoke();
         }
 
         private void ChooseColor(int region, Button sender)
         {
-            if (!colorPicker.isShown && colorRegions != null && region < colorRegions.Count)
+            if (!_colorPicker.isShown && _colorRegions != null && region < Species.ColorRegionCount)
             {
-                colorPicker.SetColors(_colorIDs, region, colorRegions[region].name, colorRegions[region]?.naturalColors);
-                if (colorPicker.ShowDialog() == DialogResult.OK)
+                _colorPicker.SetColors(_selectedRegionColorIds[region], _colorRegions[region].name, _colorRegions[region]?.naturalColors);
+                if (_colorPicker.ShowDialog() == DialogResult.OK)
                 {
                     // color was chosen
+                    _selectedRegionColorIds[region] = _colorPicker.SelectedColorId;
                     SetColorButton(sender, region);
                     RegionColorChosen?.Invoke();
                 }
@@ -114,18 +122,39 @@ namespace ARKBreedingStats.uiControls
 
         private void SetColorButton(Button bt, int region)
         {
-            int colorId = _colorIDs[region];
-            Color cl = CreatureColors.creatureColor(colorId);
+            int colorId = _selectedRegionColorIds[region];
+            Color cl = CreatureColors.CreatureColor(colorId);
             bt.BackColor = cl;
             bt.ForeColor = Utils.ForeColor(cl);
+            if (VerboseButtonTexts)
+                bt.Text = $"[{region}]: {colorId}";
             // tooltip
-            if (colorRegions?[region] != null)
-                tt.SetToolTip(bt, $"{colorRegions[region].name} ({region}):\n{CreatureColors.creatureColorName(colorId)} ({colorId})");
+            if (_colorRegions?[region] != null)
+                _tt.SetToolTip(bt, $"{_colorRegions[region].name} ({region}):\n{CreatureColors.CreatureColorName(colorId)} ({colorId})");
         }
 
         private void RegionColorChooser_Disposed(object sender, EventArgs e)
         {
-            tt.RemoveAll();
+            _tt.RemoveAll();
+        }
+
+        internal void SetRegionColorsExisting(CreatureCollection.ColorExisting[] colorAlreadyAvailable)
+        {
+            var parameter = CreatureCollection.ColorExisting.Unknown;
+            for (int ci = 0; ci < Species.ColorRegionCount; ci++)
+            {
+                if (colorAlreadyAvailable != null)
+                    parameter = colorAlreadyAvailable[ci];
+                switch (parameter)
+                {
+                    case CreatureCollection.ColorExisting.ColorIsNew:
+                        _panels[ci].BackColor = Color.Gold; break;
+                    case CreatureCollection.ColorExisting.ColorExistingInOtherRegion:
+                        _panels[ci].BackColor = Color.DarkGreen; break;
+                    default:
+                        _panels[ci].BackColor = Color.Transparent; break;
+                }
+            }
         }
     }
 }

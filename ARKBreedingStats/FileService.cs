@@ -8,31 +8,23 @@ namespace ARKBreedingStats
 
     public static class FileService
     {
-        private const string jsonFolder = "json";
-
+        private const string JsonFolder = "json";
         public const string ValuesFolder = "values";
         public const string ValuesJson = "values.json";
         public const string ValuesServerMultipliers = "serverMultipliers.json";
         public const string TamingFoodData = "tamingFoodData.json";
         public const string ModsManifest = "_manifest.json";
+        public const string ModsManifestCustom = "_manifestCustom.json";
         public const string KibblesJson = "kibbles.json";
         public const string AliasesJson = "aliases.json";
-        public const string ArkDataJson = "ark_data.json";
         public const string IgnoreSpeciesClasses = "ignoreSpeciesClasses.json";
         public const string CustomReplacingsNamePattern = "customReplacings.json";
+        public const string CustomSpeciesVariants = "customSpeciesVariants.json";
+        public const string ImageFolderName = "img";
+        public const string CacheFolderName = "cache";
 
         public static readonly string ExeFilePath = new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath;
-        public static readonly string ExeLocation = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
-
-        /// <summary>
-        /// Returns a <see cref="FileStream"/> of a file located in the json data folder
-        /// </summary>
-        /// <param name="fileName">name of file to read; use FileService constants</param>
-        /// <returns></returns>
-        public static FileStream GetJsonFileStream(string fileName)
-        {
-            return File.OpenRead(GetJsonPath(fileName));
-        }
+        private static readonly string ExeLocation = Path.GetDirectoryName(new Uri(Assembly.GetExecutingAssembly().CodeBase).LocalPath);
 
         /// <summary>
         /// Returns a <see cref="StreamReader"/> of a file located in the json data folder
@@ -45,26 +37,23 @@ namespace ARKBreedingStats
         }
 
         /// <summary>
-        /// Gets the full path for the given filename or the path to the application data folder
+        /// Gets the full path for the given filename or the path to the application data folder.
+        /// If fileName2 is given, fileName is considered to be the containing folder.
         /// </summary>
-        /// <param name="fileName"></param>
         /// <returns></returns>
-        public static string GetPath(string fileName = null)
-        {
-            return Path.Combine(Updater.IsProgramInstalled ? getLocalApplicationDataPath() : ExeLocation, fileName ?? string.Empty);
-        }
+        public static string GetPath(string fileName = null, string fileName2 = null, string fileName3 = null)
+            => Path.Combine(Updater.IsProgramInstalled ? GetLocalApplicationDataPath() : ExeLocation, fileName ?? string.Empty, fileName2 ?? string.Empty, fileName3 ?? string.Empty);
+
 
         /// <summary>
-        /// Gets the full path for the given filename or the path to the json folder
+        /// Gets the full path for the given filename or the path to the json folder.
+        /// If fileName2 is given, fileName is considered to be the containing folder.
         /// </summary>
-        /// <param name="fileName"></param>
         /// <returns></returns>
-        public static string GetJsonPath(string fileName = null, string fileName2 = null)
-        {
-            return Path.Combine(Updater.IsProgramInstalled ? getLocalApplicationDataPath() : ExeLocation, jsonFolder, fileName ?? string.Empty, fileName2 ?? string.Empty);
-        }
+        public static string GetJsonPath(string fileName = null, string fileName2 = null) =>
+            GetPath(JsonFolder, fileName, fileName2);
 
-        private static string getLocalApplicationDataPath()
+        private static string GetLocalApplicationDataPath()
         {
             return Path.Combine(
                     Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), // C:\Users\xxx\AppData\Local\
@@ -74,9 +63,7 @@ namespace ARKBreedingStats
         /// <summary>
         /// Saves an object to a json-file.
         /// </summary>
-        /// <param name="data"></param>
-        /// <param name="filePath">filePath</param>
-        public static bool SaveJSONFile(string filePath, object data, out string errorMessage)
+        public static bool SaveJsonFile(string filePath, object data, out string errorMessage)
         {
             errorMessage = null;
             try
@@ -90,7 +77,7 @@ namespace ARKBreedingStats
             }
             catch (SerializationException ex)
             {
-                errorMessage = $"File\n{Path.GetFullPath(filePath)}\ncouldn't be saved.\nErrormessage:\n\n" + ex.Message;
+                errorMessage = $"File\n{Path.GetFullPath(filePath)}\ncouldn't be saved.\nError message:\n\n" + ex.Message;
             }
             return false;
         }
@@ -98,14 +85,10 @@ namespace ARKBreedingStats
         /// <summary>
         /// Loads a serialized object from a json-file.
         /// </summary>
-        /// <param name="filePath">filePath</param>
-        /// <param name="data"></param>
-        public static bool LoadJSONFile<T>(string filePath, out T data, out string errorMessage)
+        public static bool LoadJsonFile<T>(string filePath, out T data, out string errorMessage) where T : class
         {
             errorMessage = null;
-            data = default;
-            if (!File.Exists(filePath))
-                return false;
+            data = null;
 
             // load json-file of data
             try
@@ -114,16 +97,20 @@ namespace ARKBreedingStats
                 {
                     var ser = new Newtonsoft.Json.JsonSerializer();
                     data = (T)ser.Deserialize(sr, typeof(T));
-                    return true;
+                    if (data != null)
+                        return true;
+
+                    errorMessage = $"File\n{Path.GetFullPath(filePath)}\n contains no readable data.";
+                    return false;
                 }
             }
             catch (Newtonsoft.Json.JsonReaderException ex)
             {
-                errorMessage = $"File\n{Path.GetFullPath(filePath)}\ncouldn't be opened or read.\nErrormessage:\n\n" + ex.Message;
+                errorMessage = $"File\n{Path.GetFullPath(filePath)}\ncouldn't be opened or read.\nError message:\n\n" + ex.Message;
             }
             catch (Newtonsoft.Json.JsonSerializationException ex)
             {
-                errorMessage = $"File\n{Path.GetFullPath(filePath)}\ncouldn't be opened or read.\nErrormessage:\n\n" + ex.Message;
+                errorMessage = $"File\n{Path.GetFullPath(filePath)}\ncouldn't be opened or read.\nError message:\n\n" + ex.Message;
             }
             return false;
         }
@@ -131,8 +118,6 @@ namespace ARKBreedingStats
         /// <summary>
         /// Tries to create a directory if not existing. Returns true if the path exists.
         /// </summary>
-        /// <param name="path"></param>
-        /// <returns></returns>
         public static bool TryCreateDirectory(string path, out string error)
         {
             error = null;
@@ -151,9 +136,8 @@ namespace ARKBreedingStats
         }
 
         /// <summary>
-        /// Tries to delete a file, doesn't throw an exception.
+        /// Tries to delete a file, doesn't throw an exception when failing.
         /// </summary>
-        /// <param name="filePath"></param>
         public static bool TryDeleteFile(string filePath)
         {
             if (!File.Exists(filePath)) return false;
@@ -162,14 +146,52 @@ namespace ARKBreedingStats
                 File.Delete(filePath);
                 return true;
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Tries to delete a file, doesn't throw an exception when failing.
+        /// </summary>
+        public static bool TryDeleteFile(FileInfo fileInfo)
+        {
+            if (!fileInfo.Exists) return false;
+            try
+            {
+                fileInfo.Delete();
+                return true;
+            }
+            catch
+            {
+                // ignored
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Tries to delete a directory, doesn't throw an exception when failing.
+        /// </summary>
+        public static bool TryDeleteDirectory(string dirPath)
+        {
+            if (!Directory.Exists(dirPath)) return false;
+            try
+            {
+                Directory.Delete(dirPath);
+                return true;
+            }
+            catch
+            {
+                // ignored
+            }
             return false;
         }
 
         /// <summary>
         /// Tries to move a file, doesn't throw an exception.
         /// </summary>
-        /// <param name="filePath"></param>
         public static bool TryMoveFile(string filePathFrom, string filePathTo)
         {
             if (!File.Exists(filePathFrom)) return false;
@@ -178,8 +200,67 @@ namespace ARKBreedingStats
                 File.Move(filePathFrom, filePathTo);
                 return true;
             }
-            catch { }
+            catch
+            {
+                // ignored
+            }
+
             return false;
+        }
+
+        /// <summary>
+        /// Creates a temporary directory and returns its path.
+        /// </summary>
+        /// <returns></returns>
+        public static string GetTempDirectory()
+        {
+            string tempFolder = Path.GetTempFileName();
+            File.Delete(tempFolder);
+            Directory.CreateDirectory(tempFolder);
+            return tempFolder;
+        }
+
+        /// <summary>
+        /// Tests if a folder is protected and needs admin privileges to copy files over.
+        /// This is used for the updater.
+        /// </summary>
+        /// <param name="folderPath"></param>
+        /// <returns>Returns true if elevated privileges are needed.</returns>
+        public static bool TestIfFolderIsProtected(string folderPath)
+        {
+            try
+            {
+                string testFilePath = Path.Combine(folderPath, "testFile.txt");
+                File.WriteAllText(testFilePath, string.Empty);
+                TryDeleteFile(testFilePath);
+            }
+            catch (UnauthorizedAccessException)
+            {
+                return true;
+            }
+            return false;
+        }
+
+        /// <summary>
+        /// Checks if a file is a valid json file.
+        /// </summary>
+        /// <param name="filePath"></param>
+        /// <returns></returns>
+        internal static bool IsValidJsonFile(string filePath)
+        {
+            if (!File.Exists(filePath))
+                return false;
+
+            string fileContent = File.ReadAllText(filePath);
+            // currently very basic test, could be improved
+            return fileContent.StartsWith("{") && fileContent.EndsWith("}");
+
+            //try
+            //{
+            //    Newtonsoft.Json.Linq.JObject.Parse(fileContent);
+            //    return true;
+            //}
+            //catch { return false; }
         }
     }
 }

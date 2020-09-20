@@ -17,23 +17,22 @@ namespace ARKBreedingStats.importExported
         public ImportStatus Status { get; private set; }
         public DateTime? AddedToLibrary;
         public readonly string exportedFile;
-        private ToolTip tt;
+        private readonly ToolTip _tt;
         public bool validValues;
         public string speciesBlueprintPath;
 
         public ExportedCreatureControl()
         {
             InitializeComponent();
-            if (tt == null)
-                tt = new ToolTip();
+            if (_tt == null)
+                _tt = new ToolTip();
             validValues = true;
         }
 
-        public ExportedCreatureControl(string filePath)
+        public ExportedCreatureControl(string filePath) : this()
         {
-            InitializeComponent();
             exportedFile = filePath;
-            creatureValues = ImportExported.importExportedCreature(filePath);
+            creatureValues = ImportExported.ImportExportedCreature(filePath);
 
             // check if the values are valid, i.e. if the read file was a creature-file at all.
             if (creatureValues?.Species == null)
@@ -44,20 +43,16 @@ namespace ARKBreedingStats.importExported
             }
 
             groupBox1.Text = $"{creatureValues.name} ({(creatureValues.Species?.name ?? "unknown species")}, Lvl {creatureValues.level}), " +
-                    $"exported at {Utils.shortTimeDate(creatureValues.domesticatedAt)}. " +
+                    $"exported at {Utils.ShortTimeDate(creatureValues.domesticatedAt)}. " +
                     $"Filename: {Path.GetFileName(filePath)}";
             Disposed += ExportedCreatureControl_Disposed;
 
-            if (tt == null)
-                tt = new ToolTip();
-            tt.SetToolTip(btRemoveFile, "Delete the exported game-file");
-
-            validValues = true;
+            _tt.SetToolTip(btRemoveFile, "Delete the exported game-file");
         }
 
         private void ExportedCreatureControl_Disposed(object sender, EventArgs e)
         {
-            tt.RemoveAll();
+            _tt.RemoveAll();
         }
 
         private void btLoadValues_Click(object sender, EventArgs e)
@@ -86,10 +81,10 @@ namespace ARKBreedingStats.importExported
                     groupBox1.BackColor = Color.LightGreen;
                     break;
                 case ImportStatus.OldImported:
-                    lbStatus.Text = "Already imported on " + Utils.shortTimeDate(addedToLibrary, false);
+                    lbStatus.Text = "Already imported on " + Utils.ShortTimeDate(addedToLibrary, false);
                     groupBox1.BackColor = Color.YellowGreen;
                     break;
-                case ImportStatus.NeedsLevelChosing:
+                case ImportStatus.NeedsLevelChoosing:
                     lbStatus.Text = "Cannot be extracted automatically, you need to choose from level combinations";
                     groupBox1.BackColor = Color.Yellow;
                     break;
@@ -103,7 +98,7 @@ namespace ARKBreedingStats.importExported
 
         public enum ImportStatus
         {
-            NeedsLevelChosing,
+            NeedsLevelChoosing,
             NotImported,
             JustImported,
             OldImported
@@ -111,7 +106,7 @@ namespace ARKBreedingStats.importExported
 
         private void btRemoveFile_Click(object sender, EventArgs e)
         {
-            if (removeFile())
+            if (removeFile((ModifierKeys & Keys.Shift) == 0))
             {
                 DisposeThis?.Invoke(this, null);
             }
@@ -138,7 +133,7 @@ namespace ARKBreedingStats.importExported
             }
             else
             {
-                MessageBox.Show("The file does not exist:\n" + exportedFile, "File not found", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("The file does not exist:\n" + exportedFile, $"File not found - {Utils.ApplicationNameVersion}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return successfullyDeleted;
         }
